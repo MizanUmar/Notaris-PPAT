@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Notaris & PPAT Eka Sulistya, S.H., M.Kn.</title>
+    <meta name="description" content="Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn.">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================= PUBLIC INTERFACE ================= -->
+    <div id="public-interface">
+        <!-- Top Navbar -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo-container" onclick="showPublicPage('home')">
+                    <div class="logo-img">ES</div>
+                    <div class="logo-text">
+                        <h1>Eka Sulistya, S.H., M.Kn.</h1>
+                        <p>Notaris & Pejabat Pembuat Akta Tanah</p>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#" id="nav-home" class="active" onclick="showPublicPage('home')">Beranda</a></li>
+                    <li><a href="#" id="nav-services" onclick="showPublicPage('services')">Layanan & Syarat</a></li>
+                    <li><a href="#" id="nav-buku-tamu" onclick="showPublicPage('buku-tamu-scanner')">Buku Tamu (QR)</a></li>
+                    <li>
+                        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                            <i class="fa-solid fa-sun" id="theme-icon"></i>
+                        </button>
+                    </li>
+                    <li><a href="#" class="btn btn-outline" onclick="showPublicPage('login')">Masuk</a></li>
+                    <li><a href="#" class="btn btn-primary" onclick="showPublicPage('register')">Daftar</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page Home -->
+        <section id="page-home" class="page-view active hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <p class="text-gold">Selamat Datang di Portal Resmi</p>
+                        <h2>Pelayanan Hukum Cepat, Transparan, & Terpercaya</h2>
+                        <p>Kami hadir untuk memberikan solusi administrasi akta autentik, pertanahan, serta konsultasi hukum perdata secara modern dan efisien.</p>
+                        <div class="hero-btns">
+                            <a href="#" class="btn btn-primary" onclick="showPublicPage('login')">Konsultasi Sekarang <i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="#" class="btn btn-outline" onclick="showPublicPage('buku-tamu-scanner')"><i class="fa-solid fa-qrcode"></i> Isi Buku Tamu Digital</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-image-border">
+                            <div class="hero-img-placeholder">
+                                <i class="fa-solid fa-balance-scale"></i>
+                                <h3>Kantor Notaris & PPAT</h3>
+                                <p>Eka Sulistya, S.H., M.Kn.<br>Kedudukan Kota Pontianak</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Overview -->
+            <div class="services-section">
+                <div class="container">
+                    <div class="section-title">
+                        <p>Layanan Utama</p>
+                        <h3>Layanan Notaris & PPAT</h3>
+                    </div>
+                    <div class="services-grid" id="public-services-grid">
+                        <!-- Dynamic content filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Office Info & Maps -->
+            <div class="office-info-section">
+                <div class="container">
+                    <div class="info-grid">
+                        <div class="info-details">
+                            <div class="section-title" style="text-align: left; margin-bottom: 20px;">
+                                <p>Hubungi Kami</p>
+                                <h3>Kantor Operasional</h3>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div class="info-text">
+                                    <h5>Alamat Kantor</h5>
+                                    <p>Jalan Pangeran Natakusuma, Kec. Pontianak Kota, Kota Pontianak, Kalimantan Barat</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-clock"></i>
+                                <div class="info-text">
+                                    <h5>Jam Kerja</h5>
+                                    <p>Senin - Jumat: 08.00 - 16.00 WIB<br>Sabtu, Minggu & Hari Libur Nasional: Tutup</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <div class="info-text">
+                                    <h5>Kontak & Email</h5>
+                                    <p>WhatsApp/Telp: +62 812-3456-7890<br>Email: notaris.ekasulistya@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <!-- Simulated Map placeholder -->
+                            <div class="map-placeholder">
+                                <i class="fa-solid fa-map-marked-alt" style="font-size: 48px; color: var(--accent-gold); margin-bottom: 15px;"></i>
+                                <h5>Simulasi Google Maps</h5>
+                                <p>Jl. Pangeran Natakusuma, Kota Pontianak</p>
+                                <a href="https://maps.google.com" target="_blank" class="btn btn-outline" style="margin-top: 15px; padding: 6px 15px; font-size: 12px;">Buka di Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Services Info -->
+        <section id="page-services" class="page-view" style="padding-top: 130px; padding-bottom: 80px;">
+            <div class="container">
+                <div class="section-title">
+                    <p>Informasi Dokumen</p>
+                    <h3>Persyaratan Layanan Akta & Surat</h3>
+                </div>
+                <div class="services-grid" id="detail-services-grid">
+                    <!-- Loaded dynamically via JavaScript with Toggle accordion requirements -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Guest Book Scanner Simulation -->
+        <section id="page-buku-tamu-scanner" class="page-view" style="padding-top: 130px; padding-bottom: 80px;">
+            <div class="container">
+                <div class="section-title">
+                    <p>Scan QR Code Kunjungan</p>
+                    <h3>Buku Tamu Digital</h3>
+                </div>
+                <div class="qr-scanner-card">
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">Silakan arahkan kamera HP Anda ke QR Code yang tertera di meja pelayanan kantor Notaris, atau klik tombol simulasi di bawah untuk mengisi formulir kedatangan.</p>
+                    <div class="qr-box">
+                        <div class="qr-scan-line"></div>
+                        <!-- A visual mock QR Code -->
+                        <i class="fa-solid fa-qrcode" style="font-size: 180px; color: #1a202c;"></i>
+                    </div>
+                    <button class="btn btn-primary qr-btn-sim" onclick="showPublicPage('buku-tamu-form')">
+                        <i class="fa-solid fa-camera"></i> Simulasi Pindai QR / Masuk Formulir
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Guest Book Form -->
+        <section id="page-buku-tamu-form" class="page-view" style="padding-top: 130px; padding-bottom: 80px;">
+            <div class="container" style="max-width: 600px;">
+                <div class="auth-card" style="max-width: 100%;">
+                    <div class="auth-header">
+                        <h3>Isi Buku Tamu Kunjungan</h3>
+                        <p>Kantor Notaris & PPAT Eka Sulistya, S.H., M.Kn.</p>
+                    </div>
+                    <form id="form-guestbook" onsubmit="handleGuestbookSubmit(event)">
+                        <div class="form-group">
+                            <label for="gt-nama">Nama Lengkap *</label>
+                            <input type="text" id="gt-nama" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gt-instansi">Instansi / Pekerjaan *</label>
+                            <input type="text" id="gt-instansi" class="form-control" placeholder="Contoh: PT. Maju Bersama / Swasta" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gt-nohp">Nomor HP / WhatsApp *</label>
+                            <input type="tel" id="gt-nohp" class="form-control" placeholder="Contoh: 0812XXXXXXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gt-keperluan">Keperluan Kunjungan *</label>
+                            <textarea id="gt-keperluan" class="form-control" rows="4" placeholder="Jelaskan maksud dan tujuan kunjungan Anda" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Kehadiran
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Login -->
+        <section id="page-login" class="page-view auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h3>Masuk Ke Sistem</h3>
+                    <p>Kelola data client & permohonan layanan</p>
+                </div>
+                <form id="form-login" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" class="form-control" placeholder="Username Anda" required>
+                        <i class="fa-solid fa-user input-icon"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                        <i class="fa-solid fa-lock input-icon"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-role">Hak Akses</label>
+                        <select id="login-role" class="form-control" required>
+                            <option value="client">Client (Pengguna Layanan)</option>
+                            <option value="notaris">Notaris / Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Masuk</button>
+                </form>
+                <div class="auth-footer">
+                    Belum punya akun? <a href="#" onclick="showPublicPage('register')">Daftar Sekarang</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Register -->
+        <section id="page-register" class="page-view auth-container">
+            <div class="auth-card" style="max-width: 550px;">
+                <div class="auth-header">
+                    <h3>Daftar Akun Baru</h3>
+                    <p>Buat akun client untuk mengajukan layanan</p>
+                </div>
+                <form id="form-register" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="reg-nama">Nama Lengkap *</label>
+                        <input type="text" id="reg-nama" class="form-control" placeholder="Nama lengkap sesuai KTP" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-nik">NIK KTP *</label>
+                        <input type="text" id="reg-nik" class="form-control" placeholder="16 digit NIK Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-nohp">Nomor HP / WhatsApp *</label>
+                        <input type="tel" id="reg-nohp" class="form-control" placeholder="Contoh: 0812XXXXXXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Alamat Email *</label>
+                        <input type="email" id="reg-email" class="form-control" placeholder="email@contoh.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-alamat">Alamat Lengkap *</label>
+                        <textarea id="reg-alamat" class="form-control" rows="2" placeholder="Alamat tinggal saat ini" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-username">Username Login *</label>
+                        <input type="text" id="reg-username" class="form-control" placeholder="Gunakan huruf & angka tanpa spasi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password *</label>
+                        <input type="password" id="reg-password" class="form-control" placeholder="Minimal 6 karakter" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Daftar Sekarang</button>
+                </form>
+                <div class="auth-footer">
+                    Sudah memiliki akun? <a href="#" onclick="showPublicPage('login')">Masuk di sini</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2026 Kantor Notaris & PPAT Eka Sulistya, S.H., M.Kn. All Rights Reserved.</p>
+                <p style="font-size: 12px; margin-top: 5px; color: var(--text-muted);">Proposal Tugas Akhir oleh Putri Alya Fadhilah - NIM 3202316139 | D3 Teknik Informatika</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ================= CLIENT PANEL (DASHBOARD) ================= -->
+    <div id="client-panel" style="display: none;">
+        <div class="dashboard-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <a href="#" class="logo-container" style="pointer-events: none;">
+                        <div class="logo-img">CL</div>
+                        <div class="logo-text">
+                            <h1>Client Panel</h1>
+                            <p id="client-display-name">Nama Client</p>
+                        </div>
+                    </a>
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item active" id="cnav-dashboard"><a href="#" onclick="showClientSection('dashboard')"><i class="fa-solid fa-chart-line"></i> <span>Dashboard</span></a></li>
+                    <li class="sidebar-nav-item" id="cnav-apply"><a href="#" onclick="showClientSection('apply')"><i class="fa-solid fa-file-signature"></i> <span>Ajukan Layanan</span></a></li>
+                    <li class="sidebar-nav-item" id="cnav-persyaratan"><a href="#" onclick="showClientSection('persyaratan')"><i class="fa-solid fa-folder-open"></i> <span>Syarat Dokumen</span></a></li>
+                    <li class="sidebar-nav-item" id="cnav-biodata"><a href="#" onclick="showClientSection('biodata')"><i class="fa-solid fa-address-card"></i> <span>Biodata Saya</span></a></li>
+                    <li class="sidebar-nav-item" id="cnav-bukutamu"><a href="#" onclick="showClientSection('bukutamu')"><i class="fa-solid fa-book"></i> <span>Buku Tamu</span></a></li>
+                </ul>
+                <div class="sidebar-footer">
+                    <a href="#" onclick="handleLogout()" class="btn btn-outline" style="width: 100%; padding: 8px 12px;"><i class="fa-solid fa-sign-out-alt"></i> <span>Keluar</span></a>
+                </div>
+            </aside>
+
+            <!-- Main Dashboard Panel -->
+            <main class="dashboard-main">
+                <!-- Section Dashboard -->
+                <div id="csec-dashboard" class="client-section active">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Dashboard Client</h3>
+                            <p>Pantau status permohonan akta dan surat Anda</p>
+                        </div>
+                        <div class="user-profile-menu">
+                            <span class="badge badge-success">Client Aktif</span>
+                        </div>
+                    </div>
+
+                    <!-- Client stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fa-solid fa-folder-open"></i></div>
+                            <div class="stat-details">
+                                <h4 id="stat-client-total">0</h4>
+                                <p>Total Pengajuan</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="color: var(--warning); background: rgba(255, 159, 28, 0.1);"><i class="fa-solid fa-hourglass-half"></i></div>
+                            <div class="stat-details">
+                                <h4 id="stat-client-process">0</h4>
+                                <p>Sedang Diproses</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="color: var(--success); background: rgba(46, 196, 182, 0.1);"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="stat-details">
+                                <h4 id="stat-client-done">0</h4>
+                                <p>Selesai</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client recent orders -->
+                    <div class="table-container">
+                        <div class="table-header-bar">
+                            <h4>Aktivitas Pengajuan Terbaru</h4>
+                            <button class="btn btn-primary" style="padding: 6px 15px; font-size: 12px;" onclick="showClientSection('apply')"><i class="fa-solid fa-plus"></i> Ajukan Layanan</button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No. Order</th>
+                                    <th>Layanan</th>
+                                    <th>Tanggal Pengajuan</th>
+                                    <th>Status</th>
+                                    <th>Keterangan Notaris</th>
+                                    <th>Dokumen Berkas</th>
+                                </tr>
+                            </thead>
+                            <tbody id="client-orders-table">
+                                <!-- Loaded dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section Apply Service -->
+                <div id="csec-apply" class="client-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Ajukan Layanan Online</h3>
+                            <p>Ajukan permohonan akta atau pengurusan surat dengan mudah</p>
+                        </div>
+                    </div>
+                    
+                    <div class="container" style="max-width: 700px; margin: 0;">
+                        <div class="auth-card" style="max-width: 100%; box-shadow: none;">
+                            <form id="form-apply-service" onsubmit="handleApplyService(event)">
+                                <div class="form-group">
+                                    <label for="apply-layanan">Pilih Jenis Layanan *</label>
+                                    <select id="apply-layanan" class="form-control" onchange="showApplyRequirements()" required>
+                                        <!-- Dynamic options loaded via JS -->
+                                    </select>
+                                </div>
+                                <div class="form-group" id="apply-requirements-box" style="background: rgba(197, 168, 128, 0.05); padding: 15px; border-radius: var(--border-radius); border: 1px solid var(--border-color); margin-bottom: 20px; display: none;">
+                                    <h5 class="text-gold" style="font-size: 14px; margin-bottom: 8px;"><i class="fa-solid fa-info-circle"></i> Berkas Persyaratan Yang Wajib Disiapkan:</h5>
+                                    <ul id="apply-requirements-list" style="font-size: 13px; padding-left: 20px; color: var(--text-secondary);">
+                                        <!-- Requirement list via JS -->
+                                    </ul>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apply-catatan">Catatan / Keterangan Tambahan</label>
+                                    <textarea id="apply-catatan" class="form-control" rows="3" placeholder="Tulis catatan jika ada berkas yang kurang atau info tambahan untuk notaris"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apply-files">Unggah Berkas Pendukung (Format PDF / JPG, Maks 5MB) *</label>
+                                    <input type="file" id="apply-files" class="form-control" multiple required>
+                                    <small style="color: var(--text-muted); display: block; margin-top: 5px;">Pilih satu atau beberapa file hasil scan dokumen persyaratan KTP, KK, dll.</small>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Kirim Pengajuan Layanan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Persyaratan Client -->
+                <div id="csec-persyaratan" class="client-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Persyaratan Dokumen Layanan</h3>
+                            <p>Daftar berkas yang harus Anda siapkan untuk setiap jenis layanan</p>
+                        </div>
+                    </div>
+                    <div class="services-grid" id="client-persyaratan-grid">
+                        <!-- Loaded dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Section Biodata Client -->
+                <div id="csec-biodata" class="client-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Biodata & Keamanan Akun</h3>
+                            <p>Kelola data identitas dan kredensial login Anda</p>
+                        </div>
+                    </div>
+                    <div class="container" style="max-width: 600px; margin: 0;">
+                        <div class="auth-card" style="max-width: 100%; box-shadow: none;">
+                            <form id="form-edit-biodata" onsubmit="handleSaveBiodata(event)">
+                                <div class="form-group">
+                                    <label for="bio-nama">Nama Lengkap</label>
+                                    <input type="text" id="bio-nama" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio-nik">NIK KTP</label>
+                                    <input type="text" id="bio-nik" class="form-control" required readonly style="opacity: 0.7;">
+                                    <small style="color: var(--text-muted);">NIK tidak dapat diubah setelah terdaftar.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio-nohp">Nomor HP / WhatsApp</label>
+                                    <input type="tel" id="bio-nohp" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio-email">Email</label>
+                                    <input type="email" id="bio-email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio-alamat">Alamat Lengkap</label>
+                                    <textarea id="bio-alamat" class="form-control" rows="3" required></textarea>
+                                </div>
+                                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 25px 0;">
+                                <h4 class="font-heading" style="font-size: 18px; margin-bottom: 15px;">Ganti Kata Sandi (Opsional)</h4>
+                                <div class="form-group">
+                                    <label for="bio-password">Password Baru</label>
+                                    <input type="password" id="bio-password" class="form-control" placeholder="Kosongkan jika tidak ingin mengubah password">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Simpan Perubahan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Buku Tamu Client -->
+                <div id="csec-bukutamu" class="client-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Riwayat Buku Tamu</h3>
+                            <p>Daftar riwayat kunjungan Anda ke Kantor Notaris & PPAT</p>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Instansi / Pekerjaan</th>
+                                    <th>Kunjungan Untuk</th>
+                                    <th>Tanggal & Jam</th>
+                                </tr>
+                            </thead>
+                            <tbody id="client-guestbook-table">
+                                <!-- Loaded dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- ================= NOTARIS/ADMIN PANEL ================= -->
+    <div id="admin-panel" style="display: none;">
+        <div class="dashboard-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <a href="#" class="logo-container" style="pointer-events: none;">
+                        <div class="logo-img" style="border-color: var(--accent-gold);">NT</div>
+                        <div class="logo-text">
+                            <h1>Notaris Admin</h1>
+                            <p>Eka Sulistya, S.H.</p>
+                        </div>
+                    </a>
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item active" id="anav-dashboard"><a href="#" onclick="showAdminSection('dashboard')"><i class="fa-solid fa-gauge"></i> <span>Dashboard</span></a></li>
+                    <li class="sidebar-nav-item" id="anav-clients"><a href="#" onclick="showAdminSection('clients')"><i class="fa-solid fa-users"></i> <span>Data Client</span></a></li>
+                    <li class="sidebar-nav-item" id="anav-requests"><a href="#" onclick="showAdminSection('requests')"><i class="fa-solid fa-file-invoice"></i> <span>Permintaan Layanan</span></a></li>
+                    <li class="sidebar-nav-item" id="anav-documents"><a href="#" onclick="showAdminSection('documents')"><i class="fa-solid fa-folder-closed"></i> <span>Akta & Surat</span></a></li>
+                    <li class="sidebar-nav-item" id="anav-bukutamu"><a href="#" onclick="showAdminSection('bukutamu')"><i class="fa-solid fa-book-open"></i> <span>Buku Tamu (Log)</span></a></li>
+                </ul>
+                <div class="sidebar-footer">
+                    <a href="#" onclick="handleLogout()" class="btn btn-outline" style="width: 100%; padding: 8px 12px;"><i class="fa-solid fa-sign-out-alt"></i> <span>Keluar</span></a>
+                </div>
+            </aside>
+
+            <!-- Main Dashboard Area -->
+            <main class="dashboard-main">
+                <!-- Section Dashboard -->
+                <div id="asec-dashboard" class="admin-section active">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Ringkasan Kinerja Notaris</h3>
+                            <p>Statistik operasional Kantor Notaris & PPAT hari ini</p>
+                        </div>
+                        <div class="user-profile-menu">
+                            <span class="badge badge-pending">Hak Akses: Notaris / Admin</span>
+                        </div>
+                    </div>
+
+                    <!-- Admin Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                            <div class="stat-details">
+                                <h4 id="stat-admin-clients">0</h4>
+                                <p>Total Client</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="color: var(--warning); background: rgba(255, 159, 28, 0.1);"><i class="fa-solid fa-bell"></i></div>
+                            <div class="stat-details">
+                                <h4 id="stat-admin-pending">0</h4>
+                                <p>Permintaan Masuk</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="color: var(--success); background: rgba(46, 196, 182, 0.1);"><i class="fa-solid fa-file-shield"></i></div>
+                            <div class="stat-details">
+                                <h4 id="stat-admin-akta">0</h4>
+                                <p>Akta Selesai</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="color: var(--info); background: rgba(0, 180, 216, 0.1);"><i class="fa-solid fa-clipboard-user"></i></div>
+                            <div class="stat-details">
+                                <h4 id="stat-admin-guests">0</h4>
+                                <p>Kunjungan Tamu</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Service requests -->
+                    <div class="table-container">
+                        <div class="table-header-bar">
+                            <h4>Permintaan Layanan Terbaru (Menunggu Tindakan)</h4>
+                            <button class="btn btn-outline" style="padding: 6px 15px; font-size: 12px;" onclick="showAdminSection('requests')">Lihat Semua</button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No. Order</th>
+                                    <th>Nama Client</th>
+                                    <th>Layanan</th>
+                                    <th>Tanggal Pengajuan</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-recent-requests-table">
+                                <!-- Loaded dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section Client Management -->
+                <div id="asec-clients" class="admin-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Manajemen Data Client</h3>
+                            <p>Kelola data profil seluruh client yang terdaftar pada sistem</p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <div class="table-header-bar">
+                            <div class="search-filter-row">
+                                <input type="text" id="admin-client-search" class="form-control" placeholder="Cari client berdasarkan nama..." oninput="filterClientTable()" style="max-width: 300px; padding: 8px 12px;">
+                            </div>
+                            <button class="btn btn-primary" onclick="openAddClientModal()"><i class="fa-solid fa-plus"></i> Tambah Client Baru</button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>NIK</th>
+                                    <th>No. HP</th>
+                                    <th>Email</th>
+                                    <th>Alamat</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-clients-table">
+                                <!-- Loaded dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section Service Requests Management -->
+                <div id="asec-requests" class="admin-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Kelola Permintaan Layanan</h3>
+                            <p>Proses permohonan akta, legalitas, dan surat yang diajukan oleh client</p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <div class="table-header-bar">
+                            <div class="search-filter-row">
+                                <input type="text" id="admin-request-search" class="form-control" placeholder="Cari nama client/layanan..." oninput="filterRequestTable()" style="max-width: 250px; padding: 8px 12px;">
+                                <select id="admin-request-filter" class="form-control" onchange="filterRequestTable()" style="max-width: 200px; padding: 8px 12px;">
+                                    <option value="all">Semua Status</option>
+                                    <option value="Menunggu">Menunggu</option>
+                                    <option value="Diproses">Diproses</option>
+                                    <option value="Selesai">Selesai</option>
+                                    <option value="Ditolak">Ditolak</option>
+                                </select>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No. Order</th>
+                                    <th>Nama Client</th>
+                                    <th>Layanan</th>
+                                    <th>Tanggal Masuk</th>
+                                    <th>Status</th>
+                                    <th>Keterangan</th>
+                                    <th>Berkas</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-requests-table">
+                                <!-- Loaded dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section Documents Management (Akta & Surat) -->
+                <div id="asec-documents" class="admin-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Arsip Digital Akta & Surat</h3>
+                            <p>Simpan dan kelola database dokumen hukum yang telah diterbitkan</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Tab for Akta / Surat -->
+                    <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+                        <button class="btn btn-primary" id="btn-tab-akta" onclick="toggleDocTab('akta')">Arsip Akta Resmi</button>
+                        <button class="btn btn-outline" id="btn-tab-surat" onclick="toggleDocTab('surat')">Arsip Surat Kantor</button>
+                    </div>
+
+                    <!-- Sub-section Akta -->
+                    <div id="doc-sub-akta" class="doc-tab-view">
+                        <div class="table-container">
+                            <div class="table-header-bar">
+                                <h4>Data Akta Notaris & PPAT</h4>
+                                <button class="btn btn-primary" onclick="openAddAktaModal()"><i class="fa-solid fa-plus"></i> Tambah Akta Baru</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nomor Akta</th>
+                                        <th>Nama Akta</th>
+                                        <th>Tanggal Pembuatan</th>
+                                        <th>Nama Client</th>
+                                        <th>File Digital</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-akta-table">
+                                    <!-- Loaded dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Sub-section Surat -->
+                    <div id="doc-sub-surat" class="doc-tab-view" style="display: none;">
+                        <div class="table-container">
+                            <div class="table-header-bar">
+                                <h4>Data Surat Resmi</h4>
+                                <button class="btn btn-primary" onclick="openAddSuratModal()"><i class="fa-solid fa-plus"></i> Tambah Surat Baru</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nomor Surat</th>
+                                        <th>Jenis Surat</th>
+                                        <th>Tanggal Surat</th>
+                                        <th>Keterangan</th>
+                                        <th>File Digital</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-surat-table">
+                                    <!-- Loaded dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Guest Book Log -->
+                <div id="asec-bukutamu" class="admin-section" style="display: none;">
+                    <div class="dashboard-header">
+                        <div>
+                            <h3>Rekapitulasi Kunjungan Tamu</h3>
+                            <p>Data tamu yang mengisi buku tamu digital berbasis QR Code</p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <div class="table-header-bar">
+                            <input type="text" id="admin-guest-search" class="form-control" placeholder="Cari nama tamu..." oninput="filterGuestTable()" style="max-width: 300px; padding: 8px 12px;">
+                            <button class="btn btn-outline" onclick="clearGuestbookLogs()"><i class="fa-solid fa-trash"></i> Bersihkan Log</button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Tamu</th>
+                                    <th>Instansi / Pekerjaan</th>
+                                    <th>Nomor HP</th>
+                                    <th>Keperluan</th>
+                                    <th>Tanggal & Jam</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-guestbook-table">
+                                <!-- Loaded dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- ================= MODALS SECTION ================= -->
+    <!-- Modal Add Client -->
+    <div id="modal-client" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="modal-client-title">Tambah Client Baru</h4>
+                <button class="modal-close" onclick="closeModal('modal-client')">&times;</button>
+            </div>
+            <form id="form-admin-client" onsubmit="handleAdminClientSubmit(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="ac-id">
+                    <div class="form-group">
+                        <label for="ac-nama">Nama Lengkap *</label>
+                        <input type="text" id="ac-nama" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ac-nik">NIK KTP *</label>
+                        <input type="text" id="ac-nik" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ac-nohp">Nomor HP / WhatsApp *</label>
+                        <input type="tel" id="ac-nohp" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ac-email">Email *</label>
+                        <input type="email" id="ac-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ac-alamat">Alamat Lengkap *</label>
+                        <textarea id="ac-alamat" class="form-control" rows="2" required></textarea>
+                    </div>
+                    <div class="form-group" id="ac-login-fields">
+                        <label for="ac-username">Username Default *</label>
+                        <input type="text" id="ac-username" class="form-control">
+                        <small style="color: var(--text-muted);">Akun client otomatis dibuat agar client dapat login.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('modal-client')">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Process Service Request -->
+    <div id="modal-process-request" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Proses Permintaan Layanan</h4>
+                <button class="modal-close" onclick="closeModal('modal-process-request')">&times;</button>
+            </div>
+            <form id="form-process-request" onsubmit="handleProcessRequestSubmit(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="pr-id">
+                    <div class="form-group">
+                        <label>Nama Client</label>
+                        <input type="text" id="pr-client" class="form-control" readonly style="opacity: 0.7;">
+                    </div>
+                    <div class="form-group">
+                        <label>Layanan yang Diajukan</label>
+                        <input type="text" id="pr-layanan" class="form-control" readonly style="opacity: 0.7;">
+                    </div>
+                    <div class="form-group">
+                        <label for="pr-status">Ubah Status Layanan</label>
+                        <select id="pr-status" class="form-control" required>
+                            <option value="Menunggu">Menunggu Verifikasi</option>
+                            <option value="Diproses">Diproses (Pembuatan Draf)</option>
+                            <option value="Selesai">Selesai (Akta Terbit)</option>
+                            <option value="Ditolak">Ditolak / Berkas Tidak Valid</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pr-catatan">Catatan / Keterangan untuk Client</label>
+                        <textarea id="pr-catatan" class="form-control" rows="3" placeholder="Tulis instruksi tambahan, alasan ditolak, atau tanggal penandatanganan akta..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('modal-process-request')">Batal</button>
+                    <button type="submit" class="btn btn-primary">Perbarui Status</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Add Akta -->
+    <div id="modal-akta" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Tambah Arsip Akta Baru</h4>
+                <button class="modal-close" onclick="closeModal('modal-akta')">&times;</button>
+            </div>
+            <form id="form-admin-akta" onsubmit="handleAdminAktaSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="aa-nomor">Nomor Akta *</label>
+                        <input type="text" id="aa-nomor" class="form-control" placeholder="Contoh: 12/Notaris/2026" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aa-nama">Nama / Judul Akta *</label>
+                        <input type="text" id="aa-nama" class="form-control" placeholder="Contoh: Akta Pendirian PT Mandiri Sejahtera" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aa-tanggal">Tanggal Terbit Akta *</label>
+                        <input type="date" id="aa-tanggal" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aa-client">Hubungkan ke Client *</label>
+                        <select id="aa-client" class="form-control" required>
+                            <!-- Loaded via JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="aa-file">Unggah Draf Akta / Scan Akta Resmi *</label>
+                        <input type="file" id="aa-file" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('modal-akta')">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Arsip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Add Surat -->
+    <div id="modal-surat" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Tambah Arsip Surat Baru</h4>
+                <button class="modal-close" onclick="closeModal('modal-surat')">&times;</button>
+            </div>
+            <form id="form-admin-surat" onsubmit="handleAdminSuratSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="as-nomor">Nomor Surat *</label>
+                        <input type="text" id="as-nomor" class="form-control" placeholder="Contoh: 045/ES/VII/2026" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="as-jenis">Jenis Surat *</label>
+                        <input type="text" id="as-jenis" class="form-control" placeholder="Contoh: Surat Kuasa Membebankan Hak Tanggungan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="as-tanggal">Tanggal Surat *</label>
+                        <input type="date" id="as-tanggal" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="as-keterangan">Keterangan *</label>
+                        <textarea id="as-keterangan" class="form-control" rows="2" placeholder="Keterangan isi surat singkat"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="as-file">Unggah File Surat *</label>
+                        <input type="file" id="as-file" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('modal-surat')">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Surat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal View Files / Document list -->
+    <div id="modal-view-files" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Berkas Lampiran Pengajuan</h4>
+                <button class="modal-close" onclick="closeModal('modal-view-files')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul id="uploaded-files-list" style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+                    <!-- Filled dynamically via JS -->
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="closeModal('modal-view-files')">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= NOTIFICATION TOAST ================= -->
+    <div id="toast" class="toast-notification" style="display: none;">
+        <i class="fa-solid fa-circle-check text-gold" id="toast-icon"></i>
+        <span id="toast-message">Notifikasi baru berhasil dikirim.</span>
+    </div>
+
+    <!-- Core App Javascript -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,939 @@
+PROPOSAL TUGAS AKHIR
+RANCANG BANGUN SISTEM INFORMASI MANAJEMEN DATA CLIENT DAN PELAYANAN BERBASIS WEB PADA KANTOR NOTARIS DAN PPAT EKA SULISTYA, S.H., M.Kn.
+OLEH:
+PUTRI ALYA FADHILAH
+NIM 3202316139
+PROGRAM STUDI D3 TEKNIK INFORMATIKA
+JURUSAN TEKNIK ELEKTRO
+POLITEKNIK NEGERI PONTIANAK
+2026
+HALAMAN PENGESAHAN
+RANCANG BANGUN SISTEM INFORMASI MANAJEMEN DATA CLIENT DAN PELAYANAN BERBASIS WEB PADA KANTOR NOTARIS DAN PPAT EKA SULISTYA, S.H., M.Kn.
+Proposal Tugas Akhir
+Program Studi D3 Teknik Informatika
+Jurusan Teknik Elektro
+Oleh:
+PUTRI ALYA FADHILAH
+NIM 3202316139
+Dosen Pembimbing :
+Fitri Wibowo, S.ST., M.T.
+NIP. 198512282015041002
+Telah dipertahankan di depan penguji pada tanggal 06 April 2026 dan dinyatakan memenuhi syarat sebagai Proposal Tugas Akhir.
+Dosen Penguji:
+Penguji I
+Suharsono, S.Kom., M.Kom.
+NIP. 198811112022031006
+Penguji II
+Tri Bowo Atmojo, S.T., M.Cs.
+NIP. 198407172019031010
+Mengetahui :
+Koordinator Program Studi 
+D3 Teknik Informatika
+Mariana Syamsudin, S.T., M.T., PhD
+NIP. 197503142006042001
+Koordinator Tugas Akhir
+Novi Aryani Fitri, S.T., M.Tr.Kom.
+NIP. 199111132022032016
+HALAMAN PERNYATAAN ORISINALITAS
+Saya yang bertanda tangan dibawah ini : 
+Nama                   : Putri Alya Fadhilah
+NIM                    : 3202316139
+Jurusan / Program Studi: Teknik Elektro/Teknik Informatika
+Judul Proposal        : Rancang Bangun Sistem Informasi Manajemen                                                   Data Client Dan Pelayanan Berbasis Web Pada                                                   Kantor Notaris Dan PPAT Eka Sulistya, S.H.,                                                    M.Kn.
+Menyatakan dengan sebenar-benarnya bahwa penulisan proposal Tugas Akhir ini berdasarkan hasil penelitian, pemikiran dan pemaparan asli dari saya sendiri, baik untuk naskah proposal maupun kegiatan yang tercantum sebagai bagian dari proposal Tugas Akhir ini. Jika terdapat karya orang lain, saya akan mencantumkan sumber yang jelas.
+Demikian pernyataan ini saya buat dengan sesungguhnya dan apabila dikemudian hari terdapat penyimpangan dan ketidakbenaran dalam pernyataan ini, maka saya bersedia menerima sanksi akademik berupa pencabutan gelar yang telah diperoleh karena karya tulis ini dan sanksi lain sesuai dengan peraturan yang berlaku di Politeknik Negeri Pontianak. 
+Demikian pernyataan ini saya buat dalam  keadaan sadar tanpa paksaan dari pihak manapun.   
+Pontianak, 17 April 2026
+Yang membuat pernyataan, 
+Materai10.000Materai10.000
+Materai
+10.000
+Materai
+10.000
+NAMA
+NIM. 
+DAFTAR ISI
+DAFTAR ISIiv
+DAFTAR TABELv
+DAFTAR GAMBARvi
+BAB I PENDAHULUAN1
+1.1Latar Belakang1
+1.2Rumusan Masalah3
+1.3Batasan Masalah3
+1.4Tujuan Tugas Akhir4
+1.5Manfaat Tugas Akhir5
+1.6Metodologi Pelaksanaan Tugas Akhir5
+BAB II DASAR TEORI7
+2.1 Tinjauan Pustaka7
+2.2 Dasar Teori11
+BAB III RANCANGAN AWAL15
+3.1Analisis Kebutuhan Sistem15
+3.2Arsitektur Sistem19
+3.4 Perancangan Antarmuka (UI/UX) (Jika Relevan dan Opsional)31
+3.4 Spesifikasi Teknologi46
+3.5 Rencana Pengujian48
+3.6 Jadwal Penyelesaian Tugas Akhir54
+DAFTAR PUSTAKA56
+DAFTAR TABEL
+Table 2. 1 Tabel Perbandingan9
+Table 3. 1 Skenario Pengujian50
+Table 3. 2 Jadwal Pengujian Tugas Akhir55
+DAFTAR GAMBAR
+Gambar 3. 1 Diagram Arsitektur Sistem20
+Gambar 3. 2 Use Case23
+Gambar 3. 3 Tabel Relasi Sistem Notaris27
+Gambar 3. 4 Halaman Daftar Sekarang32
+Gambar 3. 5 Halaman Login33
+Gambar 3. 6 Halaman Dashboard34
+Gambar 3. 7 Halaman Data Client35
+Gambar 3. 8 Halaman Permintaan Layanan36
+Gambar 3. 9 Halaman Data Akta36
+Gambar 3. 10 Halaman Pilih Jenis Surat37
+Gambar 3. 11 Halaman Dokumen Persyaratan38
+Gambar 3. 12 Halaman Buku Tamu39
+Gambar 3. 13 Halaman Landing Page40
+Gambar 3. 14 Halaman Dashboard Client41
+Gambar 3. 15 Halaman Permintaan Layanan Client42
+Gambar 3. 16 Halaman Dokumen Persyaratan42
+Gambar 3. 17 Halaman Biodata Client43
+Gambar 3. 18 Halaman Buku Tamu Client44
+BAB IPENDAHULUAN
+Latar Belakang
+Perkembangan teknologi informasi pada era modern telah mendorong berbagai bidang pekerjaan untuk beralih dari sistem administrasi manual menuju sistem yang otomatis dan berbasis web. Pemanfaatan teknologi informasi memungkinkan organisasi dalam mengelola data secara lebih tertata serta mempermudah proses pengolahan dan penyimpanan informasi. Sistem informasi berbasis web juga mampu menggabungkan berbagai data ke dalam satu basis data yang terpusat sehingga memudahkan proses pengelolaan informasi, pencarian data, serta pembuatan laporan secara lebih optimal. Oleh karena itu, penerapan sistem informasi menjadi salah satu solusi penting dalam meningkatkan kualitas pengelolaan data dan pelayanan pada suatu organisasi [1].
+Pemanfaatan teknologi informasi juga mulai diterapkan dalam berbagai bidang pelayanan publik, termasuk pada bidang pelayanan hukum. Dalam sistem hukum di Indonesia, notaris merupakan pejabat umum yang berwenang untuk membuat akta autentik, yaitu akta yang dibuat oleh atau di hadapan notaris menurut bentuk dan tata cara yang ditetapkan dalam undang-undang sehingga memiliki kekuatan hukum yang sempurna [2]. Selain notaris, terdapat pula Pejabat Pembuat Akta Tanah (PPAT) yang berwenang membuat akta berkaitan dengan perbuatan hukum mengenai hak atas tanah atau hak milik atas satuan rumah susun. Kedua instansi ini melayani berbagai kebutuhan hukum masyarakat seperti pembuatan akta perjanjian, akta jual beli, akta pendirian badan usaha, akta hibah, surat kuasa, surat pernyataan, serta pengurusan dokumen pertanahan. Oleh karena itu, kegiatan administrasi pada kantor notaris dan PPAT memerlukan pengelolaan data yang baik agar dokumen hukum yang dihasilkan dapat tersimpan secara aman dan mudah diakses ketika dibutuhkan [2].
+Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. merupakan salah satu kantor pelayanan jasa hukum yang telah beroperasi sejak tanggal 23 Juni 2025 dan berkedudukan di Kota Pontianak, tepatnya di Jalan Pangeran Natakusuma. Kantor ini beroperasi setiap hari Senin hingga Jumat pada pukul 08.00–16.00 WIB dan libur pada hari-hari besar nasional. Layanan yang tersedia antara lain pembuatan akta perjanjian, akta jual beli, akta pendirian badan usaha, akta hibah, surat kuasa, surat pernyataan, serta pengurusan dokumen pertanahan dan layanan hukum lainnya. Dalam menjalankan kegiatan operasionalnya, kantor ini dijalankan secara langsung oleh notaris tanpa staf administrasi tetap. Apabila diperlukan, notaris dibantu oleh tenaga bantu lepas yang bertugas untuk keperluan non-administrasi seperti pengantaran dokumen sesuai kebutuhan. Berbagai aktivitas administrasi seperti pencatatan data client, pengelolaan dokumen persyaratan layanan, serta pencatatan kunjungan client masih ditangani secara langsung oleh notaris [3].
+Berdasarkan hasil observasi yang dilakukan di Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn., diketahui bahwa pengelolaan data client dan administrasi pelayanan masih dilakukan secara manual menggunakan dokumen fisik maupun file yang tersimpan secara terpisah. Proses pencarian data client sering kali membutuhkan waktu yang relatif lebih lama karena dokumen harus dicari secara manual pada arsip yang tersedia, misalnya ketika notaris perlu memverifikasi data client yang pernah berkunjung atau melanjutkan proses pembuatan akta yang belum selesai. Selain itu, pencatatan kunjungan client masih menggunakan buku tamu manual yang terkadang tidak terisi karena client lupa melakukan pengisian atau belum mendapatkan arahan mengenai pengisian buku tamu tersebut. Kondisi tersebut menyebabkan data kunjungan tidak tercatat secara lengkap serta menyulitkan proses rekapitulasi data kunjungan dan laporan administrasi. Penelitian sebelumnya menunjukkan bahwa sistem administrasi manual dapat menimbulkan kesulitan dalam pengelolaan data serta meningkatkan risiko kehilangan dokumen atau kesalahan pencatatan data [4].
+Berdasarkan permasalahan tersebut, diperlukan suatu sistem yang mampu mengelola data client dan pelayanan secara lebih terstruktur dan terpusat. Oleh karena itu, penelitian ini bertujuan untuk menghasilkan Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. Sistem ini dirancang untuk membantu proses pengelolaan data client, pencatatan kunjungan client melalui buku tamu digital berbasis QR Code, pengelolaan informasi layanan dan persyaratan dokumen, serta mempermudah proses pencarian data client secara lebih teratur. Dengan adanya sistem ini diharapkan proses administrasi dan pelayanan pada kantor notaris dapat berjalan dengan lebih tertata serta memudahkan notaris dalam mengelola berbagai data dan informasi pelayanan.
+Rumusan Masalah
+Berdasarkan latar belakang yang telah dijelaskan sebelumnya, maka rumusan masalah dalam penelitian ini adalah bagaimana merancang dan membangun sistem informasi manajemen data client dan pelayanan berbasis web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn?
+Batasan Masalah
+Agar penelitian ini lebih terarah dan dapat diselesaikan sesuai kemampuan, ada beberapa batasan masalah dalam tugas akhir ini, yaitu sebagai berikut:
+Ruang lingkup penelitian ini dilakukan pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. Sistem yang dikembangkan memiliki dua jenis pengguna, yaitu notaris selaku pengguna utama (admin) yang bertugas mengelola data dan layanan, serta client selaku pengguna pendukung yang dapat mengakses fitur seperti melihat informasi layanan, persyaratan dokumen, mengajukan layanan secara online, dan mengisi buku tamu digital melalui scan QR Code.
+Fitur sistem dalam penelitian ini meliputi pengelolaan data client yaitu Create, Read, Update, Delete (CRUD), pencatatan kunjungan client menggunakan buku tamu digital berbasis QR Code, pengelolaan informasi layanan notaris dan PPAT beserta persyaratan dokumen, serta pencarian data client secara terstruktur yang bertujuan untuk mempermudah staf kantor dalam mengelola dan menemukan data client secara lebih cepat dan terstruktur.
+Data yang dikelola dalam sistem meliputi data pengguna (admin), data client, data kunjungan atau buku tamu, data layanan notaris, serta data informasi persyaratan dokumen yang berkaitan dengan pelayanan pada Kantor Notaris dan PPAT.
+Teknologi yang digunakan dalam pembangunan sistem ini adalah sistem berbasis web dengan menggunakan bahasa pemrograman PHP yang didukung oleh framework Laravel serta database MySQL sebagai media penyimpanan data.
+Sistem yang dibangun dalam penelitian ini hanya berfokus pada pengelolaan data client, pencatatan kunjungan client melalui buku tamu digital, serta penyediaan informasi layanan notaris dan PPAT beserta persyaratan dokumen. Sistem ini tidak mencakup pengelolaan isi atau substansi hukum akta maupun proses legal formal notaris secara langsung.
+Tujuan Tugas Akhir
+Tujuan dari pelaksanaan tugas akhir ini adalah untuk menghasilkan sistem informasi manajemen data client dan pelayanan berbasis web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. 
+Manfaat Tugas Akhir
+Adapun manfaat yang diharapkan dari pelaksanaan tugas akhir ini adalah sebagai berikut:
+Bagi Kantor Notaris dan PPAT
+Membantu dalam pengelolaan data klien secara lebih terstruktur, mempermudah proses pencarian data, serta meningkatkan efektivitas dan kualitas pelayanan administrasi kepada masyarakat.
+Bagi Masyarakat
+Mempermudah dalam memperoleh informasi layanan dan persyaratan dokumen secara lebih cepat dan akurat, serta mengurangi kesalahan atau ketidakefisienan kunjungan ke kantor notaris.
+Bagi Penulis
+Menambah wawasan dan pengalaman dalam menganalisis permasalahan, merancang, serta membangun sistem informasi berbasis web sesuai dengan kebutuhan instansi.
+Metodologi Pelaksanaan Tugas Akhir
+Metodologi pelaksanaan tugas akhir ini menggunakan metode System Development Life Cycle (SDLC) dengan model Waterfall, karena sistem yang dikembangkan merupakan sistem informasi berbasis web yang memiliki tahapan pengembangan terstruktur dan sistematis. Metode ini dipilih karena sesuai dengan kebutuhan perancangan sistem yang dilakukan secara bertahap mulai dari analisis hingga implementasi.
+Gambar 1. 1 Metode Waterfall
+Adapun tahapan dalam metode Waterfall yang digunakan dalam tugas akhir ini adalah sebagai berikut:
+Analisis Kebutuhan (Requirement Analysis)
+Pada tahap ini dilakukan identifikasi permasalahan dan kebutuhan sistem melalui observasi serta wawancara di Kantor Notaris & PPAT Eka Sulistya, S.H., M.Kn.. Analisis dilakukan untuk mengetahui kebutuhan pengguna (admin) dalam pengelolaan data klien dan pelayanan. 
+Perancangan Sistem (System Design)
+Tahap ini meliputi perancangan struktur sistem seperti pembuatan use case diagram, perancangan database, perancangan alur sistem, serta desain antarmuka pengguna (user interface).
+Implementasi (Implementation system)
+Pada tahap ini dilakukan proses pembangunan sistem berdasarkan hasil perancangan yang telah dibuat sebelumnya. Sistem dikembangkan menggunakan framework Laravel dengan bahasa pemrograman PHP serta menggunakan database MySQL sebagai media penyimpanan data. Tahap ini mencakup pembuatan fitur-fitur sistem seperti pengelolaan data client, pencatatan buku tamu, pengelolaan informasi layanan, serta pencarian data client.
+Pengujian Sistem (Testing)
+Tahap pengujian dilakukan untuk memastikan bahwa sistem yang telah dibangun dapat berjalan sesuai dengan kebutuhan dan fungsi yang telah dirancang. Pengujian sistem dilakukan menggunakan metode Black Box Testing untuk menguji setiap fungsi pada sistem. Selain itu, dilakukan juga User Acceptance Testing (UAT) untuk mengetahui tingkat penerimaan pengguna terhadap sistem yang telah dikembangkan serta memastikan sistem dapat digunakan dengan baik oleh pengguna.
+BAB IIDASAR TEORI
+2.1 Tinjauan Pustaka
+Tinjauan pustaka merupakan bagian yang berisi uraian teori, konsep, serta hasil penelitian terdahulu yang relevan dengan topik penelitian. Bagian ini bertujuan untuk memberikan landasan ilmiah dalam mendukung permasalahan yang telah diuraikan pada bab sebelumnya. Dengan adanya tinjauan pustaka, penelitian yang dilakukan memiliki dasar teoritis yang jelas dan terarah.
+Dalam penelitian ini, tinjauan pustaka membahas konsep mengenai sistem informasi, pelayanan administrasi pada kantor notaris, pengelolaan data client, serta pemanfaatan web sebagai media informasi dan pengelolaan data. Selain itu, disertakan pula hasil penelitian terdahulu yang berkaitan dengan pengembangan sistem informasi berbasis web pada instansi pelayanan. Uraian teori dan penelitian terdahulu tersebut menjadi acuan dalam merancang dan mengembangkan sistem yang sesuai dengan kebutuhan kantor notaris. 
+Ringkasan Penelitian Terdahulu
+Penelitian yang dilakukan oleh Pratama dan Nugroho (2021) dengan judul “Implementasi Sistem Informasi Berbasis Web untuk Meningkatkan Kinerja Organisasi” bertujuan untuk merancang sistem informasi berbasis web yang dapat mendukung pengelolaan data dan proses administrasi secara lebih efektif. Metode pengembangan yang digunakan adalah metode Waterfall dengan perancangan sistem menggunakan UML. Hasil penelitian menunjukkan bahwa sistem yang dikembangkan mampu meningkatkan efektivitas kerja serta mempercepat proses administrasi melalui pengelolaan data secara terpusat. Namun, penelitian tersebut belum diterapkan secara khusus pada lingkungan kantor notaris dan PPAT.
+Berdasarkan Undang-Undang Republik Indonesia Nomor 2 Tahun 2014 tentang Jabatan Notaris, dijelaskan bahwa notaris merupakan pejabat umum yang memiliki kewenangan untuk membuat akta autentik serta memiliki kewenangan lain sebagaimana diatur dalam peraturan
+perundang-undangan. Ketentuan ini menunjukkan bahwa keberadaan notaris memiliki peran penting dalam memberikan kepastian hukum melalui pembuatan akta autentik. Namun, undang-undang tersebut lebih menekankan pada aspek hukum jabatan notaris dan belum membahas mengenai pemanfaatan sistem informasi dalam pengelolaan administrasi di kantor notaris dan PPAT.
+Penelitian yang dilakukan oleh Hedianto dan Susilowati (2018) dengan judul “Sistem Informasi Administrasi pada Kantor Notaris dan PPAT” bertujuan untuk membantu pengelolaan administrasi serta penyimpanan data pada kantor notaris dan PPAT agar lebih rapi dan mudah diakses. Metode yang digunakan dalam penelitian ini adalah metode analisis dan perancangan sistem informasi dengan pendekatan berbasis komputer. Hasil penelitian menunjukkan bahwa sistem informasi yang dikembangkan mampu membantu proses pengolahan data administrasi menjadi lebih tertata dan mempermudah pencarian data. Akan tetapi, penelitian ini masih terbatas pada pengelolaan administrasi dan belum membahas secara lengkap manajemen data client dalam sistem berbasis web.
+Penelitian yang dilakukan oleh Priatna (2020) dengan judul “Perancangan Sistem Informasi Pengelolaan Data Akta Notaril Berbasis Web” bertujuan untuk merancang sistem informasi yang dapat membantu pengelolaan data akta notaris secara lebih terstruktur. Metode yang digunakan dalam penelitian ini adalah metode perancangan sistem berbasis web dengan tahapan analisis kebutuhan, perancangan sistem, serta implementasi. Hasil penelitian menunjukkan bahwa sistem informasi yang dikembangkan mampu membantu proses pencatatan, penyimpanan, dan pencarian data akta secara lebih mudah. Namun, penelitian ini hanya berfokus pada pengelolaan data akta notaris dan belum mencakup pengelolaan data client secara menyeluruh.
+Analisis Perbandingan
+Membuat tabel perbandingan antara sistem atau metode yang diusulkan dengan sistem yang telah ada pada penelitian sebelumnya. Tabel ini harus mencakup aspek-aspek seperti:
+Fitur atau fungsi sistem
+Teknologi yang digunakan
+Kelebihan dan kekurangan
+Hasil yang dicapai
+Contoh tabel perbandingan dapat dilihat pada table 2.1
+Table 2. 1 Tabel Perbandingan
+No
+Aspek
+Pratama & Nugroho (2021)
+Hedianto & Susilowati (2018)
+Priatna (2020)
+Sistem yang Diusulkan
+1
+Teknologi
+Web-based
+Web-based
+Web-based
+Web-based (PHP Laravel + MySQL)
+2
+Fitur Utama
+Pengelolaan data organisasi dan administrasi
+Sistem administrasi notaris dan PPAT
+Pengelolaan data akta notaris
+Manajemen data client, layanan, buku tamu digital QR Code
+3
+Kelebihan
+Mempermudah pengelolaan data organisasi
+Membantu pengolahan data administrasi dan pencarian data
+Mempermudah pencatatan dan penyimpanan data akta
+Pengelolaan data client lebih terintegrasi dan pencatatan kunjungan digital
+4
+Kekurangan
+Tidak diterapkan pada kantor notaris
+Belum membahas manajemen data client
+Hanya fokus pada data akta
+-
+5
+Hasil Penelitian
+Meningkatkan efektivitas kerja organisasi
+Administrasi menjadi lebih tertata
+Pengelolaan data akta lebih terstruktur
+Sistem membantu pengelolaan data client dan pelayanan secara lebih terorganisir
+Kebaruan Sistem yang Diusulkan
+Kebaruan dari sistem yang diusulkan dalam penelitian ini terletak pada pengembangan Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web yang dirancang khusus untuk mendukung kegiatan administrasi pada kantor notaris dan PPAT. Berbeda dengan penelitian sebelumnya yang umumnya hanya berfokus pada pengelolaan data akta atau administrasi secara umum, sistem yang diusulkan mengintegrasikan pengelolaan data client, data layanan, serta pencatatan kunjungan client dalam satu sistem yang saling terhubung. Selain itu, sistem ini dilengkapi dengan fitur buku tamu digital berbasis QR Code yang memungkinkan client melakukan pencatatan kunjungan secara lebih mudah dan otomatis.
+Kebaruan lainnya terdapat pada penggunaan teknologi sistem berbasis web yang dibangun menggunakan bahasa pemrograman PHP dengan framework Laravel serta database MySQL sebagai media penyimpanan data. Penerapan teknologi tersebut diharapkan mampu membantu proses pengelolaan data client, penyimpanan dokumen persyaratan layanan, serta pencarian data secara lebih teratur. Sistem ini juga dirancang untuk menyesuaikan kondisi kantor notaris yang memiliki keterbatasan sumber daya manusia, sehingga dapat membantu notaris dalam mengelola kegiatan administrasi dan pelayanan secara lebih praktis, terstruktur, dan terpusat.
+2.2 Dasar Teori
+Dasar teori berisi konsep, teori, atau prinsip-prinsip ilmiah yang mendukung tugas akhir. Bagian ini menjelaskan landasan teoritis yang digunakan untuk merancang sistem atau menjawab rumusan masalah. Contoh struktur dasar teori sebagai berikut: 
+Konsep Dasar
+1.1 Sistem Informasi
+Sistem informasi merupakan suatu sistem yang terdiri dari berbagai komponen yang saling berhubungan untuk mengumpulkan, mengolah, menyimpan, dan menyajikan informasi dalam suatu organisasi. Sistem informasi digunakan untuk mendukung proses pengambilan keputusan serta membantu kegiatan operasional organisasi. Dengan adanya sistem informasi, proses pengelolaan data dapat dilakukan secara lebih terstruktur dan teratur sehingga informasi yang dihasilkan menjadi lebih akurat dan mudah digunakan. Selain itu, sistem informasi juga memanfaatkan teknologi komputer untuk membantu proses pengolahan data secara lebih efektif. Oleh karena itu, penerapan sistem informasi sangat penting dalam mendukung aktivitas organisasi agar dapat berjalan dengan lebih efisien dan terorganisir [5].
+1.2 Sistem Informasi Berbasis Web
+Sistem informasi berbasis web merupakan sistem informasi yang dibangun menggunakan teknologi web sehingga dapat diakses melalui jaringan internet menggunakan browser. Sistem ini memungkinkan pengguna untuk memperoleh informasi secara lebih mudah tanpa perlu menginstal aplikasi tambahan pada perangkat tertentu. Selain itu, sistem berbasis web juga memungkinkan pengelolaan data secara terpusat sehingga memudahkan proses penyimpanan dan pengolahan data. Dengan adanya sistem informasi berbasis web, proses pengelolaan informasi dapat dilakukan secara lebih cepat dan efisien dalam mendukung kegiatan operasional organisasi [6].
+1.3 Manajemen Data Client
+Manajemen data client merupakan proses pengelolaan data yang berkaitan dengan informasi client dalam suatu organisasi. Proses ini meliputi kegiatan pencatatan, penyimpanan, pengolahan, serta pencarian data client yang diperlukan dalam kegiatan pelayanan dan administrasi. Pengelolaan data client yang baik dapat membantu organisasi dalam menyimpan informasi secara lebih rapi dan terstruktur. Selain itu, manajemen data client juga mempermudah proses pencarian informasi ketika data tersebut dibutuhkan. Dengan adanya pengelolaan data client yang baik, organisasi dapat memberikan pelayanan yang lebih efektif serta meningkatkan kualitas pelayanan kepada client [7].
+1.4 Layanan 
+Layanan merupakan serangkaian aktivitas yang diberikan oleh suatu lembaga atau instansi untuk memenuhi kebutuhan pengguna dalam melaksanakan tugasnya. Pada dasarnya, pelayanan diperlukan oleh semua pihak karena tidak mungkin memisahkan layanan dari kegiatan operasional suatu organisasi. Dalam konteks kantor notaris dan PPAT, layanan mencakup berbagai kegiatan seperti pembuatan akta autentik, pengurusan dokumen hukum, serta pemberian informasi kepada masyarakat terkait prosedur dan persyaratan yang diperlukan. Pengelolaan informasi layanan yang terstruktur sangat diperlukan agar masyarakat dapat memperoleh informasi secara mudah dan cepat sebelum melakukan kunjungan ke kantor, sehingga proses pelayanan dapat berjalan lebih efisien [JURNAL BARU 8]
+Teori Pendukung
+System Development Life Cycle (SDLC) merupakan metode yang digunakan dalam pengembangan sistem informasi yang dilakukan secara terstruktur melalui beberapa tahapan, mulai dari analisis kebutuhan, perancangan sistem, implementasi, hingga pengujian sistem. Metode ini membantu pengembang dalam merancang sistem secara sistematis sehingga sistem yang dihasilkan dapat sesuai dengan kebutuhan pengguna. Dalam proses perancangan sistem, biasanya digunakan Unified Modeling Language (UML) sebagai bahasa pemodelan untuk menggambarkan struktur serta alur kerja sistem yang akan dibangun. UML digunakan dalam berbagai bentuk diagram seperti use case diagram dan activity diagram untuk memvisualisasikan proses yang terjadi di dalam sistem. Selain itu, teknologi QR Code (Quick Response Code) juga dapat diterapkan dalam sistem informasi untuk mempermudah proses identifikasi dan pencatatan data secara cepat melalui proses pemindaian menggunakan perangkat digital. Penggunaan QR Code memungkinkan proses pencatatan data dilakukan secara otomatis sehingga dapat meningkatkan efisiensi serta meminimalkan kesalahan pencatatan data dalam sistem informasi [8].
+Teknologi yang Digunakan
+3.1 PHP
+PHP merupakan bahasa pemrograman yang banyak digunakan dalam pengembangan aplikasi berbasis web. PHP bekerja pada sisi server (server-side scripting) sehingga mampu memproses data yang dikirimkan oleh pengguna sebelum ditampilkan kembali pada halaman web.. Bahasa pemrograman ini bersifat open source serta mudah diintegrasikan dengan berbagai sistem manajemen basis data. Oleh karena itu, PHP banyak digunakan dalam pengembangan sistem informasi berbasis web karena mampu mendukung pembuatan aplikasi yang dinamis dan interaktif [11].
+3.2 Framework Laravel
+Laravel merupakan salah satu framework yang digunakan dalam pengembangan aplikasi berbasis PHP. Framework ini menyediakan berbagai fitur yang dapat mempermudah proses pengembangan sistem seperti pengelolaan routing, autentikasi pengguna, serta manajemen database. Dengan menggunakan Laravel, struktur kode program dapat disusun dengan lebih rapi dan terorganisir sehingga mempermudah proses pengembangan maupun pemeliharaan sistem. Selain itu, Laravel juga mendukung pengembangan aplikasi berbasis web yang lebih cepat dan efisien [11].
+3.3 MySql
+MySQL merupakan sistem manajemen basis data (Database Management System/DBMS) yang digunakan untuk menyimpan dan mengelola data dalam suatu aplikasi. MySQL menggunakan bahasa SQL (Structured Query Language) untuk melakukan proses pengolahan data seperti menambah, mengubah, menghapus, dan menampilkan data. Dalam sistem informasi berbasis web, MySQL sering digunakan sebagai media penyimpanan data karena mampu menangani pengelolaan data dalam jumlah besar serta memiliki kinerja yang cukup baik. Dengan adanya database MySQL, data pada sistem informasi dapat disimpan secara terstruktur sehingga memudahkan proses pencarian dan pengolahan data dalam sistem [11].
+Hubungan dengan Tugas Akhir
+Teori-teori yang telah dijelaskan sebelumnya menjadi landasan dalam perancangan Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. Konsep sistem informasi digunakan sebagai dasar dalam pengelolaan data client dan pelayanan pada sistem yang dikembangkan. Teori mengenai sistem informasi berbasis web menjadi acuan dalam pengembangan sistem agar dapat diakses secara mudah melalui browser. Selain itu, metode pengembangan sistem digunakan sebagai panduan dalam proses perancangan dan pembangunan sistem mulai dari tahap analisis kebutuhan hingga implementasi sistem. Teknologi seperti PHP, framework Laravel, dan database MySQL digunakan sebagai tools utama dalam pembangunan sistem sehingga sistem yang dihasilkan dapat membantu proses pengelolaan data client dan pelayanan secara lebih teratur serta mempermudah proses administrasi pada kantor notaris.
+BAB IIIRANCANGAN AWAL    
+Rancangan awal sistem yang akan dikembangkan dalam penelitian ini. Rancangan awal sistem disusun sebagai dasar dalam proses pembangunan Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. Pada tahap ini dilakukan perencanaan dan perancangan sistem secara menyeluruh agar sistem yang dibangun dapat sesuai dengan kebutuhan pengguna serta mampu mendukung kegiatan administrasi yang ada.
+Pembahasan dalam bab ini meliputi analisis sistem dan perancangan sistem yang digunakan dalam pengembangan aplikasi. Perancangan dilakukan secara terstruktur untuk menggambarkan alur kerja sistem secara jelas, termasuk fitur pengelolaan data client, pencatatan kunjungan melalui buku tamu digital berbasis QR Code, serta pengelolaan informasi layanan dan persyaratan dokumen. Dengan adanya rancangan awal ini, diharapkan sistem yang dibangun dapat berjalan dengan baik dan mempermudah proses pelayanan serta pengelolaan data pada kantor notaris.
+Analisis Kebutuhan Sistem
+Bagian ini menjelaskan kebutuhan sistem yang akan dibangun, baik kebutuhan fungsional maupun non-fungsional.
+Kebutuhan Fungsional
+Kebutuhan fungsional merupakan kebutuhan yang berkaitan dengan fitur atau fungsi utama yang harus dimiliki oleh sistem yang akan dibangun. Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. dirancang untuk mendukung proses pengelolaan data dan pelayanan secara lebih terstruktur. Adapun kebutuhan fungsional dalam sistem ini adalah sebagai berikut:
+Manajemen Data Client
+Sistem harus mampu mengelola data client yang meliputi proses penambahan data, pengubahan data, penghapusan data, serta menampilkan data client secara terstruktur. Data client yang disimpan meliputi nama, alamat, nomor telepon, email, dan informasi pendukung lainnya.
+Manajemen Permintaan Layanan Client
+Sistem harus menyediakan fitur untuk mengelola data permintaan layanan dari client. Fitur ini digunakan untuk mencatat layanan yang diajukan oleh client beserta status proses layanan seperti menunggu, diproses, dan selesai.
+Pengajuan Layanan oleh Client
+Sistem harus menyediakan fitur bagi client untuk melakukan pengajuan layanan secara online melalui web. Client dapat mengisi data diri serta memilih jenis layanan yang diinginkan. Data pengajuan tersebut akan tersimpan dalam sistem dan dapat diproses oleh admin atau notaris.
+Manajemen Data Akta / Draft Akta
+Sistem harus mampu menyimpan dan mengelola data akta atau draft akta yang sedang diproses maupun yang telah selesai. Data ini berfungsi sebagai arsip digital yang memudahkan proses pencarian dan pengelolaan dokumen.
+Manajemen Data Surat
+Sistem harus dapat mengelola data surat yang berkaitan dengan layanan client, seperti pembuatan surat resmi atau dokumen pendukung lainnya, termasuk penyimpanan nomor surat, tanggal, serta keterangan surat.
+Pencatatan Kunjungan Client (Buku Tamu Digital Berbasis QR Code)
+Sistem harus menyediakan fitur pencatatan kunjungan client melalui buku tamu digital berbasis QR Code. Client dapat melakukan scan QR Code yang tersedia di kantor, kemudian mengisi data kunjungan melalui halaman web. Data kunjungan akan otomatis tersimpan dalam database dan dapat dilihat oleh admin.
+Pengelolaan Informasi Layanan
+Sistem harus menyediakan fitur untuk menampilkan dan mengelola informasi mengenai layanan yang tersedia pada kantor notaris, seperti jenis layanan dan deskripsi layanan.
+Pengelolaan Persyaratan Dokumen
+Sistem harus dapat menampilkan dan mengelola informasi terkait persyaratan dokumen yang diperlukan untuk setiap jenis layanan sehingga client dapat mempersiapkan dokumen sebelum melakukan pengajuan layanan.
+Pencarian Data Client
+Sistem harus menyediakan fitur pencarian data client secara cepat dan terstruktur berdasarkan nama atau data tertentu untuk mempermudah proses pencarian informasi.
+Manajemen Hak Akses Pengguna
+Sistem harus memiliki fitur login yang membatasi akses pengguna sehingga hanya pengguna tertentu seperti admin atau notaris yang dapat mengelola data dalam sistem.
+Dashboard Sistem
+Sistem harus menyediakan halaman dashboard yang menampilkan ringkasan informasi penting seperti jumlah client, jumlah permintaan layanan, jumlah akta, serta data terbaru untuk memudahkan monitoring aktivitas sistem.
+Akses Informasi oleh Client
+Sistem harus menyediakan halaman yang dapat diakses oleh client untuk melihat informasi layanan dan persyaratan dokumen secara online tanpa harus melakukan login ke dalam sistem.
+Kebutuhan Non-Fungsional (Opsional)
+Kebutuhan non-fungsional merupakan kebutuhan yang berkaitan dengan aspek teknis sistem yang meliputi kenyamanan penggunaan, keamanan, kinerja, serta keandalan sistem. Kebutuhan ini bertujuan untuk memastikan sistem dapat berjalan dengan baik, stabil, dan sesuai dengan kondisi operasional pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. Adapun kebutuhan non-fungsional dalam sistem ini adalah sebagai berikut:
+Usability (Kemudahan Penggunaan)
+Sistem harus memiliki antarmuka (user interface) yang mudah dipahami dan digunakan oleh pengguna, khususnya notaris sebagai admin utama. Tampilan sistem dirancang sederhana, responsif, dan memiliki navigasi yang jelas. Setiap fitur dilengkapi dengan label atau petunjuk yang mudah dimengerti sehingga pengguna dapat mengoperasikan sistem tanpa memerlukan pelatihan khusus.
+Reliability (Keandalan Sistem)
+Sistem harus dapat beroperasi secara stabil dan konsisten selama jam operasional kantor. Sistem diharapkan mampu meminimalkan terjadinya error atau gangguan, serta tetap dapat berjalan dengan baik dalam proses pengelolaan data client, permintaan layanan, akta, surat, maupun pencatatan kunjungan client. 
+Security (Keamanan Sistem)
+Sistem harus mampu menjaga keamanan data client serta informasi layanan yang tersimpan di dalam database. Akses sistem dibatasi hanya untuk pengguna yang memiliki akun (login), sehingga data tidak dapat diakses oleh pihak yang tidak berwenang. Selain itu, data yang tersimpan harus terlindungi dari kehilangan, kebocoran, maupun penyalahgunaan. 
+Performance (Kinerja Sistem)
+Sistem harus mampu merespons setiap perintah pengguna dengan waktu yang relatif cepat, seperti pada proses pencarian data client, penyimpanan data, serta pengelolaan informasi layanan. Waktu respon yang cepat sangat penting untuk mendukung kelancaran proses administrasi agar tidak menghambat pekerjaan pengguna. 
+Safety (Keamanan Data dan Minim Kesalahan)
+Sistem harus mampu meminimalkan kesalahan dalam proses penginputan data melalui fitur validasi data. Selain itu, penyimpanan data secara digital dan terpusat diharapkan dapat mengurangi risiko kehilangan data, duplikasi data, serta kesalahan pencatatan yang sering terjadi pada sistem manual.
+Arsitektur Sistem
+Arsitektur sistem merupakan gambaran umum mengenai struktur dan komponen utama yang terdapat dalam sistem yang akan dibangun, serta hubungan antar komponen tersebut. Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. dirancang menggunakan arsitektur berbasis web yang terdiri dari beberapa bagian utama, yaitu pengguna (user), antarmuka sistem (front-end), logika aplikasi (back-end), serta basis data (database).
+Diagram Arsitektur 
+Pada sistem yang diusulkan, terdapat dua jenis pengguna utama yaitu notaris sebagai administrator dan client sebagai pengguna umum. Kedua aktor tidak terhubung langsung ke sistem, tetapi berinteraksi melalui jaringan internet sebagai media penghubung. Client dan notaris sama-sama mengirimkan request ke sistem melalui internet. Request dari client meliputi akses informasi layanan, persyaratan dokumen, pengajuan layanan, serta pengisian buku tamu digital melalui QR Code. Sementara itu, notaris mengirimkan request setelah melakukan login untuk mengelola data seperti data client, layanan, akta, surat, dan kunjungan.
+Request tersebut diteruskan oleh internet menuju web application yang berfungsi sebagai pusat pemrosesan sistem. Web application menerima setiap request, kemudian memprosesnya sesuai dengan logika sistem yang berjalan. Dalam proses ini, web application akan berkomunikasi dengan database server untuk melakukan operasi data seperti pengambilan data (query) dan penyimpanan atau pembaruan data (update).
+Seluruh data yang digunakan dalam sistem disimpan secara terpusat pada database server. Database ini menyimpan data client, layanan, akta, surat, dan kunjungan dalam bentuk terstruktur sehingga mudah diakses dan dikelola. Setelah proses pengolahan data selesai, web application akan mengirimkan response kembali melalui internet kepada client atau notaris. Response tersebut ditampilkan dalam bentuk halaman web sesuai dengan request yang dilakukan pengguna.
+Gambar 3. 1 Diagram Arsitektur Sistem
+Penjelasan Komponen
+Berikut merupakan penjelasan fungsi dari setiap komponen utama yang terdapat pada sistem berdasarkan diagram arsitektur:
+Client (Pengguna Umum)
+Client merupakan pengguna umum yang memanfaatkan layanan pada sistem melalui jaringan internet. Client mengakses sistem menggunakan browser untuk mengirimkan request ke web server.
+Fungsi client dalam sistem meliputi:
+Mengakses halaman web melalui internet
+Melihat informasi layanan dan persyaratan dokumen yang tersedia
+Melakukan pengajuan layanan secara online
+Mengisi buku tamu digital melalui pemindaian QR Code
+Menerima response berupa tampilan informasi dari sistem
+Setiap data yang dikirim oleh client akan diteruskan melalui internet menuju web server untuk diproses oleh sistem. Setelah proses selesai, client akan menerima response dari sistem melalui internet.
+Notaris (Admin)
+Notaris merupakan administrator yang memiliki hak akses penuh terhadap sistem. Notaris mengakses sistem melalui internet dengan melakukan login terlebih dahulu, kemudian mengirim request ke web application untuk mengelola data.
+Fungsi notaris dalam sistem meliputi:
+Mengelola data client
+Mengelola data permintaan layanan
+Mengelola data akta
+Mengelola data surat
+Mengelola informasi layanan
+Mengelola persyaratan dokumen
+Melihat data kunjungan client dari buku tamu digital
+Melakukan pencarian data client
+Setiap aktivitas yang dilakukan oleh notaris akan dikirim sebagai request melalui internet menuju web server untuk diproses dan disimpan ke dalam database. Setelah proses selesai, notaris akan menerima response dari sistem melalui internet.
+3) Internet
+Internet berfungsi sebagai media penghubung antara pengguna, yaitu client dan notaris, dengan sistem. Pada diagram, seluruh request yang dikirim oleh pengguna akan diteruskan melalui internet menuju web application untuk diproses. Setelah proses selesai, web application akan mengirimkan response kembali kepada pengguna melalui jalur yang sama. Internet berperan sebagai jalur komunikasi dua arah yang memungkinkan terjadinya pertukaran data antara pengguna dan sistem secara terus-menerus. Keberadaan internet menjadi sangat penting karena seluruh komunikasi dalam sistem berlangsung melalui komponen ini. 
+4) Web Application (Web Server)
+Web application merupakan pusat pemrosesan sistem yang menerima request dari pengguna melalui internet. Komponen ini menjalankan logika sistem dan mengatur alur data. Fungsi web server meliputi:
+Menerima request dari pengguna melalui internet
+Memproses logika sistem
+Menghubungkan sistem dengan database server
+Mengirim response kembali ke pengguna
+Mengelola proses data query dan update
+5) Database Server
+Database server berfungsi sebagai tempat penyimpanan seluruh data sistem. Pada diagram, web application terhubung langsung dengan database untuk melakukan proses query dan update data.
+Fungsi database:
+Menyimpan data secara terpusat
+Mengelola data client 
+Mengelola Permintaan layanan
+Mengelola akta
+Mengelola surat 
+Mengelola kunjungan Client
+Menyediakan data saat dibutuhkan oleh sistem
+Menjamin data tersimpan secara terstruktur dan mudah diakses
+Use Case
+Gambar 3. 2 Use Case
+Use Case Diagram Sistem Notaris menggambarkan interaksi antara dua aktor utama, yaitu Notaris & Admin sebagai pengguna internal sistem dan Client sebagai pengguna eksternal. Notaris & Admin memiliki hak akses penuh terhadap sistem yang diawali dengan proses login. Setelah berhasil login, Notaris & Admin dapat mengelola berbagai fitur yang tersedia dalam sistem, seperti mengelola dashboard sistem, data client, permintaan layanan, data akta, data surat, profil kantor, informasi layanan, persyaratan dokumen, serta buku tamu digital. Melalui fitur tersebut, Notaris & Admin dapat melakukan pengelolaan data secara terstruktur untuk mendukung proses pelayanan kepada client.
+Sementara itu, Client dapat mengakses beberapa informasi pada sistem tanpa harus melakukan login, seperti melihat profil kantor, informasi layanan, dan persyaratan dokumen yang tersedia. Namun, apabila client ingin melakukan pengajuan layanan secara online, maka client diwajibkan untuk melakukan login terlebih dahulu ke dalam sistem. Setelah login, client dapat mengisi data yang diperlukan untuk mengajukan layanan yang diinginkan melalui sistem.
+Selain itu, sistem juga menyediakan fitur buku tamu digital berbasis QR Code yang dapat digunakan oleh client ketika berkunjung langsung ke kantor notaris. Client dapat melakukan scan QR Code yang telah disediakan, kemudian mengisi form kunjungan yang ditampilkan oleh sistem. Data kunjungan tersebut akan tersimpan secara otomatis dalam database dan dapat dikelola oleh Notaris & Admin. Dengan adanya sistem ini, proses pengelolaan data menjadi lebih terstruktur serta memudahkan client dalam memperoleh informasi dan layanan secara lebih praktis dan efisien.
+Perancangan Berbasis Data
+Perancangan basis data dilakukan untuk menentukan struktur data yang digunakan dalam sistem serta hubungan antara tabel. Perancangan basis data dilakukan untuk menyimpan data yang digunakan dalam aplikasi. Perancangan basis data dapat dilihat pada melalui relasi tabel dan stuktur tabel.
+Relasi Tabel
+Gambar 3. 3 Tabel Relasi Sistem Notaris
+Relasi tabel digunakan untuk menggambarkan hubungan antar tabel dalam sistem agar proses pengolahan data dapat berjalan secara terstruktur dan terintegrasi. Berdasarkan struktur database yang dirancang, relasi antar tabel pada sistem notaris adalah sebagai berikut:
+Relasi Users ke Client
+Tabel users memiliki relasi one-to-many dengan tabel client. Artinya, satu user dapat terhubung dengan satu atau lebih data client. Relasi ini menggunakan field id_user pada tabel client sebagai kunci asing (foreign key).
+Relasi Users ke Buku Tamu
+Tabel users memiliki relasi one-to-many dengan tabel buku_tamu. Artinya, satu user dapat memiliki satu atau lebih data kunjungan yang tercatat dalam buku tamu digital. Relasi ini menggunakan field id_client pada tabel buku_tamu sebagai kunci asing.
+Relasi Client ke Permintaan Layanan
+Tabel client memiliki relasi one-to-many dengan tabel permintaan_layanan. Artinya, satu client dapat melakukan beberapa pengajuan layanan. Relasi ini terhubung melalui field id_client pada tabel permintaan_layanan.
+Relasi Layanan ke Permintaan Layanan
+Tabel layanan memiliki relasi one-to-many dengan tabel permintaan_layanan. Artinya, satu jenis layanan dapat diajukan dalam banyak permintaan. Relasi ini menggunakan field id_layanan pada tabel permintaan_layanan.
+Relasi Layanan ke Informasi Layanan
+Tabel layanan memiliki relasi one-to-many dengan tabel informasi_layanan. Artinya, satu layanan dapat memiliki beberapa informasi atau pengumuman yang berkaitan. Relasi ini menggunakan field id_layanan pada tabel informasi_layanan sebagai kunci asing.
+Relasi Layanan ke Persyaratan Dokumen
+Tabel layanan memiliki relasi one-to-many dengan tabel persyaratan_dokumen. Artinya, setiap layanan dapat memiliki beberapa persyaratan dokumen yang harus dipenuhi oleh client. Relasi ini menggunakan field id_layanan pada tabel persyaratan_dokumen sebagai kunci asing.
+Relasi Permintaan Layanan ke Akta
+Tabel permintaan_layanan memiliki relasi one-to-many dengan tabel akta. Artinya, satu permintaan layanan dapat menghasilkan satu atau lebih data akta. Relasi ini menggunakan field id_permintaan pada tabel akta sebagai kunci asing.
+Relasi Permintaan Layanan ke Surat
+Tabel permintaan_layanan memiliki relasi one-to-many dengan tabel surat. Artinya, satu permintaan layanan dapat menghasilkan beberapa dokumen surat. Relasi ini menggunakan field id_permintaan pada tabel surat sebagai kunci asing.
+Relasi Permintaan Layanan ke Dokumen Client
+Tabel permintaan_layanan memiliki relasi one-to-many dengan tabel dokumen_client. Artinya, setiap permintaan layanan dapat memiliki beberapa dokumen pendukung yang diunggah oleh client. Relasi ini menggunakan field id_permintaan pada tabel dokumen_client sebagai kunci asing.
+Tabel Profil Kantor
+Tabel profil_kantor bersifat standalone dan tidak memiliki relasi langsung dengan tabel lain. Tabel ini digunakan untuk menyimpan informasi profil kantor notaris seperti nama kantor, alamat, nomor telepon, email, jam operasional, logo, dan deskripsi yang ditampilkan kepada client melalui halaman publik sistem.
+Relasi Utama (Permintaan Layanan)
+Tabel permintaan_layanan menjadi tabel utama dalam sistem. Tabel ini menghubungkan beberapa tabel penting, yaitu:
+client sebagai pihak yang mengajukan layanan 
+layanan sebagai jenis layanan yang dipilih 
+akta, surat, dan dokumen_client sebagai hasil dan dokumen pendukung dari layanan.
+Struktur Tabel
+Tabel Users (Login Admin & Client)
+Digunakan untuk login semua pengguna (admin, notaris, dan client).
+Field
+Tipe Data
+Keterangan
+id_user
+INT(11)
+Primary Key
+username
+VARCHAR(100)
+Username login
+password
+VARCHAR(255)
+Password
+nama
+VARCHAR(150)
+Nama pengguna
+role
+ENUM('admin','notaris','client')
+Hak akses pengguna
+created_at
+DATETIME
+Tanggal dibuat
+Tabel Client
+Digunakan untuk menyimpan biodata client.
+Field
+Tipe Data
+Keterangan
+id_client
+INT(11)
+Primary Key
+id_user
+INT(11)
+Foreign Key → users
+nik
+VARCHAR(20)
+NIK client
+no_hp
+VARCHAR(15)
+Nomor HP
+email
+VARCHAR(100)
+Email
+alamat
+TEXT
+Alamat
+created_at
+DATETIME
+Tanggal dibuat
+Tabel Layanan
+Digunakan untuk menampilkan jenis layanan yang tersedia di kantor notaris.
+Field
+Tipe Data
+Keterangan
+id_layanan
+INT(11)
+Primary Key
+nama_layanan
+VARCHAR(100)
+Nama layanan
+deskripsi
+TEXT
+Deskripsi layanan
+estimasi_waktu
+VARCHAR(100)
+Estimasi waktu pengerjaan
+status_aktif
+TINYINT(1)
+Status layanan aktif/tidak
+Tabel Persyaratan_Dokumen
+Digunakan untuk menyimpan persyaratan dokumen per layanan.
+Field
+Tipe Data
+Keterangan
+id_persyaratan
+INT(11)
+Primary Key
+id_layanan
+INT(11)
+Foreign Key → layanan
+nama_dokumen
+VARCHAR(100)
+Nama dokumen yang diperlukan
+keterangan
+TEXT
+Keterangan tambahan
+Tabel Permintaan_Layanan
+Digunakan saat client mengajukan layanan secara online.
+Field
+Tipe Data
+Keterangan
+id_permintaan
+INT(11)
+Primary Key
+id_client
+INT(11)
+Foreign Key → client
+id_layanan
+INT(11)
+Foreign Key → layanan
+tanggal_permintaan
+DATE
+Tanggal pengajuan
+status
+ENUM('Menunggu','Diproses','Selesai','Ditolak')
+Status layanan
+keterangan
+TEXT
+Catatan tambahan
+created_at
+DATETIME
+Tanggal dibuat
+Tabel Dokumen_Client
+Digunakan untuk menyimpan dokumen persyaratan yang diunggah oleh client.
+Field
+Tipe Data
+Keterangan
+id_dokumen
+INT(11)
+Primary Key
+id_permintaan
+INT(11)
+Foreign Key → permintaan_layanan
+nama_file
+VARCHAR(255)
+Nama file dokumen
+file_path
+VARCHAR(255)
+Lokasi penyimpanan file
+tanggal_upload
+DATETIME
+Tanggal unggah
+Tabel Akta
+Digunakan untuk menyimpan data akta yang dihasilkan dari permintaan layanan.
+Field
+Tipe Data
+Keterangan
+id_akta
+INT(11)
+Primary Key
+id_permintaan
+INT(11)
+Foreign Key → permintaan_layanan
+nomor_akta
+VARCHAR(100)
+Nomor akta
+nama_akta
+VARCHAR(100)
+Nama akta
+tanggal_akta
+DATE
+Tanggal pembuatan akta
+file_akta
+VARCHAR(255)
+File akta digital
+Tabel Surat
+Digunakan untuk menyimpan data surat yang berkaitan dengan layanan client.
+Field
+Tipe Data
+Keterangan
+id_surat
+INT(11)
+Primary Key
+id_permintaan
+INT(11)
+Foreign Key → permintaan_layanan
+nomor_surat
+VARCHAR(100)
+Nomor surat
+jenis_surat
+VARCHAR(100)
+Jenis surat
+tanggal_surat
+DATE
+Tanggal surat
+file_surat
+VARCHAR(255)
+File surat digital
+keterangan
+TEXT
+Keterangan tambahan
+Tabel Profil_Kantor
+Digunakan untuk informasi kantor notaris.
+Field
+Tipe Data
+Keterangan
+id_profil
+INT (PK)
+ID profil
+nama_kantor
+VARCHAR(150)
+Nama kantor
+alamat
+TEXT
+Alamat
+no_telepon
+VARCHAR(15)
+Nomor telepon
+email
+VARCHAR(100)
+Email
+logo
+VARCHAR(255)
+Logo
+Tabel Informasi_Layanan
+Digunakan untuk menyimpan informasi atau pengumuman yang berkaitan dengan layanan.
+Field
+Tipe Data
+Keterangan
+id_informasi
+INT(11)
+Primary Key
+id_layanan
+INT(11)
+Foreign Key → layanan
+judul
+VARCHAR(150)
+Judul informasi
+isi_informasi
+TEXT
+Isi informasi
+tanggal
+DATE
+Tanggal publikasi
+Tabel Buku_Tamu
+Digunakan untuk mencatat kunjungan client melalui scan QR Code.
+Field
+Tipe Data
+Keterangan
+id_tamu
+INT(11)
+Primary Key
+id_client
+INT(11)
+Foreign Key → users
+nama_tamu
+VARCHAR(150)
+Nama tamu
+instansi
+VARCHAR(150)
+Instansi/pekerjaan
+nomor_hp
+VARCHAR(20)
+Nomor HP
+keperluan
+TEXT
+Keperluan kunjungan
+tanggal_kunjungan
+DATE
+Tanggal kunjungan
+qr_code
+VARCHAR(255)
+Kode QR unik
+created_at
+DATETIME
+Tanggal dibuat
+3.4 Perancangan Antarmuka (UI/UX) (Jika Relevan dan Opsional)
+Bagian ini menjelaskan desain antarmuka pengguna (user interface) yang digunakan dalam Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris & PPAT Eka Sulistya, S.H., M.Kn. Perancangan antarmuka bertujuan untuk memberikan kemudahan penggunaan (user friendly), meningkatkan kenyamanan pengguna, serta mendukung efisiensi dalam pengoperasian sistem.
+Wireframe atau Mockup
+Perancangan antarmuka dilakukan dengan membuat wireframe atau mockup sebagai gambaran awal tampilan sistem sebelum diimplementasikan ke dalam bentuk kode program. Berikut adalah rancangan tampilan untuk fitur utama dalam sistem:
+Halaman Daftar Sekarang
+Gambar 3. 4 Halaman Daftar Sekarang
+Halaman Daftar Sekarang adalah halaman yang digunakan oleh pengguna baru untuk membuat akun pada Sistem Notaris, pada halaman daftar sekarang menampilkan form pendaftaran yang terdiri dari kolom username, email, password, serta pilihan role pengguna seperti notaris, staf, dan client yang disusun secara rapi dan mudah dipahami, sehingga dapat memudahkan pengguna dalam melakukan proses pendaftaran secara terstruktur.
+Halaman Login
+Gambar 3. 5 Halaman Login
+Halaman login adalah pintu masuk utama bagi pengguna untuk mengakses Sistem Notaris, pada halaman ini menampilkan form login yang terdiri dari kolom username, password, serta pilihan role pengguna seperti notaris, staf, dan client yang disusun secara rapi dan mudah dipahami, sehingga memudahkan pengguna dalam melakukan proses login ke dalam sistem.
+Halaman Dashboard
+Gambar 3. 6 Halaman Dashboard
+Halaman dashboard adalah halaman utama yang ditampilkan setelah pengguna berhasil melakukan login ke dalam Sistem Notaris. Pada Halaman Dashboard ini ditampilkan berbagai informasi penting secara ringkas, seperti jumlah akta bulan ini, total client, serta jumlah permintaan layanan yang masih tertunda. Halaman dashboard juga menampilkan tabel pesanan terbaru yang berisi data permintaan layanan dari client, seperti nomor, nama client, jenis layanan, dan status pengerjaan. Fitur tambahan berupa kalender dan daftar agenda mendatang yang digunakan untuk mencatat serta mengingat jadwal penting, seperti legalisasi atau penandatanganan dokumen. 
+Halaman Data Client
+Gambar 3. 7 Halaman Data Client
+Halaman data client adalah fitur yang digunakan untuk mengelola data klien dalam Sistem Notaris. Notaris dapat menambahkan data client baru melalui formulir pendaftaran yang berisi informasi seperti nama lengkap, jenis dan nomor identitas, email, serta alamat. Halaman ini juga menampilkan daftar data client yang telah terdaftar dalam bentuk list yang dilengkapi dengan informasi nama, tanggal pendaftaran, dan nomor telepon. Tersedia pula fitur aksi seperti melihat detail, mengedit, dan menghapus data client, serta fitur filter dan pengurutan untuk mempermudah pencarian data. 
+Halaman Permintaan Layanan
+Gambar 3. 8 Halaman Permintaan Layanan
+Halaman permintaan layanan adalah fitur yang digunakan oleh notaris sebagai administator untuk mengelola seluruh data pengajuan layanan dari client dalam satu tampilan yang terstruktur. Terdapat fitur pencarian yang memudahkan pengguna menemukan data tertentu dengan cepat. Fitur filter yang terdiri dari kolom pencarian, pilihan status, dan jenis layanan, sehingga notaris dapat menyaring data sesuai kebutuhan. Halaman ini juga menampilkan tabel data permintaan layanan yang berisi informasi penting seperti nomor permintaan, nama client, jenis layanan, status, dan tanggal masuk. Pada setiap data juga tersedia kolom aksi yang memungkinkan notaris untuk melihat detail pengajuan atau menghapus data jika diperlukan. 
+Halaman Akta
+Gambar 3. 9 Halaman Data Akta
+Halaman data akta adalah fitur yang digunakan untuk mengelola seluruh data akta dalam sistem secara terstruktur. Terdapat fitur pencarian, serta tombol filter dan tambah akta baru yang memudahkan notaris dalam mencari data maupun menambahkan data akta baru. Tampilan halaman ini berupa tabel yang berisi beberapa kolom penting seperti nomor akta, tanggal pembuatan, nama client, dan status proses akta. Status ditampilkan dengan penanda yang jelas, seperti selesai atau process, sehingga memudahkan notaris dalam memantau perkembangan setiap akta. Pada bagian kolom aksi tersedia tombol detail yang dapat digunakan untuk melihat informasi lengkap dari setiap data akta. 
+Halaman Pilih Jenis Surat
+Gambar 3. 10 Halaman Pilih Jenis Surat
+Halaman pilih jenis surat adalah fitur yang digunakan untuk menampilkan berbagai pilihan layanan surat yang tersedia dalam sistem secara jelas dan terstruktur. Pada halaman ini dilengkapi dengan kolom pencarian untuk memudahkan pencarian layanan. Halaman utama menampilkan beberapa kategori surat seperti surat kuasa, surat pernyataan, surat permohonan, dan surat keterangan. Selain itu, terdapat bagian bantuan di bawah halaman yang menyediakan opsi untuk menghubungi pihak terkait jika pengguna membutuhkan konsultasi lebih lanjut. 
+Halaman Informasi Persyaratan Dokumen
+Gambar 3. 11 Halaman Dokumen Persyaratan
+Halaman dokumen persyaratan adalah fitur yang digunakan untuk menampilkan dan mengelola informasi terkait dokumen yang harus dipenuhi oleh client pada setiap jenis layanan dalam sistem. Halaman utama menampilkan beberapa kategori layanan seperti akta jual beli, pendirian PT, akta hibah, dan legalisasi, notaris dapat menambahkan, mengubah, dan menghapus data persyaratan sesuai kebutuhan, sementara client dapat melihat dengan jelas dokumen apa saja yang harus disiapkan sebelum melakukan pengajuan. 
+Halaman Buku Tamu Digital
+Gambar 3. 12 Halaman Buku Tamu
+Halaman buku tamu adalah fitur yang digunakan untuk mencatat dan mengelola data kunjungan client secara digital dalam sistem. Pada halaman ini tersedia form input yang memungkinkan client mengisi data seperti nama lengkap, instansi atau pekerjaan, nomor telepon, serta tujuan kunjungan. Sistem juga menampilkan ringkasan informasi seperti jumlah kunjungan dalam periode tertentu dan sesi kunjungan yang sedang berlangsung. Data yang telah diinput akan tersimpan dan ditampilkan dalam bentuk tabel yang memuat informasi tamu, waktu kunjungan, serta kolom aksi yang dapat digunakan oleh admin untuk melihat detail atau menghapus data. 
+Halaman Landing Page
+Gambar 3. 13 Halaman Landing Page
+Halaman landing page ini adalah tampilan awal sistem sebelum client membuat akun dan login, yang menampilkan sistem informasi kantor Notaris & PPAT, pada halaman utama menampilkan identitas notaris, deskripsi singkat layanan, button aksi seperti “Konsultasi Sekarang” dan “Isi Buku Tamu” yang akan berinteraksi langsung dengan sistem. Halaman ini juga menampilkan layanan utama seperti Akta Jual Beli (AJB), Pendirian PT/CV, dan Legalisasi Dokumen. Dilengkapi informasi lokasi dan kontak notaris, alamat kantor notaris, email, nomor telepon, jam operasional, dan peta.
+Halaman Dashboard Client
+Gambar 3. 14 Halaman Dashboard Client
+Halaman dashboard client adalah halaman utama setelah client login yang berfungsi untuk menampilkan ringkasan informasi dan aktivitas terkait layanan notaris. Pada halaman ini tersedia kolom pencarian dan button keluar, pada halaman utama ditampilkan informasi statistik seperti total akta, jumlah dalam proses, dan yang telah selesai. Selain itu, terdapat tabel “Aktivitas Terbaru” yang menampilkan riwayat layanan lengkap dengan nomor akta, jenis layanan, status, dan tanggal, serta panel “Perlu Tindakan” di sisi kanan yang berisi tugas yang harus segera dilakukan oleh client seperti unggah atau verifikasi dokumen, sehingga pengguna dapat memantau progres layanan secara cepat dan terstruktur.
+Halaman Permintaan Layanan Client
+Gambar 3. 15 Halaman Permintaan Layanan Client
+Halaman permintaan layanan client adalah halaman yang digunakan untuk mengelola dan memantau seluruh pengajuan layanan yang dilakukan oleh pengguna. Pada halaman ini terdapat daftar order dalam bentuk tabel yang memuat informasi seperti nomor order, jenis akta, status, dan tanggal pengajuan. Di bagian atas juga tersedia button “Buat Permintaan Baru” yang berfungsi untuk menambahkan permintaan layanan baru. Selain itu, dibagian kanan terdapat panel “Perlu Tindakan” yang menampilkan informasi terkait proses yang harus segera diselesaikan oleh client, seperti melengkapi berkas atau melakukan tindak lanjut dokumen.
+Halaman Persyaratan Client
+Gambar 3. 16 Halaman Dokumen Persyaratan
+Halaman dokumen persyaratan client adalah fitur yang digunakan untuk menampilkan informasi terkait dokumen yang harus dipenuhi oleh client pada setiap jenis layanan dalam sistem. Pada halaman ini, client dapat melihat berbagai kategori layanan seperti akta jual beli, pendirian PT, akta hibah, dan legalisasi dokumen, lengkap dengan daftar persyaratan yang harus disiapkan sebelum melakukan pengajuan. Informasi disajikan secara jelas dan terstruktur sehingga memudahkan client dalam memahami dan melengkapi dokumen yang dibutuhkan sesuai dengan layanan yang dipilih.
+Halaman Biodata Client
+Gambar 3. 17 Halaman Biodata Client
+Halaman biodata client adalah halaman yang digunakan untuk menampilkan dan mengelola informasi pribadi pengguna dalam sistem. Pada halaman ini, client dapat mengisi data identitas seperti nama lengkap, NIK, nomor telepon atau WhatsApp, email, dan alamat. Tersedia juga tombol “Edit Profil” untuk memperbarui data sesuai kebutuhan. Selain itu, terdapat bagian keamanan akun yang menyediakan fitur seperti ganti kata sandi untuk menjaga keamanan akun. Di sisi lain, disediakan juga fitur bantuan yang dapat digunakan client untuk menghubungi tim dukungan jika mengalami kendala.
+Halaman Buku Tamu Client
+Gambar 3. 18 Halaman Buku Tamu Client
+Halaman buku tamu adalah fitur yang digunakan oleh client untuk mencatat kehadiran dan mengisi data kunjungan secara digital dalam sistem, dimana tersedia form pendaftaran yang mencakup nama lengkap, instansi atau pekerjaan, nomor telepon, tujuan kunjungan, serta catatan tambahan yang kemudian disimpan melalui tombol “Catat Kehadiran”. Selain itu, halaman ini juga menampilkan daftar kunjungan yang berisi identitas tamu, waktu, dan tujuan kunjungan sehingga memudahkan dalam melihat riwayat kehadiran, serta dilengkapi informasi jam operasional dan waktu saat ini sebagai acuan bagi client saat melakukan kunjungan.
+Prinsip Desain
+Desain antarmuka pada sistem ini dibuat dengan memperhatikan prinsip usability, consistency, dan aesthetics, agar sistem mudah digunakan, memiliki tampilan yang profesional, serta memberikan kenyamanan bagi pengguna, baik notaris maupun client.
+Usability (Kemudahan Penggunaan)
+Antarmuka dirancang agar mudah digunakan oleh notaris sebagai pengguna utama serta client sebagai pengguna umum. Navigasi dibuat sederhana melalui menu yang jelas, seperti menu data client, pengelolaan permintaan  layanan, data akta, data surat, informasi layanan, persyaratan dokumen, serta buku tamu digital.
+Sistem juga dilengkapi dengan validasi input dan pesan kesalahan (error message) untuk meminimalkan kesalahan dalam pengisian data. Selain itu, terdapat fitur konfirmasi pada tindakan penting seperti penghapusan data atau perubahan status layanan. Tampilan dibuat sederhana dan intuitif sehingga memudahkan pengguna dalam menjalankan proses pengelolaan data dan pelayanan secara lebih cepat dan efisien.
+Consistency (Konsistensi)
+Tampilan sistem dirancang secara konsisten dalam penggunaan warna, tata letak, ikon, serta gaya komponen antarmuka. Warna utama seperti biru dan abu-abu digunakan untuk memberikan kesan profesional, formal, dan modern sesuai dengan karakteristik layanan kantor notaris.
+Seluruh elemen antarmuka seperti tombol, formulir, tabel, dan halaman detail menggunakan gaya visual yang seragam, sehingga pengguna dapat dengan mudah memahami fungsi dari setiap komponen tanpa mengalami kebingungan saat berpindah halaman.
+Aesthetics (Keindahan Tampilan)
+Antarmuka dirancang dengan tampilan yang bersih (clean design) dan modern dengan penggunaan ikon sederhana, tata letak yang rapi, serta tipografi yang mudah dibaca. Elemen antarmuka seperti tombol dan kartu informasi (card) dibuat dengan desain minimalis untuk meningkatkan kenyamanan visual pengguna. Tata letak yang terstruktur membantu pengguna untuk lebih fokus pada informasi penting, seperti data client, daftar permintaan layanan, data akta, data surat, serta data kunjungan pada buku tamu digital. Dengan penerapan prinsip estetika yang baik, sistem tidak hanya fungsional tetapi juga menarik secara visual.
+Dengan penerapan ketiga prinsip tersebut, antarmuka sistem diharapkan menjadi lebih mudah digunakan, konsisten, dan menarik, sehingga dapat mendukung efisiensi kerja notaris dalam mengelola data client, memproses layanan, serta memantau kunjungan client melalui buku tamu digital berbasis QR Code.
+3.5 Spesifikasi Teknologi
+Bagian ini menjelaskan teknologi, tools, dan bahasa pemrograman yang digunakan dalam pengembangan Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris & PPAT Eka Sulistya, S.H., M.Kn.
+Bahasa Pemrograman:
+Bahasa pemrograman yang digunakan dalam pembangunan sistem adalah sebagai berikut:
+1. PHP
+PHP merupakan bahasa pemrograman yang digunakan dalam pengembangan aplikasi berbasis web dan berjalan pada sisi server (server-side scripting). PHP berfungsi untuk memproses data yang dikirimkan oleh pengguna sebelum ditampilkan kembali pada halaman web.
+Dalam sistem ini, PHP digunakan untuk mengelola logika aplikasi, memproses data client, permintaan layanan, akta, surat, serta data kunjungan, dan menghubungkannya dengan basis data. Selain itu, PHP bersifat open source dan mudah diintegrasikan dengan berbagai sistem manajemen basis data, sehingga sangat sesuai digunakan dalam pengembangan sistem informasi berbasis web yang dinamis dan interaktif [11].
+2. JavaScript
+JavaScript merupakan bahasa pemrograman tingkat tinggi yang bersifat client-side, artinya pemrosesannya dilakukan langsung oleh browser pada sisi pengguna tanpa perlu dikirim ke server terlebih dahulu [JURNAL BARU]. Dalam sistem ini, JavaScript berperan dalam memberikan respons terhadap aksi pengguna seperti validasi form, interaksi antarmuka, serta peningkatan pengalaman pengguna (user experience) agar sistem lebih responsif dan mudah digunakan.
+3. HTML & CSS
+HyperText Markup Language (HTML) merupakan bahasa yang digunakan untuk membangun dan menyusun struktur dasar halaman web, seperti menentukan bagian judul, paragraf, tabel, formulir, dan elemen lainnya yang ditampilkan di browser, sedangkan Cascading Style Sheets (CSS) digunakan untuk mengatur tampilan visual, tata letak, serta desain antarmuka sistem sehingga menghasilkan tampilan yang terstruktur dan menarik [JURNAL BARU]. Penggunaan HTML dan CSS dalam sistem ini bertujuan untuk menghasilkan tampilan antarmuka yang mudah digunakan oleh notaris maupun client dalam mengakses berbagai fitur yang tersedia.
+Framework
+Framework yang digunakan dalam pengembangan sistem ini adalah:
+1. Laravel (PHP Framework)
+Laravel merupakan framework yang digunakan dalam pengembangan aplikasi berbasis PHP. Framework ini menyediakan berbagai fitur yang dapat mempermudah proses pengembangan sistem, seperti pengelolaan routing, autentikasi pengguna, serta manajemen database melalui ORM Eloquent. Dalam sistem ini, Laravel digunakan untuk membantu pengembangan aplikasi agar lebih terstruktur, mempercepat proses pembuatan fitur, serta mempermudah pengelolaan data dan logika sistem. Dengan menggunakan Laravel, pengembangan sistem menjadi lebih efisien, mudah dikembangkan, dan lebih terorganisir [11].
+2. Bootstrap (Front-End Framework)
+Bootstrap merupakan sebuah kerangka kerja (framework) berbasis Hypertext Markup Language (HTML), Cascading Style Sheets (CSS), dan JavaScript yang bersifat open-source dan digunakan untuk membangun tampilan antarmuka web yang responsif dan mudah digunakan (user-friendly). Framework Bootstrap menyediakan berbagai komponen tampilan yang siap pakai sehingga memungkinkan tampilan sistem menyesuaikan diri secara otomatis dengan berbagai ukuran layar perangkat, baik komputer, tablet, maupun smartphone [JURNAL BARU]. Penggunaan Bootstrap dalam sistem ini bertujuan untuk menghasilkan tampilan antarmuka yang rapi, konsisten, dan nyaman diakses oleh notaris maupun client dari berbagai jenis perangkat.
+Basis Data
+Sistem menggunakan MySQL sebagai sistem manajemen basis data relasional (Relational Database Management System / RDBMS). MySQL digunakan untuk menyimpan seluruh data yang berkaitan dengan sistem, seperti data client, permintaan layanan, data akta, data surat, data layanan, persyaratan dokumen, serta data kunjungan client (buku tamu digital) secara terstruktur dan terpusat. Dengan penggunaan MySQL, pengelolaan data menjadi lebih aman, terorganisir, serta mudah diakses kembali ketika dibutuhkan, sehingga dapat mendukung efisiensi proses administrasi pada kantor notaris.
+Tools Pendukung:
+Beberapa tools yang digunakan dalam pengembangan sistem adalah sebagai berikut:
+1. Visual Studio Code
+Digunakan sebagai code editor utama untuk menulis dan mengelola kode program.
+2. XAMPP
+Digunakan sebagai server lokal yang menyediakan layanan Apache, PHP, dan MySQL untuk menjalankan sistem selama tahap pengembangan.
+3. Git & GitHub
+Digunakan sebagai sistem kontrol versi (version control) untuk mengelola perubahan kode selama proses pengembangan sistem.
+4. Figma
+Digunakan untuk merancang desain antarmuka pengguna (User Interface / UI) sebelum diimplementasikan ke dalam bentuk kode program.
+5. Google Chrome
+Digunakan sebagai browser untuk melakukan pengujian tampilan (user interface) serta fungsionalitas sistem berbasis web.
+3.6 Rencana Pengujian
+ Rencana pengujian dilakukan untuk memastikan bahwa Sistem Informasi Manajemen Data Client dan Pelayanan Berbasis Web pada Kantor Notaris dan PPAT Eka Sulistya, S.H., M.Kn. dapat berjalan dengan baik sesuai dengan kebutuhan pengguna. Pengujian ini bertujuan untuk menguji fungsionalitas sistem, memastikan tidak adanya kesalahan pada proses pengolahan data, serta menjamin sistem dapat digunakan secara optimal dalam mendukung kegiatan administrasi dan pelayanan.
+Jenis Pengujian:
+1. Black Box Testing
+Black Box Testing merupakan metode pengujian perangkat lunak yang berfokus pada fungsionalitas sistem dari sisi pengguna tanpa melihat struktur kode program di dalamnya, dimana pengujian dilakukan berdasarkan input yang diberikan dan output yang dihasilkan oleh sistem sehingga dapat diketahui apakah sistem telah berjalan sesuai dengan kebutuhan yang telah ditentukan [JURNAL BARU].
+Pada Sistem Informasi Manajemen Data Client dan Pelayanan Kantor Notaris, pengujian ini dilakukan pada beberapa fitur utama, seperti proses login, pengelolaan data client, pengajuan layanan, serta pengisian buku tamu digital. Sebagai contoh, pengujian dilakukan dengan memasukkan username dan password yang benar untuk memastikan sistem dapat mengarahkan pengguna ke halaman dashboard. Sebaliknya, jika data yang dimasukkan salah, maka sistem harus menampilkan pesan kesalahan.
+2. User Acceptance Testing (UAT)
+User Acceptance Testing (UAT) merupakan metode pengujian yang dilakukan oleh pengguna akhir untuk memverifikasi bahwa seluruh fitur sistem telah sesuai dengan kebutuhan dan ekspektasi pengguna setelah proses pengembangan selesai [JURNAL BARU].
+Pada sistem ini, pengujian dilakukan oleh pihak yang berperan sebagai Notaris dan Client. Notaris melakukan pengujian pada fitur pengelolaan data client, pengelolaan layanan, serta melihat data buku tamu. Sementara itu, Client melakukan pengujian pada fitur melihat informasi layanan, pengajuan layanan secara online, serta pengisian buku tamu digital melalui scan QR Code. 
+Skenario Pengujian
+Berikut adalah beberapa skenario pengujian yang dilakukan pada fitur utama sistem:
+Table 3. 1 Skenario Pengujian
+No
+Fitur
+Skenario Pengujian
+Input
+Output yang Diharapkan
+Status
+1
+Login Admin
+Login valid
+Email dan password benar
+Berhasil masuk ke dashboard admin
+-
+2
+Login Admin
+Login tidak valid
+Email atau password salah
+Sistem menampilkan pesan kesalahan
+-
+3
+Login Client
+Login valid
+Email dan password benar
+Berhasil masuk ke halaman client
+-
+4
+Login Client
+Login tidak valid
+Email atau password salah
+Sistem menampilkan pesan kesalahan
+-
+5
+Data Client
+Tambah data client
+Data lengkap
+Data client berhasil disimpan
+-
+6
+Data Client
+Edit data client
+Perubahan data
+Data client berhasil diperbarui
+-
+7
+Data Client
+Hapus data client
+Klik tombol hapus
+Data client berhasil dihapus
+-
+8
+Data Client
+Input tidak lengkap
+Data kosong/tidak lengkap
+Sistem menolak dan menampilkan peringatan
+-
+9
+Layanan
+Pengajuan layanan
+Data lengkap
+Data pengajuan layanan berhasil disimpan
+-
+10
+Layanan
+Pilih jenis layanan
+Memilih jenis layanan
+Informasi layanan tampil sesuai pilihan
+-
+11
+Layanan
+Input tidak lengkap
+Data kosong/tidak lengkap
+Sistem menolak dan menampilkan peringatan
+-
+12
+Persyaratan Dokumen
+Lihat persyaratan
+Akses halaman
+Data persyaratan dokumen ditampilkan
+-
+13
+Persyaratan Dokumen
+Kelola persyaratan
+Tambah/ubah data
+Data persyaratan berhasil disimpan
+-
+14
+Akta
+Tambah data akta
+Data lengkap
+Data akta berhasil disimpan
+-
+15
+Akta
+Edit data akta
+Perubahan data
+Data akta berhasil diperbarui
+-
+16
+Akta
+Hapus data akta
+Klik tombol hapus
+Data akta berhasil dihapus
+-
+17
+Surat
+Tambah data surat
+Data lengkap
+Data surat berhasil disimpan
+-
+18
+Surat
+Edit data surat
+Perubahan data
+Data surat berhasil diperbarui
+-
+19
+Surat
+Hapus data surat
+Klik tombol hapus
+Data surat berhasil dihapus
+-
+20
+Informasi Layanan
+Lihat informasi layanan
+Akses halaman
+Informasi layanan ditampilkan
+-
+21
+Informasi Layanan
+Kelola informasi layanan
+Tambah/ubah data
+Data informasi layanan berhasil disimpan
+-
+22
+Buku Tamu Digital
+Scan QR Code
+Scan QR Code
+Sistem menampilkan form buku tamu
+-
+23
+Buku Tamu Digital
+Isi buku tamu
+Data lengkap
+Data kunjungan berhasil disimpan
+-
+24
+Buku Tamu Digital
+Input tidak lengkap
+Data kosong/tidak lengkap
+Sistem menolak dan menampilkan peringatan
+-
+25
+Kunjungan
+Lihat data kunjungan
+Akses halaman
+Data kunjungan client ditampilkan
+-
+26
+Pencarian Data
+Cari data client
+Kata kunci nama/data
+Data client sesuai pencarian ditampilkan
+-
+27
+Pencarian Data
+Data tidak ditemukan
+Kata kunci tidak sesuai
+Sistem menampilkan pesan "data tidak ditemukan"
+-
+28
+Dashboard
+Menampilkan data
+Akses dashboard
+Data statistik dan ringkasan ditampilkan
+-
+29
+Web
+Akses halaman utama
+Membuka web
+Halaman utama berhasil ditampilkan
+-
+30
+Web
+Navigasi menu
+Klik menu
+Halaman berpindah sesuai menu yang dipilih
+-
+3.7 Jadwal Penyelesaian Tugas Akhir 
+Jadwal penyelesaian Tugas Akhir merupakan rencana waktu yang disusun untuk memastikan bahwa setiap tahapan dan pengembangan sistem dapat diselesaikan secara terstruktur dan tepat waktu. Jadwal ini mencakup seluruh aktivitas yang akan dilakukan, mulai dari persiapan hingga penyelesaian laporan akhir. Jadwal penyelesaian Tugas akhir dapat di sajikan sesuai  dengan tabel 3.2.
+NO
+KEGIATAN
+TAHUN 2025
+FEBRUARI
+MARET
+APRIL
+MEI
+JUNI
+JULI
+AGUSTUS
+1
+Studi Pustaka dan Penulisan Proposal TA
+2
+Revisi dan Seminar Judul
+3
+Observasi
+4
+Wawancara dan Pengumpulan Data
+5
+Analisis dan Desain Sistem
+6
+Pembuatan Sistem Program
+7
+Pengujian Sistem
+8
+Seminar Progress
+9
+Penulisan Tugas Akhir
+10
+Sidang Tugas Akhir
+11
+Revisi Tugas Akhir
+Table 3. 2 Jadwal Pengujian Tugas Akhir
+Lampiran 1. Jadwal Penyelesaian Tugas AkhirLampiran 1. Jadwal Penyelesaian Tugas AkhirDAFTAR PUSTAKA
+Lampiran 1. Jadwal Penyelesaian Tugas Akhir
+Lampiran 1. Jadwal Penyelesaian Tugas Akhir
+[1] A. Nugroho, “Perancangan Sistem Informasi Berbasis Web untuk Pengelolaan Data Organisasi,” Jurnal Teknologi Informasi, 2020.
+[2] Republik Indonesia, Undang-Undang Nomor 2 Tahun 2014 tentang Jabatan Notaris.
+[3] F. A. Hedianto dan M. Susilowati, “Sistem Informasi Administrasi pada Kantor Notaris dan PPAT,” Kurawal: Jurnal Teknologi Informasi, 2018.
+[4] A. Priatna, “Perancangan Sistem Informasi Pengelolaan Data Akta Notaris Berbasis Web,” Jurnal Informatika, 2020.
+[5] Jamaludin, E. Budiman, dan Pohny, “Sistem Informasi Manajemen Data Personal Mahasiswa,” Jurnal Rekayasa Teknologi Informasi, vol. 4, no. 1, 2020.
+[6] A. Hidayat dan Y. Cahyono, “Rancang Bangun Sistem Informasi Manajemen Berbasis Web dengan Metode Extreme Programming,” Jurnal Informatika, 2021.
+[7] Fandhilah, A. Ardiansyah, dan S. Aji, “Sistem Informasi Administrasi Berbasis Web Menggunakan Framework CodeIgniter,” Jurnal Sistem Informasi Akuntansi, 2021.
+[8] M. Sanwasih dan R. Setiabudi, “Perancangan Penerapan Quick Response (QR) Code dalam Sistem Pendaftaran,” TeknoIS: Jurnal Ilmiah Teknologi Informasi dan Sains, vol. 11, no. 2, 2021.
+[9] M. F. A. Prasetyo, M. R. Ardiansyah, A. A. Ashari, D. T. Putro, dan E. Rahmawati, “Rancang Bangun Tracking Pengiriman Berbasis Website Menggunakan Metode Systems Development Life Cycle (SDLC),” Jurnal Teknologi Informasi dan Komunikasi, 2024.
+[10] L. Puspita, T. Mary, dan S. Junaidi, “Perancangan Sistem Informasi Presensi Menggunakan Quick Response Code Berbasis Website,” Jurnal Ilmu Komputer dan Bisnis, 2024.
+[11] B. Cahyo, I. D. Fibrian, dan M. A. Murtadho, “Web-Based Printing Management Information System Using Laravel Framework,” Computech: Jurnal Ilmiah Teknologi Informasi dan Komunikasi, vol. 3, no. 1, 2023.
