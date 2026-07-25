@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
+
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
             storage_path('framework/views'),
             storage_path('logs'),
         ];
+
+        Paginator::useBootstrapFive();
 
         foreach ($dirs as $dir) {
             if (!file_exists($dir)) {
