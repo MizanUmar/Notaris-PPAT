@@ -19,17 +19,17 @@
             <div class="row mb-4">
                 <div class="col-md-4">
                     <label class="fw-bold text-muted small">Nama Client</label>
-                    <div class="fw-semibold text-dark">{{ $permintaan->client->user->nama ?? '-' }}</div>
+                    <div class="fw-semibold text-dark">{{ $permintaan?->client?->user?->nama ?? '-' }}</div>
                 </div>
 
                 <div class="col-md-4">
                     <label class="fw-bold text-muted small">Layanan</label>
-                    <div class="fw-semibold text-primary">{{ $permintaan->layanan->nama_layanan ?? '-' }}</div>
+                    <div class="fw-semibold text-primary">{{ $permintaan?->layanan?->nama_layanan ?? '-' }}</div>
                 </div>
 
                 <div class="col-md-4">
                     <label class="fw-bold text-muted small">Tanggal Permintaan</label>
-                    <div class="fw-semibold text-dark">{{ $permintaan->created_at->translatedFormat('d F Y') }}</div>
+                    <div class="fw-semibold text-dark">{{ $permintaan?->created_at?->translatedFormat('d F Y') ?? '-' }}</div>
                 </div>
             </div>
 
