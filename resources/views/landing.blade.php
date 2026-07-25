@@ -451,6 +451,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
+                    <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 text-uppercase tracking-wider">Notaris & PPAT Eka Sulistya</span>
                     <h1 class="display-4 fw-extrabold text-white font-heading mb-1 lh-sm">
                         Sistem Informasi Management Operasional Dan Layanan Kantor
                     </h1>
@@ -661,7 +662,7 @@
                     <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm"
                         style="border:1px solid #e2e8f0;">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127670.36015707736!2d109.24835824584282!3d-0.02633029199347895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e11a007f354c7d9%3A0x67394f923b7b2a64!2sPontianak!5e0!3m2!1sid!2sid"
+                            src="https://www.google.com/maps?q=Kantor+Notaris+%26+PPAT+Eka+Sulistya,+Jl.+Pangeran+Natakusuma,+Sungai+Bangkong,+Kec.+Pontianak+Kota,+Kota+Pontianak,+Kalimantan+Barat+78116&output=embed"
                             style="border:0;"
                             allowfullscreen=""
                             loading="lazy"
