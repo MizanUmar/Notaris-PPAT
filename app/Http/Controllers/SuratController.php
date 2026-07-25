@@ -15,12 +15,12 @@ class SuratController extends Controller
         $search = $request->input('search');
 
         $surat = Surat::with(['permintaan.client.user', 'permintaan.layanan'])
-            ->when($search, function($query) use ($search) {
+            ->when($search, function ($query) use ($search) {
                 $query->where('nomor_surat', 'like', "%{$search}%")
-                      ->orWhere('jenis_surat', 'like', "%{$search}%")
-                      ->orWhereHas('permintaan.client.user', function($q) use ($search) {
-                          $q->where('nama', 'like', "%{$search}%");
-                      });
+                    ->orWhere('jenis_surat', 'like', "%{$search}%")
+                    ->orWhereHas('permintaan.client.user', function ($q) use ($search) {
+                        $q->where('nama', 'like', "%{$search}%");
+                    });
             })
             ->orderBy('tanggal_surat', 'desc')
             ->paginate(10);
@@ -125,7 +125,7 @@ class SuratController extends Controller
             $file = $request->file('file_surat');
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('letters', $filename, 'public');
-            
+
             $data['file_surat'] = $path;
         } else {
             // Re-generate PDF with updated metadata and current text content
@@ -159,7 +159,7 @@ class SuratController extends Controller
     public function destroy($id)
     {
         $surat = Surat::findOrFail($id);
-        
+
         if ($surat->file_surat) {
             Storage::disk('public')->delete($surat->file_surat);
         }
@@ -190,10 +190,10 @@ class SuratController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('nomor_surat', 'like', "%$search%")
-                      ->orWhere('jenis_surat', 'like', "%$search%")
-                      ->orWhereHas('permintaan.layanan', function ($qLayanan) use ($search) {
-                          $qLayanan->where('nama_layanan', 'like', "%$search%");
-                      });
+                        ->orWhere('jenis_surat', 'like', "%$search%")
+                        ->orWhereHas('permintaan.layanan', function ($qLayanan) use ($search) {
+                            $qLayanan->where('nama_layanan', 'like', "%$search%");
+                        });
                 });
             })
             ->latest()
@@ -258,5 +258,13 @@ class SuratController extends Controller
             'permintaan',
             'isAdmin'
         ));
+    }
+
+    public function edit($id)
+    {
+        $surat = Surat::with(['permintaan.client.user', 'permintaan.layanan'])->findOrFail($id);
+        $permintaan = $surat->permintaan;
+
+        return view('admin.surat.edit', compact('surat', 'permintaan'));
     }
 }

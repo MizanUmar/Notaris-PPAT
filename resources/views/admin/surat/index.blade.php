@@ -52,56 +52,51 @@
                 </thead>
                 <tbody>
                     @forelse($surat as $sur)
-                        <tr>
-                            <td class="ps-4"><span class="fw-bold font-monospace text-dark">{{ $sur->nomor_surat }}</span></td>
-                            <td><span class="fw-semibold text-primary">{{ $sur->jenis_surat }}</span></td>
-                            <td><span class="small">{{ $sur->tanggal_surat->translatedFormat('d F Y') }}</span></td>
-                            <td>
-                                <span class="fw-medium text-capitalize d-block">{{ $sur->permintaan->client->user->nama ?? '-' }}</span>
-                                <small class="text-muted">Layanan: {{ $sur->permintaan->layanan->nama_layanan ?? '-' }}</small>
-                            </td>
-                            <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('admin.surat.preview', $sur->id) }}" class="btn btn-sm btn-outline-info py-1 px-2 rounded">
-                                        <i class="fa-solid fa-eye me-1"></i> Lihat
-                                    </a>
-                                    <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2 rounded">
-                                        <i class="fa-solid fa-file-pdf me-1"></i> Unduh
-                                    </a>
-                                </div>
-                            </td>
-                            <td class="pe-4 text-end">
-                                <div class="btn-group gap-1">
-                                    <button class="btn btn-sm btn-warning text-dark edit-btn" 
-                                            data-id="{{ $sur->id }}"
-                                            data-nomor_surat="{{ $sur->nomor_surat }}"
-                                            data-jenis_surat="{{ $sur->jenis_surat }}"
-                                            data-tanggal_surat="{{ $sur->tanggal_surat->toDateString() }}"
-                                            data-keterangan="{{ $sur->keterangan }}">
-                                        <i class="fa-solid fa-pen"></i> Edit
-                                    </button>
+                    <tr>
+                        <td class="ps-4"><span class="fw-bold font-monospace text-dark">{{ $sur->nomor_surat }}</span></td>
+                        <td><span class="fw-semibold text-primary">{{ $sur->jenis_surat }}</span></td>
+                        <td><span class="small">{{ $sur->tanggal_surat->translatedFormat('d F Y') }}</span></td>
+                        <td>
+                            <span class="fw-medium text-capitalize d-block">{{ $sur->permintaan->client->user->nama ?? '-' }}</span>
+                            <small class="text-muted">Layanan: {{ $sur->permintaan->layanan->nama_layanan ?? '-' }}</small>
+                        </td>
+                        <td>
+                            <div class="d-flex gap-1">
+                                <a href="{{ route('admin.surat.preview', $sur->id) }}" class="btn btn-sm btn-outline-info py-1 px-2 rounded">
+                                    <i class="fa-solid fa-eye me-1"></i> Lihat
+                                </a>
+                                <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2 rounded">
+                                    <i class="fa-solid fa-file-pdf me-1"></i> Unduh
+                                </a>
+                            </div>
+                        </td>
+                        <td class="pe-4 text-end">
+                            <div class="btn-group gap-1">
+                                <a href="{{ route('admin.surat.edit', $sur->id) }}" class="btn btn-sm btn-warning text-dark">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </a>
 
-                                    <form action="{{ route('admin.surat.destroy', $sur->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus arsip surat ini?')">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> Hapus</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                                <form action="{{ route('admin.surat.destroy', $sur->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus arsip surat ini?')">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
                     @empty
-                        <tr>
-                            <td colspan="7" class="text-center py-5 text-muted">Arsip surat tidak ditemukan.</td>
-                        </tr>
+                    <tr>
+                        <td colspan="7" class="text-center py-5 text-muted">Arsip surat tidak ditemukan.</td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Pagination -->
         @if($surat->hasPages())
-            <div class="card-footer bg-white border-0 py-3">
-                {{ $surat->links() }}
-            </div>
+        <div class="card-footer bg-white border-0 py-3">
+            {{ $surat->links() }}
+        </div>
         @endif
     </div>
 </div>
@@ -122,9 +117,9 @@
                         <select name="permintaan_id" class="form-select" required>
                             <option value="" disabled selected>Pilih Layanan Client</option>
                             @foreach($requests as $req)
-                                <option value="{{ $req->id }}" {{ request('permintaan_id') == $req->id ? 'selected' : '' }}>
-                                    #{{ $req->id }} - {{ $req->client->user->nama }} ({{ $req->layanan->nama_layanan }})
-                                </option>
+                            <option value="{{ $req->id }}" {{ request('permintaan_id') == $req->id ? 'selected' : '' }}>
+                                #{{ $req->id }} - {{ $req->client->user->nama }} ({{ $req->layanan->nama_layanan }})
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -202,29 +197,9 @@
 
 @section('scripts')
 <script>
-    // Trigger modal tambah if permintaan_id is in query
     @if(request('permintaan_id'))
         const modalTambah = new bootstrap.Modal(document.getElementById('modalTambah'));
         modalTambah.show();
     @endif
-
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            const nomor_surat = this.getAttribute('data-nomor_surat');
-            const jenis_surat = this.getAttribute('data-jenis_surat');
-            const tanggal_surat = this.getAttribute('data-tanggal_surat');
-            const keterangan = this.getAttribute('data-keterangan');
-
-            document.getElementById('editForm').setAttribute('action', `/admin/surat/update/${id}`);
-            document.getElementById('edit_nomor_surat').value = nomor_surat;
-            document.getElementById('edit_jenis_surat').value = jenis_surat;
-            document.getElementById('edit_tanggal_surat').value = tanggal_surat;
-            document.getElementById('edit_keterangan').value = keterangan;
-
-            const modal = new bootstrap.Modal(document.getElementById('modalEdit'));
-            modal.show();
-        });
-    });
 </script>
 @endsection

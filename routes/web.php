@@ -197,6 +197,8 @@ Route::middleware(['auth', 'role:admin,notaris'])
             Route::post('/update/{id}', [SuratController::class, 'update'])->name('admin.surat.update');
             Route::post('/delete/{id}', [SuratController::class, 'destroy'])->name('admin.surat.destroy');
             Route::get('/preview/{id}', [SuratController::class, 'preview'])->name('admin.surat.preview');
+            // routes/web.php
+            Route::get('/admin/surat/edit/{id}', [SuratController::class, 'edit'])->name('admin.surat.edit');
         });
 
         // ===========================================================
