@@ -777,11 +777,15 @@
             }
 
             // Bind change event to dropdown -- hanya update field kiri
+            // Prefill otomatis saat halaman dibuka (sama seperti halaman Create)
+            compileLetter();
+
+            // Bind change event to dropdown -- otomatis terapkan ulang template juga
             selectDraft.addEventListener('change', function() {
                 renderFields();
             });
 
-            // Bind apply button -- satu-satunya cara isi editor lama tertimpa template baru
+            // Bind apply button
             document.getElementById('btnApplyTemplate').addEventListener('click', compileLetter);
 
         })
