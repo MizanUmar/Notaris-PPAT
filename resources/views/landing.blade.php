@@ -749,33 +749,28 @@
             <div class="row g-4">
 
                 @foreach($layanan as $item)
-
                 <div class="col-12 col-md-6">
-
                     <div class="card h-100 border-0 shadow-sm rounded-4">
-
                         <div class="card-body p-4">
-
                             <h5 class="fw-bold text-primary">
-
-                                {{ $item->nama }}
-
+                                {{ $item->nama_layanan }}
                             </h5>
 
                             <hr>
 
-                            <p class="text-muted">
-
-                                {{ $layanan->persyaratan }}
-
-                            </p>
+                            @if($item->persyaratan->count())
+                            <ul class="mb-0">
+                                @foreach($item->persyaratan as $syarat)
+                                <li>{{ $syarat->persyaratan }}</li>
+                                @endforeach
+                            </ul>
+                            @else
+                            <p class="text-muted">Belum ada persyaratan.</p>
+                            @endif
 
                         </div>
-
                     </div>
-
                 </div>
-
                 @endforeach
 
             </div>
