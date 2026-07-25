@@ -174,6 +174,9 @@ Route::middleware(['auth', 'role:admin,notaris'])
                 [AktaController::class, 'preview']
             )
                 ->name('admin.akta.preview');
+
+            // routes/web.php — di dekat rute akta lainnya
+            Route::get('/admin/akta/edit/{id}', [AktaController::class, 'edit'])->name('admin.akta.edit');
         });
 
         Route::get(

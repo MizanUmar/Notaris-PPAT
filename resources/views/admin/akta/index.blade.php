@@ -65,14 +65,9 @@
                         </td>
                         <td class="pe-4 text-end">
                             <div class="btn-group gap-1">
-                                <button class="btn btn-sm btn-warning text-dark edit-btn"
-                                    data-id="{{ $akt->id }}"
-                                    data-nomor_akta="{{ $akt->nomor_akta }}"
-                                    data-nama_akta="{{ $akt->nama_akta }}"
-                                    data-tanggal_akta="{{ $akt->tanggal_akta->toDateString() }}"
-                                    data-isi_akta="{{ $akt->isi_akta }}">
+                                <a href="{{ route('admin.akta.edit', $akt->id) }}" class="btn btn-sm btn-warning text-dark">
                                     <i class="fa-solid fa-pen"></i> Edit
-                                </button>
+                                </a>
 
                                 <form action="{{ route('admin.akta.destroy', $akt->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus arsip akta ini?')">
                                     @csrf

@@ -133,7 +133,7 @@ class AktaController extends Controller
             $file = $request->file('file_akta');
             $namaFile = 'akta_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('deeds', $namaFile, 'public');
-            
+
             $data['file_akta'] = $path;
         } else {
             // Re-generate PDF with updated metadata (nomor, nama, tanggal) and the current/new isi_akta
@@ -219,10 +219,10 @@ class AktaController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('nomor_akta', 'like', "%$search%")
-                      ->orWhere('nama_akta', 'like', "%$search%")
-                      ->orWhereHas('permintaan.layanan', function ($qLayanan) use ($search) {
-                          $qLayanan->where('nama_layanan', 'like', "%$search%");
-                      });
+                        ->orWhere('nama_akta', 'like', "%$search%")
+                        ->orWhereHas('permintaan.layanan', function ($qLayanan) use ($search) {
+                            $qLayanan->where('nama_layanan', 'like', "%$search%");
+                        });
                 });
             })
             ->latest()
@@ -287,5 +287,13 @@ class AktaController extends Controller
             'permintaan',
             'isAdmin'
         ));
+    }
+
+    public function edit($id)
+    {
+        $akta = Akta::with(['permintaan.client.user', 'permintaan.layanan'])->findOrFail($id);
+        $permintaan = $akta->permintaan;
+
+        return view('admin.akta.edit', compact('akta', 'permintaan'));
     }
 }
