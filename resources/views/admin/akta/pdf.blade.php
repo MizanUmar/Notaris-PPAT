@@ -69,11 +69,6 @@
 
 <body>
 
-    <div class="header">
-        <div class="title">{{ $nama_akta }}</div>
-        <div class="number">Nomor : {{ $nomor_akta }}</div>
-    </div>
-
     <div class="isi">
         {!! $isi_akta !!}
     </div>

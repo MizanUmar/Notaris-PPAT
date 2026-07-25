@@ -135,8 +135,10 @@
     const layananName = "{{ $permintaan->layanan->nama_layanan }}";
 
     // 1. SURAT KUASA Template
-    window.templateKuasa = `<h3 style="text-align: center; font-weight: bold; text-decoration: underline;">SURAT KUASA</h3>
-<h4 style="text-align: center; font-weight: normal; margin-top: 5px;">Nomor : [NOMOR_SURAT]</h4>
+    window.templateKuasa = `<div style="text-align: center; margin-bottom: 20px;">
+  <p style="margin: 0; padding: 0; font-size: 14pt; font-family: 'Times New Roman', Times, serif;"><strong><u>SURAT KUASA</u></strong></p>
+  <p style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif;">Nomor : [NOMOR_SURAT]</p>
+</div>
 <br>
 <p>Yang bertanda tangan di bawah ini :</p>
 <table style="width: 100%; border: none;">
@@ -178,8 +180,10 @@
 </table>`;
 
     // 2. SURAT PERNYATAAN PENGUASAAN FISIK Template
-    window.templateFisik = `<h3 style="text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: 2px;">SURAT PERNYATAAN</h3>
-<h4 style="text-align: center; font-weight: bold; text-decoration: underline; margin-top: 0;">PENGUASAAN FISIK TANAH DAN TIDAK SENGKETA</h4>
+    window.templateFisik = `<div style="text-align: center; margin-bottom: 20px;">
+  <p style="margin: 0; padding: 0; font-size: 14pt; font-family: 'Times New Roman', Times, serif;"><strong><u>SURAT PERNYATAAN</u></strong></p>
+  <p style="margin: 0; padding: 0; font-size: 12pt; font-family: 'Times New Roman', Times, serif;"><strong><u>PENGUASAAN FISIK TANAH DAN TIDAK SENGKETA</u></strong></p>
+</div>
 <br>
 <p>Yang bertanda tangan dibawah ini :</p>
 <table style="width: 100%; border: none;">
@@ -229,8 +233,10 @@
 </table>`;
 
     // 3. SURAT PERNYATAAN PEMASANGAN BATAS Template
-    window.templateBatas = `<h3 style="text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: 2px;">SURAT PERNYATAAN</h3>
-<h4 style="text-align: center; font-weight: bold; text-decoration: underline; margin-top: 0;">PEMASANGAN TANDA-TANDA BATAS</h4>
+    window.templateBatas = `<div style="text-align: center; margin-bottom: 20px;">
+  <p style="margin: 0; padding: 0; font-size: 14pt; font-family: 'Times New Roman', Times, serif;"><strong><u>SURAT PERNYATAAN</u></strong></p>
+  <p style="margin: 0; padding: 0; font-size: 12pt; font-family: 'Times New Roman', Times, serif;"><strong><u>PEMASANGAN TANDA-TANDA BATAS</u></strong></p>
+</div>
 <br>
 <p>Yang bertanda tangan dibawah ini :</p>
 <table style="width: 100%; border: none;">
@@ -268,8 +274,10 @@
 </table>`;
 
     // 4. DEFAULT Template
-    window.templateDefault = `<h3 style="text-align: center; font-weight: bold; text-decoration: underline;">SURAT KETERANGAN</h3>
-<h4 style="text-align: center; font-weight: normal; margin-top: 5px;">Nomor : [NOMOR_SURAT]</h4>
+    window.templateDefault = `<div style="text-align: center; margin-bottom: 20px;">
+  <p style="margin: 0; padding: 0; font-size: 14pt; font-family: 'Times New Roman', Times, serif;"><strong><u>SURAT KETERANGAN</u></strong></p>
+  <p style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif;">Nomor : [NOMOR_SURAT]</p>
+</div>
 <br>
 <p>Yang bertanda tangan di bawah ini Notaris & PPAT Eka Sulistya, S.H., M.Kn. menerangkan bahwa :</p>
 <table style="width: 100%; border: none;">
