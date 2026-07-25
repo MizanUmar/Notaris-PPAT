@@ -645,7 +645,13 @@
                     </div>
 
                     <!-- Tombol WhatsApp -->
-                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profil->no_telepon) }}"
+                    @php
+                    $waNumber = preg_replace('/[^0-9]/', '', $profil->no_telepon);
+                    if (substr($waNumber, 0, 1) === '0') {
+                    $waNumber = '62' . substr($waNumber, 1);
+                    }
+                    @endphp
+                    <a href="https://wa.me/{{ $waNumber }}"
                         class="btn btn-success rounded-3 px-4 py-2" target="_blank">
                         <i class="fa-brands fa-whatsapp me-2 fs-5"></i>
                         Konsultasi via WhatsApp
