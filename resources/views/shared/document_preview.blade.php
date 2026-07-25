@@ -76,6 +76,10 @@
                     <!-- NOTARY PAPER LAYOUT -->
                     <div class="notary-paper-container shadow-lg">
                         <div class="notary-paper-body">
+                            <div style="text-align: center; margin-bottom: 30px; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+                                <div style="font-size: 16px; text-transform: uppercase;">{{ $title }}</div>
+                                <div style="font-size: 14px; margin-top: 5px;">Nomor : {{ $number }}</div>
+                            </div>
                             {!! $content !!}
                         </div>
                     </div>
