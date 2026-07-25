@@ -19,7 +19,7 @@
 
                 <form action="{{ route('client.biodata.update') }}" method="POST">
                     @csrf
-                    
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label small fw-bold">Nama Lengkap (Sesuai KTP)</label>
@@ -72,7 +72,13 @@
                 <i class="fa-solid fa-circle-question fs-1 text-primary mb-3"></i>
                 <h5 class="fw-bold font-heading mb-2">Butuh Bantuan?</h5>
                 <p class="text-muted small mb-4">Jika Anda mengalami kendala dalam memperbarui data identitas NIK atau mengalami kegagalan sistem, silakan hubungi layanan bantuan staf Notaris.</p>
-                <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-outline-primary btn-sm w-100 rounded-3"><i class="fa-brands fa-whatsapp me-2 fs-6"></i> Hubungi Staf Notaris</a>
+                @php
+                $waNumber = preg_replace('/[^0-9]/', '', $profil->no_telepon);
+                if (substr($waNumber, 0, 1) === '0') {
+                $waNumber = '62' . substr($waNumber, 1);
+                }
+                @endphp
+                <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="btn btn-outline-primary btn-sm w-100 rounded-3"><i class="fa-brands fa-whatsapp me-2 fs-6"></i> Hubungi Kami</a>
             </div>
         </div>
     </div>

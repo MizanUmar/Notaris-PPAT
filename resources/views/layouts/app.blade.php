@@ -436,10 +436,6 @@
             <button class="btn btn-outline-secondary d-lg-none me-2" id="sidebar-toggle">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <div class="d-flex align-items-center">
-                <span class="text-muted small">Status Login: </span>
-                <span class="badge ms-2 bg-dark-subtle text-dark-emphasis text-capitalize">{{ Auth::user()->role }}</span>
-            </div>
 
             <div class="ms-auto d-flex align-items-center gap-3">
                 <div class="text-end d-none d-sm-block">
