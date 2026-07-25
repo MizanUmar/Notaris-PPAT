@@ -9,7 +9,7 @@
             <h2 class="fw-bold font-heading mb-1">Arsip Akta Digital</h2>
             <p class="text-muted mb-0">Kelola dan telusuri arsip akta resmi yang diterbitkan.</p>
         </div>
-        
+
     </div>
 
     <!-- Search & Filter Card -->
@@ -69,7 +69,8 @@
                                     data-id="{{ $akt->id }}"
                                     data-nomor_akta="{{ $akt->nomor_akta }}"
                                     data-nama_akta="{{ $akt->nama_akta }}"
-                                    data-tanggal_akta="{{ $akt->tanggal_akta->toDateString() }}">
+                                    data-tanggal_akta="{{ $akt->tanggal_akta->toDateString() }}"
+                                    data-isi_akta="{{ $akt->isi_akta }}">
                                     <i class="fa-solid fa-pen"></i> Edit
                                 </button>
 
@@ -102,8 +103,9 @@
 
 
 <!-- Modal Edit -->
+<!-- Modal Edit -->
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <form action="" method="POST" id="editForm" enctype="multipart/form-data">
             @csrf
             <div class="modal-content border-0 shadow-lg">
@@ -112,20 +114,28 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Nomor Akta</label>
-                        <input type="text" name="nomor_akta" id="edit_nomor_akta" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Nama Akta</label>
-                        <input type="text" name="nama_akta" id="edit_nama_akta" class="form-control" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold">Nomor Akta</label>
+                            <input type="text" name="nomor_akta" id="edit_nomor_akta" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold">Nama Akta</label>
+                            <input type="text" name="nama_akta" id="edit_nama_akta" class="form-control" required>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label small fw-bold">Tanggal Pembuatan</label>
                         <input type="date" name="tanggal_akta" id="edit_tanggal_akta" class="form-control" required>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Isi Akta</label>
+                        <textarea id="edit_editor" name="isi_akta"></textarea>
+                    </div>
+
                     <div class="mb-0">
-                        <label class="form-label small fw-bold">Ganti File Akta Digital (Kosongkan jika tidak diganti)</label>
+                        <label class="form-label small fw-bold">Ganti File Akta Digital (Kosongkan jika tidak diganti — biarkan kosong agar PDF otomatis dibuat ulang dari Isi Akta di atas)</label>
                         <input type="file" name="file_akta" class="form-control">
                     </div>
                 </div>
@@ -140,22 +150,69 @@
 @endsection
 
 @section('scripts')
+@section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <script>
+    let editEditorInstance = null;
+
+    function initEditEditor(content) {
+        // Kalau editor lama masih ada, hancurkan dulu biar nggak dobel
+        if (editEditorInstance) {
+            editEditorInstance.destroy().then(() => {
+                editEditorInstance = null;
+                createEditEditor(content);
+            });
+        } else {
+            createEditEditor(content);
+        }
+    }
+
+    function createEditEditor(content) {
+        ClassicEditor
+            .create(document.querySelector('#edit_editor'), {
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'underline', '|',
+                    'bulletedList', 'numberedList', '|', 'insertTable', '|',
+                    'undo', 'redo'
+                ]
+            })
+            .then(editor => {
+                editEditorInstance = editor;
+                editor.setData(content || '');
+                editor.editing.view.change(writer => {
+                    writer.setStyle('min-height', '400px', editor.editing.view.document.getRoot());
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function() {
             const id = this.getAttribute('data-id');
             const nomor_akta = this.getAttribute('data-nomor_akta');
             const nama_akta = this.getAttribute('data-nama_akta');
             const tanggal_akta = this.getAttribute('data-tanggal_akta');
+            const isi_akta = this.getAttribute('data-isi_akta');
 
             document.getElementById('editForm').setAttribute('action', `/admin/akta/update/${id}`);
             document.getElementById('edit_nomor_akta').value = nomor_akta;
             document.getElementById('edit_nama_akta').value = nama_akta;
             document.getElementById('edit_tanggal_akta').value = tanggal_akta;
 
+            initEditEditor(isi_akta);
+
             const modal = new bootstrap.Modal(document.getElementById('modalEdit'));
             modal.show();
         });
     });
+
+    // Sinkronkan isi CKEditor ke textarea sebelum submit, karena CKEditor
+    // menyembunyikan textarea aslinya dari form
+    document.getElementById('editForm').addEventListener('submit', function() {
+        if (editEditorInstance) {
+            document.querySelector('#edit_editor').value = editEditorInstance.getData();
+        }
+    });
 </script>
+@endsection
 @endsection
