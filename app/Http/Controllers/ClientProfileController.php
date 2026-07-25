@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\ProfilKantor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,8 @@ class ClientProfileController extends Controller
     {
         $user = Auth::user();
         $client = $user->client;
-        return view('client.biodata.edit', compact('user', 'client'));
+        $profil = ProfilKantor::first();
+        return view('client.biodata.edit', compact('user', 'client', 'profil'));
     }
 
     public function update(Request $request)
@@ -43,7 +45,6 @@ class ClientProfileController extends Controller
                 $userData['password'] = $request->password; // automatically hashed by casts
             }
 
-            $user->update($userData);
 
             $client->update([
                 'nik' => $request->nik,

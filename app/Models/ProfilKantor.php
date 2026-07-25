@@ -17,5 +17,7 @@ class ProfilKantor extends Model
         'no_telepon',
         'email',
         'logo',
+        'latitude',
+        'longitude',
     ];
 }
