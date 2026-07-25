@@ -662,7 +662,11 @@
                     <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm"
                         style="border:1px solid #e2e8f0;">
                         <iframe
-                            src="https://www.google.com/maps?q=Kantor+Notaris+%26+PPAT+Eka+Sulistya,+Jl.+Pangeran+Natakusuma,+Sungai+Bangkong,+Kec.+Pontianak+Kota,+Kota+Pontianak,+Kalimantan+Barat+78116&output=embed"
+                            @if($profil->latitude && $profil->longitude)
+                            src="https://www.google.com/maps?q={{ $profil->latitude }},{{ $profil->longitude }}&output=embed"
+                            @else
+                            src="https://www.google.com/maps?q={{ urlencode($profil->nama_kantor . ', ' . $profil->alamat) }}&output=embed"
+                            @endif
                             style="border:0;"
                             allowfullscreen=""
                             loading="lazy"
