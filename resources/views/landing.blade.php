@@ -691,7 +691,7 @@
 
             <div class="row g-4">
 
-                @foreach($layanans as $layanan)
+                @foreach($layanan as $item)
 
                 <div class="col-12 col-sm-6 col-lg-3">
 
@@ -705,7 +705,7 @@
 
                         <h5 class="mt-4 fw-bold">
 
-                            {{ $layanan->nama }}
+                            {{ $item->nama }}
 
                         </h5>
 
@@ -756,7 +756,7 @@
 
             <div class="row g-4">
 
-                @foreach($layanans as $layanan)
+                @foreach($layanan as $item)
 
                 <div class="col-12 col-md-6">
 
@@ -766,7 +766,7 @@
 
                             <h5 class="fw-bold text-primary">
 
-                                {{ $layanan->nama }}
+                                {{ $item->nama }}
 
                             </h5>
 
