@@ -168,6 +168,12 @@ Route::middleware(['auth', 'role:admin,notaris'])
                 [AktaController::class, 'destroy']
             )
                 ->name('admin.akta.destroy');
+
+            Route::get(
+                '/preview/{id}',
+                [AktaController::class, 'preview']
+            )
+                ->name('admin.akta.preview');
         });
 
         Route::get(
@@ -187,6 +193,7 @@ Route::middleware(['auth', 'role:admin,notaris'])
             Route::post('/store', [SuratController::class, 'store'])->name('admin.surat.store');
             Route::post('/update/{id}', [SuratController::class, 'update'])->name('admin.surat.update');
             Route::post('/delete/{id}', [SuratController::class, 'destroy'])->name('admin.surat.destroy');
+            Route::get('/preview/{id}', [SuratController::class, 'preview'])->name('admin.surat.preview');
         });
 
         // ===========================================================
@@ -262,9 +269,11 @@ Route::middleware(['auth', 'role:client'])
 
         Route::prefix('akta')->group(function () {
             Route::get('/', [AktaController::class, 'clientIndex'])->name('client.akta.index');
+            Route::get('/preview/{id}', [AktaController::class, 'clientPreview'])->name('client.akta.preview');
         });
 
         Route::prefix('surat')->group(function () {
             Route::get('/', [SuratController::class, 'clientIndex'])->name('client.surat.index');
+            Route::get('/preview/{id}', [SuratController::class, 'clientPreview'])->name('client.surat.preview');
         });
     });

@@ -52,9 +52,14 @@
                             <small class="text-muted">No. Pengajuan: #{{ $sur->permintaan_id }}</small>
                         </td>
                         <td class="pe-4 text-end">
-                            <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-sm btn-success py-1 px-3 rounded">
-                                <i class="fa-solid fa-download me-1"></i> Unduh Surat
-                            </a>
+                            <div class="d-flex justify-content-end gap-1">
+                                <a href="{{ route('client.surat.preview', $sur->id) }}" class="btn btn-sm btn-outline-info py-1 px-3 rounded">
+                                    <i class="fa-solid fa-eye me-1"></i> Lihat Surat
+                                </a>
+                                <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-sm btn-success py-1 px-3 rounded">
+                                    <i class="fa-solid fa-download me-1"></i> Unduh
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @empty

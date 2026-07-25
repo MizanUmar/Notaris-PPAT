@@ -54,9 +54,14 @@
                             <small class="text-muted">Layanan: {{ $akt->permintaan->layanan->nama_layanan ?? '-' }}</small>
                         </td>
                         <td>
-                            <a href="{{ asset('storage/' . $akt->file_akta) }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2 rounded">
-                                <i class="fa-solid fa-file-pdf me-1"></i> Unduh Akta
-                            </a>
+                            <div class="d-flex gap-1">
+                                <a href="{{ route('admin.akta.preview', $akt->id) }}" class="btn btn-sm btn-outline-info py-1 px-2 rounded">
+                                    <i class="fa-solid fa-eye me-1"></i> Lihat
+                                </a>
+                                <a href="{{ asset('storage/' . $akt->file_akta) }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2 rounded">
+                                    <i class="fa-solid fa-file-pdf me-1"></i> Unduh
+                                </a>
+                            </div>
                         </td>
                         <td class="pe-4 text-end">
                             <div class="btn-group gap-1">

@@ -63,9 +63,14 @@
                             </td>
                             <td><span class="small text-muted">{{ Str::limit($sur->keterangan, 50) ?? '-' }}</span></td>
                             <td>
-                                <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-sm btn-outline-info py-1 px-2 rounded">
-                                    <i class="fa-solid fa-file-pdf me-1"></i> Unduh Surat
-                                </a>
+                                <div class="d-flex gap-1">
+                                    <a href="{{ route('admin.surat.preview', $sur->id) }}" class="btn btn-sm btn-outline-info py-1 px-2 rounded">
+                                        <i class="fa-solid fa-eye me-1"></i> Lihat
+                                    </a>
+                                    <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2 rounded">
+                                        <i class="fa-solid fa-file-pdf me-1"></i> Unduh
+                                    </a>
+                                </div>
                             </td>
                             <td class="pe-4 text-end">
                                 <div class="btn-group gap-1">

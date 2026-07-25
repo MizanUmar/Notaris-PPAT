@@ -230,4 +230,62 @@ class AktaController extends Controller
 
         return view('client.akta.index', compact('akta', 'search'));
     }
+
+    public function preview($id)
+    {
+        $akta = Akta::with(['permintaan.client.user', 'permintaan.layanan'])->findOrFail($id);
+        $documentType = 'akta';
+        $title = $akta->nama_akta;
+        $number = $akta->nomor_akta;
+        $date = $akta->tanggal_akta;
+        $content = $akta->isi_akta;
+        $filePath = $akta->file_akta;
+        $permintaan = $akta->permintaan;
+        $isAdmin = true;
+
+        return view('shared.document_preview', compact(
+            'documentType',
+            'title',
+            'number',
+            'date',
+            'content',
+            'filePath',
+            'permintaan',
+            'isAdmin'
+        ));
+    }
+
+    public function clientPreview($id)
+    {
+        $client = auth()->user()->client;
+        if (!$client) {
+            return redirect()->route('client.dashboard')->withErrors(['error' => 'Profil client tidak ditemukan.']);
+        }
+
+        $akta = Akta::with(['permintaan.client.user', 'permintaan.layanan'])
+            ->whereHas('permintaan', function ($query) use ($client) {
+                $query->where('client_id', $client->id);
+            })
+            ->findOrFail($id);
+
+        $documentType = 'akta';
+        $title = $akta->nama_akta;
+        $number = $akta->nomor_akta;
+        $date = $akta->tanggal_akta;
+        $content = $akta->isi_akta;
+        $filePath = $akta->file_akta;
+        $permintaan = $akta->permintaan;
+        $isAdmin = false;
+
+        return view('shared.document_preview', compact(
+            'documentType',
+            'title',
+            'number',
+            'date',
+            'content',
+            'filePath',
+            'permintaan',
+            'isAdmin'
+        ));
+    }
 }

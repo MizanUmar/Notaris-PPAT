@@ -201,4 +201,62 @@ class SuratController extends Controller
 
         return view('client.surat.index', compact('surat', 'search'));
     }
+
+    public function preview($id)
+    {
+        $surat = Surat::with(['permintaan.client.user', 'permintaan.layanan'])->findOrFail($id);
+        $documentType = 'surat';
+        $title = $surat->jenis_surat;
+        $number = $surat->nomor_surat;
+        $date = $surat->tanggal_surat;
+        $content = $surat->keterangan; // HTML content
+        $filePath = $surat->file_surat;
+        $permintaan = $surat->permintaan;
+        $isAdmin = true;
+
+        return view('shared.document_preview', compact(
+            'documentType',
+            'title',
+            'number',
+            'date',
+            'content',
+            'filePath',
+            'permintaan',
+            'isAdmin'
+        ));
+    }
+
+    public function clientPreview($id)
+    {
+        $client = auth()->user()->client;
+        if (!$client) {
+            return redirect()->route('client.dashboard')->withErrors(['error' => 'Profil client tidak ditemukan.']);
+        }
+
+        $surat = Surat::with(['permintaan.client.user', 'permintaan.layanan'])
+            ->whereHas('permintaan', function ($query) use ($client) {
+                $query->where('client_id', $client->id);
+            })
+            ->findOrFail($id);
+
+        $documentType = 'surat';
+        $title = $surat->jenis_surat;
+        $number = $surat->nomor_surat;
+        $date = $surat->tanggal_surat;
+        $content = $surat->keterangan; // HTML content
+        $filePath = $surat->file_surat;
+        $permintaan = $surat->permintaan;
+        $isAdmin = false;
+
+        return view('shared.document_preview', compact(
+            'documentType',
+            'title',
+            'number',
+            'date',
+            'content',
+            'filePath',
+            'permintaan',
+            'isAdmin'
+        ));
+    }
 }

@@ -159,7 +159,7 @@ class PermintaanLayananController extends Controller
             'client_id' => $client->id,
             'layanan_id' => $request->layanan_id,
             'tanggal_permintaan' => Carbon::now()->toDateString(),
-            'status' => 'Diproses',
+            'status' => 'Menunggu',
             'keterangan' => $request->keterangan,
         ]);
 
