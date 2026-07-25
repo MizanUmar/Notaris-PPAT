@@ -694,29 +694,21 @@
                 @foreach($layanan as $item)
 
                 <div class="col-12 col-sm-6 col-lg-3">
-
                     <div class="card-service h-100">
 
                         <div class="icon-circle">
-
                             <i class="fa-solid fa-scale-balanced"></i>
-
                         </div>
 
                         <h5 class="mt-4 fw-bold">
-
                             {{ $item->nama }}
-
                         </h5>
 
                         <p class="text-muted mt-3">
-
-                            {{ Str::limit($layanan->deskripsi,120) }}
-
+                            {{ Str::limit($item->deskripsi, 120) }}
                         </p>
 
                     </div>
-
                 </div>
 
                 @endforeach
