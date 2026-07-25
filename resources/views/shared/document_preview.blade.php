@@ -85,20 +85,26 @@
                     </div>
                     @else
                     <!-- CORPORATE LETTER LAYOUT -->
-                    <div class="letter-paper-container shadow-lg">
-                        <div class="letter-header">
-                            <div class="d-flex align-items-center justify-content-center gap-3">
-                                <div class="text-center">
-                                    <h3 class="kop-title">EKA SULISTYA, S.H., M.Kn.</h3>
-                                    <div class="kop-subtitle">NOTARIS & PEJABAT PEMBUAT AKTA TANAH (PPAT)</div>
-                                    <div class="kop-address">Jl. Pangeran Natakusuma, Kota Pontianak, Kalimantan Barat 78116</div>
-                                    <div class="kop-phone">Telepon: (0561) 7654321 | Email: eka.sulistya.notaris@gmail.com</div>
-                                </div>
+                    <div class="letter-paper-container shadow-lg d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="letter-header" style="text-align: center; font-family: 'Times New Roman', Times, serif; margin-bottom: 20px; line-height: 1.25;">
+                                <img src="{{ asset('garuda_logo.png') }}" style="width: 70px; height: auto; display: block; margin: 0 auto 5px;" alt="Logo Garuda">
+                                <div style="font-size: 14pt; font-weight: bold; text-transform: uppercase; margin: 0; padding: 0; letter-spacing: 0.5px; text-align: center;">NOTARIS & PPAT</div>
+                                <div style="font-size: 16pt; font-weight: bold; text-transform: uppercase; margin: 2px 0 0; padding: 0; letter-spacing: 0.5px; text-align: center;">EKA SULISTYA, S.H., M.Kn.</div>
+                                <div style="font-size: 8.5pt; font-weight: normal; margin: 4px 0 0; padding: 0; text-align: center;">SK KEMENKUM RI Nomor : AHU-01601.AH.02.01.TAHUN 2025 Tanggal 04 Maret 2025</div>
+                                <div style="font-size: 8.5pt; font-weight: normal; margin: 2px 0 0; padding: 0; text-align: center;">Kedudukan Kota Pontianak, Wilayah Kerja Provinsi Kalimantan Barat</div>
+                                <div style="font-size: 8.5pt; font-weight: normal; margin: 2px 0 0; padding: 0; text-align: center;">SK Menteri ATR/KBPN RI Nomor 717/SK-HR.03.04.PPAT/VI/2025</div>
+                                <div style="font-size: 8.5pt; font-weight: normal; margin: 2px 0 0; padding: 0; text-align: center;">Kedudukan Kota Pontianak</div>
+                                <hr style="border: none; border-top: 4px solid #000; opacity: 1; margin: 12px 0 0 0;">
                             </div>
-                            <hr class="kop-divider">
+                            <div class="letter-body">
+                                {!! $content !!}
+                            </div>
                         </div>
-                        <div class="letter-body">
-                            {!! $content !!}
+                        <div class="letter-footer" style="text-align: center; font-family: 'Times New Roman', Times, serif; font-size: 9pt; border-top: 1px solid #000; padding-top: 10px; margin-top: 50px; line-height: 1.4;">
+                            <div>Jl. Pangeran Natakusuma, Kota Pontianak, Kalimantan Barat 78116</div>
+                            <div>e-mail : ekasulistyanotaris@gmail.com</div>
+                            <div>Hp : 085931148582</div>
                         </div>
                     </div>
                     @endif
