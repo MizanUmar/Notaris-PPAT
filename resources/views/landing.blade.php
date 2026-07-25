@@ -451,7 +451,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                    <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 text-uppercase tracking-wider">Notaris & PPAT Eka Sulistya</span>
                     <h1 class="display-4 fw-extrabold text-white font-heading mb-1 lh-sm">
                         Sistem Informasi Management Operasional Dan Layanan Kantor
                     </h1>
