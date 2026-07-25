@@ -46,7 +46,6 @@
                         <th>Jenis Surat</th>
                         <th>Tanggal Surat</th>
                         <th>Client Terkait</th>
-                        <th>Keterangan</th>
                         <th>File Digital</th>
                         <th class="pe-4 text-end">Aksi</th>
                     </tr>
@@ -61,7 +60,6 @@
                                 <span class="fw-medium text-capitalize d-block">{{ $sur->permintaan->client->user->nama ?? '-' }}</span>
                                 <small class="text-muted">Layanan: {{ $sur->permintaan->layanan->nama_layanan ?? '-' }}</small>
                             </td>
-                            <td><span class="small text-muted">{{ Str::limit($sur->keterangan, 50) ?? '-' }}</span></td>
                             <td>
                                 <div class="d-flex gap-1">
                                     <a href="{{ route('admin.surat.preview', $sur->id) }}" class="btn btn-sm btn-outline-info py-1 px-2 rounded">
