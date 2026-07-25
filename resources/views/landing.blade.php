@@ -254,6 +254,128 @@
         .navbar-toggler:focus {
             box-shadow: none;
         }
+
+        /* =========================================================
+   RESPONSIVE — Tablet & Mobile
+   (Bootstrap grid sudah menangani sebagian besar layout,
+   bagian ini hanya merapikan ukuran teks/spasi/tombol
+   yang di-hardcode di atas supaya nyaman di layar kecil)
+========================================================= */
+
+        /* --- Tablet: 768px - 991px --- */
+        @media (max-width: 991.98px) {
+            .hero-section {
+                padding: 7rem 0 4rem;
+                text-align: center;
+            }
+
+            .hero-section h1.display-4 {
+                font-size: 2.4rem;
+            }
+
+            .hero-content .d-flex.flex-wrap.gap-3 {
+                justify-content: center;
+            }
+
+            .section-padding {
+                padding: 3.5rem 0;
+            }
+
+            .card-service {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* --- Mobile: sampai 767px --- */
+        @media (max-width: 767.98px) {
+            .navbar-premium {
+                padding: 0.6rem 0;
+            }
+
+            .navbar-premium .navbar-brand span {
+                font-size: 1.1rem;
+            }
+
+            .navbar-nav {
+                padding-top: 0.75rem;
+                gap: 0.5rem !important;
+            }
+
+            .navbar-nav .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-section {
+                padding: 6.5rem 0 3rem;
+                text-align: center;
+            }
+
+            .hero-section h1.display-4 {
+                font-size: 1.9rem;
+                line-height: 1.3;
+            }
+
+            .hero-content .lead {
+                font-size: 1rem;
+            }
+
+            .hero-content .d-flex.flex-wrap.gap-3 {
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .btn-premium,
+            .btn-premium-outline {
+                width: 100%;
+                text-align: center;
+                padding: 0.9rem 1.2rem;
+            }
+
+            .section-padding {
+                padding: 2.5rem 0;
+            }
+
+            .icon-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .card-service {
+                padding: 1.25rem !important;
+            }
+
+            .accordion-button {
+                font-size: 0.95rem;
+                padding: 0.9rem 1rem;
+            }
+
+            .accordion-body {
+                padding: 1rem !important;
+            }
+
+            #lokasi .btn-success {
+                width: 100%;
+                text-align: center;
+            }
+
+            .ratio.ratio-16x9 {
+                margin-top: 1.5rem;
+            }
+        }
+
+        /* --- Extra kecil: HP di bawah 400px --- */
+        @media (max-width: 399.98px) {
+            .hero-section h1.display-4 {
+                font-size: 1.6rem;
+            }
+
+            .badge.bg-primary.px-3.py-2.rounded-pill {
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
 
@@ -364,7 +486,7 @@
 
             <div class="row g-4">
                 @foreach($layanan as $lay)
-                <div class="col-md-6 col-lg-3">
+                <div class="col-6 col-md-6 col-lg-3">
                     <div class="card-service p-4">
                         <div class="icon-circle">
                             @if($loop->iteration == 1)
@@ -412,7 +534,7 @@
                                 <div class="accordion-body bg-white p-4">
                                     <ul class="list-group list-group-flush">
                                         @forelse($lay->persyaratan as $req)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                                        <li class="list-group-item d-flex flex-wrap gap-2 justify-content-between align-items-center py-3 border-0 border-bottom">
                                             <div class="d-flex align-items-center gap-2">
                                                 <i class="fa-regular fa-circle-check text-success"></i>
                                                 <span>{{ $req->nama_dokumen }}</span>
