@@ -89,13 +89,13 @@
                                     </td>
                                     <td>
                                         <div class="d-flex flex-column gap-1">
-                                            @foreach($req->akta as $akt)
-                                                <span class="small text-success"><i class="fa-solid fa-file-contract me-1"></i> Akta: {{ $akt->nomor_akta }}</span>
-                                            @endforeach
+                                            @if($req->akta)
+                                                <span class="small text-success"><i class="fa-solid fa-file-contract me-1"></i> Akta: {{ $req->akta->nomor_akta }}</span>
+                                            @endif
                                             @foreach($req->surat as $sur)
                                                 <span class="small text-info"><i class="fa-solid fa-envelope-open-text me-1"></i> Surat: {{ $sur->nomor_surat }}</span>
                                             @endforeach
-                                            @if($req->akta->isEmpty() && $req->surat->isEmpty())
+                                            @if(!$req->akta && $req->surat->isEmpty())
                                                 <span class="text-muted small">-</span>
                                             @endif
                                         </div>

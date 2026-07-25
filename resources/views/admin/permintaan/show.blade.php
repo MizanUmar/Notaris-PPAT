@@ -80,19 +80,26 @@
             <div class="card card-premium p-4">
                 <h5 class="fw-bold font-heading mb-3 border-bottom pb-2">Arsip Dokumen Terbit</h5>
                 <div class="d-flex flex-column gap-2 mb-3">
-                    @forelse($permintaan->akta as $akt)
+                    @if($permintaan->akta)
+                        @php $akt = $permintaan->akta; @endphp
                         <div class="d-flex align-items-center justify-content-between p-2 rounded bg-success-subtle border-start border-success border-3">
                             <span class="small fw-semibold text-success"><i class="fa-solid fa-file-contract me-1"></i> Akta: {{ $akt->nomor_akta }}</span>
-                            <a href="{{ asset('storage/' . $akt->file_akta) }}" target="_blank" class="btn btn-sm btn-success py-0 px-2 text-white"><i class="fa-solid fa-download"></i></a>
+                            <div class="d-flex gap-1">
+                                <a href="{{ route('admin.akta.preview', $akt->id) }}" class="btn btn-xs btn-outline-success py-0 px-2"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{ asset('storage/' . $akt->file_akta) }}" target="_blank" class="btn btn-xs btn-success py-0 px-2 text-white"><i class="fa-solid fa-download"></i></a>
+                            </div>
                         </div>
-                    @empty
+                    @else
                         <span class="text-muted small">Belum ada akta terbit untuk permintaan ini.</span>
-                    @endforelse
+                    @endif
 
                     @forelse($permintaan->surat as $sur)
                         <div class="d-flex align-items-center justify-content-between p-2 rounded bg-info-subtle border-start border-info border-3">
                             <span class="small fw-semibold text-info"><i class="fa-solid fa-envelope-open-text me-1"></i> Surat: {{ $sur->nomor_surat }}</span>
-                            <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-sm btn-info py-0 px-2 text-white"><i class="fa-solid fa-download"></i></a>
+                            <div class="d-flex gap-1">
+                                <a href="{{ route('admin.surat.preview', $sur->id) }}" class="btn btn-xs btn-outline-info py-0 px-2"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{ asset('storage/' . $sur->file_surat) }}" target="_blank" class="btn btn-xs btn-info py-0 px-2 text-white"><i class="fa-solid fa-download"></i></a>
+                            </div>
                         </div>
                     @empty
                         <span class="text-muted small">Belum ada surat terbit untuk permintaan ini.</span>
