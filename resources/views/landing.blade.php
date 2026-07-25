@@ -286,6 +286,18 @@
             }
         }
 
+        /* --- QR code di hero: rapikan saat tampil di tablet/mobile --- */
+        @media (max-width: 991.98px) {
+            .hero-qr {
+                margin-top: 2rem;
+            }
+
+            .hero-qr img {
+                max-width: 180px !important;
+                padding: 1rem !important;
+            }
+        }
+
         /* --- Mobile: sampai 767px --- */
         @media (max-width: 767.98px) {
             .navbar-premium {
@@ -467,7 +479,7 @@
                         @endauth
                     </div>
                 </div>
-                <div class="col-lg-5 text-center d-none d-lg-block">
+                <div class="col-lg-5 text-center hero-qr">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data={{ route('buku-tamu.checkin') }}" alt="QR Code Guestbook" class="img-thumbnail p-4 rounded-4 shadow-lg mb-3" style="max-width: 280px; border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-white-50 small"><i class="fa-solid fa-qrcode me-2"></i> Pindai QR Code untuk mengisi Buku Tamu Kunjungan</p>
                 </div>
