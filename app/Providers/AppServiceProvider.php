@@ -19,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (!file_exists(public_path('storage'))) {
+            try {
+                \Illuminate\Support\Facades\Artisan::call('storage:link');
+            } catch (\Exception $e) {
+                // Fail silently if symlink creation is not permitted by host OS
+            }
+        }
     }
 }
