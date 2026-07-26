@@ -262,7 +262,7 @@
                 <i class="fa-solid fa-scale-balanced text-primary fs-4"></i>
                 <div>
                     <span class="d-block fw-bold text-white lh-sm fs-6">EKA SULISTYA</span>
-                    <small class="text-muted d-block" style="font-size: 0.7rem;">Notaris & PPAT</small>
+                    <small class="text-white d-block" style="font-size: 0.7rem;">Notaris & PPAT</small>
                 </div>
             </div>
             <ul class="sidebar-menu">
