@@ -79,7 +79,7 @@
     const servicesData = {
         @foreach($layanan as $lay)
         "{{ $lay->id }}": [
-            @foreach($lay - > persyaratan as $req) {
+            @foreach($lay->persyaratan as $req) {
                 nama: "{{ $req->nama_dokumen }}",
                 ket: "{{ $req->keterangan ?? 'Fotokopi / Scan Asli' }}"
             },
