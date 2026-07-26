@@ -17,7 +17,7 @@
     <!-- Stats Cards Row -->
     <div class="row g-4 mb-4 align-items-stretch">
         <div class="col-sm-6 col-xl-3">
-            <div class="card card-premium p-4 h-100 border-start border-primary border-4">
+            <div class="card card-premium p-4 h-100 stat-accent accent-primary">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Total Client</span>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
-            <div class="card card-premium p-4 h-100 border-start border-warning border-4">
+            <div class="card card-premium p-4 h-100 stat-accent accent-warning">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Menunggu Proses</span>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
-            <div class="card card-premium p-4 h-100 border-start border-info border-4">
+            <div class="card card-premium p-4 h-100 stat-accent accent-info">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Total Permintaan</span>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
-            <div class="card card-premium p-4 h-100 border-start border-success border-4">
+            <div class="card card-premium p-4 h-100 stat-accent accent-success">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Akta Diarsipkan</span>
@@ -253,6 +253,27 @@
 
         font-size: 12px;
 
+    }
+
+    .stat-accent {
+        border: 1px solid #e2e8f0 !important;
+        border-left-width: 4px !important;
+    }
+
+    .stat-accent.accent-primary {
+        border-left-color: #800020 !important;
+    }
+
+    .stat-accent.accent-warning {
+        border-left-color: #f59e0b !important;
+    }
+
+    .stat-accent.accent-info {
+        border-left-color: #06b6d4 !important;
+    }
+
+    .stat-accent.accent-success {
+        border-left-color: #16a34a !important;
     }
 </style>
 
