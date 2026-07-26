@@ -46,6 +46,8 @@ class ClientProfileController extends Controller
             }
 
 
+            $user->update($userData);
+
             $client->update([
                 'nik' => $request->nik,
                 'no_hp' => $request->no_hp,
