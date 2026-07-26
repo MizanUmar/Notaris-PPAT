@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
-            <div class="card card-premium p-4 border-start border-warning border-4">
+            <div class="card card-premium p-4 h-100 border-start border-warning border-4">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Menunggu Proses</span>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
-            <div class="card card-premium p-4 border-start border-info border-4">
+            <div class="card card-premium p-4 h-100 border-start border-info border-4">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Total Permintaan</span>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
-            <div class="card card-premium p-4 border-start border-success border-4">
+            <div class="card card-premium p-4 h-100 border-start border-success border-4">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Akta Diarsipkan</span>
@@ -273,61 +273,61 @@
 
             events: "{{ route('reminder.events') }}",
 
-            dateClick:function(info){
+            dateClick: function(info) {
 
                 fetch('/admin/reminder/by-date/' + info.dateStr)
-                .then(response => response.json())
-                .then(data => {
+                    .then(response => response.json())
+                    .then(data => {
 
-                    const form = document.getElementById('reminderForm');
+                        const form = document.getElementById('reminderForm');
 
-                    form.reset();
+                        form.reset();
 
-                    if(data){
+                        if (data) {
 
-                        // MODE EDIT
-                        document.getElementById('modalTitle').innerHTML = "Edit Reminder";
+                            // MODE EDIT
+                            document.getElementById('modalTitle').innerHTML = "Edit Reminder";
 
-                        document.getElementById('judul').value = data.judul;
+                            document.getElementById('judul').value = data.judul;
 
-                        document.getElementById('tanggal').value = data.tanggal;
+                            document.getElementById('tanggal').value = data.tanggal;
 
-                        document.getElementById('catatan').value = data.catatan ?? "";
+                            document.getElementById('catatan').value = data.catatan ?? "";
 
-                        form.action = "/admin/reminder/" + data.id;
+                            form.action = "/admin/reminder/" + data.id;
 
-                        if(document.getElementById('_method')){
-                            document.getElementById('_method').value = "PUT";
+                            if (document.getElementById('_method')) {
+                                document.getElementById('_method').value = "PUT";
+                            }
+
+                            document.getElementById('btnSave').innerHTML = "Update";
+
+                            document.getElementById('btnDelete').classList.remove('d-none');
+
+                            document.getElementById('btnDelete').dataset.id = data.id;
+
+                        } else {
+
+                            // MODE TAMBAH
+                            document.getElementById('modalTitle').innerHTML = "Tambah Reminder";
+
+                            document.getElementById('tanggal').value = info.dateStr;
+
+                            form.action = "/admin/reminder";
+
+                            if (document.getElementById('_method')) {
+                                document.getElementById('_method').value = "POST";
+                            }
+
+                            document.getElementById('btnSave').innerHTML = "Simpan";
+
+                            document.getElementById('btnDelete').classList.add('d-none');
+
                         }
 
-                        document.getElementById('btnSave').innerHTML = "Update";
+                        new bootstrap.Modal(document.getElementById('modalReminder')).show();
 
-                        document.getElementById('btnDelete').classList.remove('d-none');
-
-                        document.getElementById('btnDelete').dataset.id = data.id;
-
-                    }else{
-
-                        // MODE TAMBAH
-                        document.getElementById('modalTitle').innerHTML = "Tambah Reminder";
-
-                        document.getElementById('tanggal').value = info.dateStr;
-
-                        form.action = "/admin/reminder";
-
-                        if(document.getElementById('_method')){
-                            document.getElementById('_method').value = "POST";
-                        }
-
-                        document.getElementById('btnSave').innerHTML = "Simpan";
-
-                        document.getElementById('btnDelete').classList.add('d-none');
-
-                    }
-
-                    new bootstrap.Modal(document.getElementById('modalReminder')).show();
-
-                });
+                    });
 
             }
 
@@ -337,19 +337,24 @@
 
     });
 
-    document.getElementById('btnDelete').addEventListener('click',function(){
+    document.addEventListener('DOMContentLoaded', function() {
 
-        if(confirm('Hapus reminder ini?')){
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            // ...konfigurasi kalender kamu tetap sama...
+        });
 
-            let form=document.getElementById('reminderForm');
+        calendar.render();
 
-            form.action='/admin/reminder/'+this.dataset.id;
-
-            document.getElementById('_method').value='DELETE';
-
-            form.submit();
-
-        }
+        // ⬇️ pindahkan ke sini, di dalam DOMContentLoaded
+        document.getElementById('btnDelete').addEventListener('click', function() {
+            if (confirm('Hapus reminder ini?')) {
+                let form = document.getElementById('reminderForm');
+                form.action = '/admin/reminder/' + this.dataset.id;
+                document.getElementById('_method').value = 'DELETE';
+                form.submit();
+            }
+        });
 
     });
 </script>
@@ -367,8 +372,6 @@
                 <input type="hidden" name="_method" id="_method" value="POST">
 
                 <input type="hidden" id="reminderId">
-
-                @csrf
 
                 <div class="modal-header">
 
