@@ -244,6 +244,12 @@
             a[aria-expanded="true"] .rotate {
                 transform: rotate(90deg);
             }
+
+            .icon-circle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }   
         </style>
         @yield('styles')
     </head>
