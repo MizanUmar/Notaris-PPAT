@@ -20,14 +20,21 @@
             <div class="card card-premium p-4">
                 <form action="{{ route('client.permintaan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    
+
                     <div class="mb-3">
                         <label for="layanan_id" class="form-label small fw-bold">Pilih Jenis Layanan Hukum</label>
                         <select name="layanan_id" id="layanan_id" class="form-select form-control-premium" required>
                             <option value="" disabled selected>Pilih Layanan Hukum...</option>
-                            @foreach($layanan as $lay)
+                            <optgroup label="Layanan Akta">
+                                @foreach($layanan->where('kategori', 'akta') as $lay)
                                 <option value="{{ $lay->id }}">{{ $lay->nama_layanan }}</option>
-                            @endforeach
+                                @endforeach
+                            </optgroup>
+                            <optgroup label="Layanan Surat">
+                                @foreach($layanan->where('kategori', 'surat') as $lay)
+                                <option value="{{ $lay->id }}">{{ $lay->nama_layanan }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                     </div>
 
@@ -56,7 +63,7 @@
                     <!-- Loaded dynamically via JS -->
                 </ul>
             </div>
-            
+
             <div class="card card-premium p-4 text-center text-muted" id="requirementPlaceholder">
                 <i class="fa-solid fa-folder-open fs-1 text-black-50 mb-3"></i>
                 <p class="mb-0 small">Pilih jenis layanan hukum di samping untuk menampilkan daftar berkas persyaratan wajib.</p>
@@ -71,14 +78,13 @@
     // Prepare requirements data mapping from PHP to JS
     const servicesData = {
         @foreach($layanan as $lay)
-            "{{ $lay->id }}": [
-                @foreach($lay->persyaratan as $req)
-                    {
-                        nama: "{{ $req->nama_dokumen }}",
-                        ket: "{{ $req->keterangan ?? 'Fotokopi / Scan Asli' }}"
-                    },
-                @endforeach
-            ],
+        "{{ $lay->id }}": [
+            @foreach($lay - > persyaratan as $req) {
+                nama: "{{ $req->nama_dokumen }}",
+                ket: "{{ $req->keterangan ?? 'Fotokopi / Scan Asli' }}"
+            },
+            @endforeach
+        ],
         @endforeach
     };
 

@@ -39,6 +39,9 @@ class SuratController extends Controller
         $permintaan = PermintaanLayanan::with(['client.user', 'layanan'])
             ->where('status', 'Diproses')
             ->whereDoesntHave('surat')
+            ->whereHas('layanan', function ($q) {
+                $q->where('kategori', 'surat');
+            })
             ->latest()
             ->get();
 

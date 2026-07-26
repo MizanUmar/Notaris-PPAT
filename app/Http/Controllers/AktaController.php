@@ -194,6 +194,9 @@ class AktaController extends Controller
         ])
             ->where('status', 'Diproses')
             ->whereDoesntHave('akta')
+            ->whereHas('layanan', function ($q) {
+                $q->where('kategori', 'akta');
+            })
             ->latest()
             ->get();
 
