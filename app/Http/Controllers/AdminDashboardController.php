@@ -11,6 +11,7 @@ use App\Models\Surat;
 use App\Models\BukuTamu;
 use Illuminate\Http\Request;
 
+
 class AdminDashboardController extends Controller
 {
     public function index()
@@ -54,6 +55,7 @@ class AdminDashboardController extends Controller
             'totalClients',
             'totalPermintaan',
             'totalAkta',
+            'totalSurat',
             'pendingPermintaan',
             'recentPermintaan',
             'recentBukuTamu',
