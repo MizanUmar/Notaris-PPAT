@@ -21,6 +21,8 @@ class AdminDashboardController extends Controller
 
         $totalAkta = Akta::count();
 
+        $totalSurat = Surat::count();
+
         $pendingPermintaan = PermintaanLayanan::where('status', 'Menunggu')->count();
 
         $recentPermintaan = PermintaanLayanan::with([
