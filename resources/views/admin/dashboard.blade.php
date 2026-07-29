@@ -68,6 +68,19 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-premium p-4 h-100 stat-accent accent-info">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <span class="text-muted small fw-bold h-100 d-block text-uppercase mb-1">Surat Diarsipkan</span>
+                        <h3 class="fw-bold text-info mb-0">{{ $totalSurat }}</h3>
+                    </div>
+                    <div class="icon-circle bg-info-subtle text-info mb-0" style="width: 50px; height: 50px; border-radius: 10px;">
+                        <i class="fa-solid fa-file-lines fs-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row g-4">
