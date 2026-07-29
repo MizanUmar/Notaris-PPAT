@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS URLs in production (e.g. Railway terminates SSL at its proxy
+        // and forwards plain HTTP internally, which without this would make
+        // route()/asset() generate http:// links and trigger mixed-content errors).
+        if ($this->app->environment('production') || str_starts_with(config('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
         // Self-healing: create standard storage subfolders if they are missing
         $dirs = [
             storage_path('app/public'),
