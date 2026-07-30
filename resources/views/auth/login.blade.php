@@ -11,13 +11,13 @@
     </div>
 
     @if($errors->any())
-        <div class="alert alert-danger py-2 border-0 small mb-3">
-            <ul class="mb-0 ps-3">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger py-2 border-0 small mb-3">
+        <ul class="mb-0 ps-3">
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
     <form action="{{ route('login.post') }}" method="POST">
@@ -52,4 +52,36 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Hubungi Admin -->
+<div class="modal fade" id="modalHubungiAdmin" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header border-0 bg-dark text-white py-3">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-circle-exclamation me-2"></i> Gagal Login Berulang Kali</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <p class="mb-3">Anda sudah beberapa kali gagal masuk. Jika lupa username atau password, silakan hubungi Admin/Notaris untuk bantuan.</p>
+                <a href="https://wa.me/6285931148582" target="_blank" class="btn btn-success w-100 fw-bold">
+                    <i class="fa-brands fa-whatsapp me-2"></i> Hubungi via WhatsApp
+                </a>
+            </div>
+            <div class="modal-footer border-0 pt-0 justify-content-center">
+                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Coba Lagi</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+@if(session('show_contact_popup'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = new bootstrap.Modal(document.getElementById('modalHubungiAdmin'));
+        modal.show();
+    });
+</script>
+@endif
 @endsection

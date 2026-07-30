@@ -29,20 +29,36 @@ class AuthController extends Controller
 
         if (Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
             $user = Auth::user();
-            
+
             // Validate role matches user selection
             if ($user->role !== $credentials['role']) {
                 Auth::logout();
+                $this->incrementFailedAttempt($request);
                 return back()->withErrors(['username' => 'Role tidak sesuai dengan akun Anda.'])->withInput();
             }
+
+            // Login berhasil -> reset counter percobaan gagal
+            $request->session()->forget('login_attempts');
 
             $request->session()->regenerate();
             return $this->redirectUser($user);
         }
 
+        $this->incrementFailedAttempt($request);
+
         return back()->withErrors([
             'username' => 'Username atau password salah.',
         ])->withInput();
+    }
+
+    private function incrementFailedAttempt(Request $request)
+    {
+        $attempts = $request->session()->get('login_attempts', 0) + 1;
+        $request->session()->put('login_attempts', $attempts);
+
+        if ($attempts >= 3) {
+            $request->session()->flash('show_contact_popup', true);
+        }
     }
 
     public function showRegister()
