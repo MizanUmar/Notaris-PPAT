@@ -3,7 +3,6 @@
 @section('title', 'Masuk')
 
 @section('content')
-<pre style="background:#000;color:#0f0;padding:10px;">Session ID: {{ session()->getId() }} | Attempts: {{ session('login_attempts') ?? 'null' }}</pre>
 <div class="auth-card">
     <div class="auth-brand">
         <i class="fa-solid fa-scale-balanced"></i>
