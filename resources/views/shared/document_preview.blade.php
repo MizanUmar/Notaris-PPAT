@@ -4,12 +4,14 @@
 
 @section('content')
 <div class="container-fluid p-0">
+    <!-- Header Halaman Pratinjau Dokumen -->
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
             <h2 class="fw-bold font-heading mb-1">Pratinjau Dokumen</h2>
             <p class="text-muted mb-0">Periksa isi berkas akta/surat secara dinamis sebelum diunduh atau dicetak.</p>
         </div>
         <div>
+            <!-- Tombol kembali yang dinamis menyesuaikan role user (admin/client) dan kategori dokumen -->
             <a href="{{ $isAdmin ? ($documentType === 'akta' ? route('admin.akta.index') : route('admin.surat.index')) : ($documentType === 'akta' ? route('client.akta.index') : route('client.surat.index')) }}" class="btn btn-outline-secondary">
                 <i class="fa-solid fa-arrow-left me-1"></i> Kembali
             </a>
@@ -17,34 +19,42 @@
     </div>
 
     <div class="row">
-        <!-- Sidebar Metadata -->
+        <!-- ========================================================
+             1. DETAIL METADATA DOKUMEN (KOLOM KIRI)
+             ======================================================== -->
         <div class="col-lg-4">
             <div class="card card-premium p-4 mb-4 shadow-sm border-0">
                 <h5 class="fw-bold font-heading mb-3 border-bottom pb-2 text-primary">
                     <i class="fa-solid fa-circle-info me-1"></i> Informasi Berkas
                 </h5>
+                <!-- Jenis Dokumen (Akta atau Surat) -->
                 <div class="mb-3">
                     <small class="text-muted d-block small">Jenis Dokumen</small>
                     <span class="badge {{ $documentType === 'akta' ? 'bg-success' : 'bg-info text-white' }} text-capitalize fw-semibold px-2 py-1">
                         {{ $documentType }}
                     </span>
                 </div>
+                <!-- Judul Berkas -->
                 <div class="mb-3">
                     <small class="text-muted d-block small">Judul / Nama Berkas</small>
                     <span class="fw-bold text-dark">{{ $title }}</span>
                 </div>
+                <!-- Nomor Surat/Akta -->
                 <div class="mb-3">
                     <small class="text-muted d-block small">Nomor Resmi</small>
                     <span class="fw-semibold font-monospace text-dark">{{ $number }}</span>
                 </div>
+                <!-- Tanggal Terbit Dokumen -->
                 <div class="mb-3">
                     <small class="text-muted d-block small">Tanggal Terbit</small>
                     <span class="fw-semibold">{{ \Carbon\Carbon::parse($date)->translatedFormat('d F Y') }}</span>
                 </div>
+                <!-- Hubungan Layanan -->
                 <div class="mb-3">
                     <small class="text-muted d-block small">Layanan Hukum</small>
                     <span class="fw-semibold text-primary">{{ $permintaan->layanan->nama_layanan ?? '-' }}</span>
                 </div>
+                <!-- Detail Nama Client -->
                 <div class="mb-4">
                     <small class="text-muted d-block small">Pemohon (Client)</small>
                     <span class="fw-semibold text-capitalize text-dark">{{ $permintaan->client->user->nama ?? '-' }}</span>
@@ -52,6 +62,7 @@
                 
                 <hr>
 
+                <!-- Tombol Aksi Unduh PDF dan Cetak Fisik -->
                 <div class="d-flex flex-column gap-2 mt-3">
                     <a href="{{ asset('storage/' . $filePath) }}" target="_blank" class="btn btn-premium-primary w-100 py-2 fw-bold shadow-xs">
                         <i class="fa-solid fa-file-pdf me-1"></i> Unduh Salinan PDF
@@ -63,7 +74,9 @@
             </div>
         </div>
 
-        <!-- Main Document Sheet -->
+        <!-- ========================================================
+             2. PANEL EMBED DOKUMEN / KERTAS VIRTUAL (KOLOM KANAN)
+             ======================================================== -->
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm overflow-hidden mb-4">
                 <div class="card-header bg-light py-3 d-flex align-items-center justify-content-between">
@@ -72,21 +85,24 @@
                 </div>
                 <div class="card-body p-5 bg-dark-subtle d-flex justify-content-center" style="overflow-x: auto;">
                     
+                    <!-- KONDISI A: TAMPILAN BERKAS AKTA NOTARIS -->
                     @if($documentType === 'akta')
-                    <!-- NOTARY PAPER LAYOUT -->
                     <div class="notary-paper-container shadow-lg">
                         <div class="notary-paper-body">
+                            <!-- Judul Tengah Akta Notaris -->
                             <div style="text-align: center; margin-bottom: 30px; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
                                 <div style="font-size: 16px; text-transform: uppercase;">{{ $title }}</div>
                                 <div style="font-size: 14px; margin-top: 5px;">Nomor : {{ $number }}</div>
                             </div>
+                            <!-- Isi Akta HTML CKEditor -->
                             {!! $content !!}
                         </div>
                     </div>
                     @else
-                    <!-- CORPORATE LETTER LAYOUT -->
+                    <!-- KONDISI B: TAMPILAN BERKAS SURAT KELUAR RESMI -->
                     <div class="letter-paper-container shadow-lg d-flex flex-column justify-content-between">
                         <div>
+                            <!-- Kop Surat Resmi Notaris Eka Sulistya -->
                             <div class="letter-header" style="text-align: center; font-family: 'Times New Roman', Times, serif; margin-bottom: 20px; line-height: 1.25;">
                                 <img src="{{ asset('garuda_logo.png') }}" style="width: 70px; height: auto; display: block; margin: 0 auto 5px;" alt="Logo Garuda">
                                 <div style="font-size: 14pt; font-weight: bold; text-transform: uppercase; margin: 0; padding: 0; letter-spacing: 0.5px; text-align: center;">NOTARIS & PPAT</div>
@@ -97,10 +113,12 @@
                                 <div style="font-size: 8.5pt; font-weight: normal; margin: 2px 0 0; padding: 0; text-align: center;">Kedudukan Kota Pontianak</div>
                                 <hr style="border: none; border-top: 4px solid #000; opacity: 1; margin: 12px 0 0 0;">
                             </div>
+                            <!-- Isi Surat HTML CKEditor -->
                             <div class="letter-body">
                                 {!! $content !!}
                             </div>
                         </div>
+                        <!-- Kaki Surat (Footer) -->
                         <div class="letter-footer" style="text-align: center; font-family: 'Times New Roman', Times, serif; font-size: 9pt; border-top: 1px solid #000; padding-top: 10px; margin-top: 50px; line-height: 1.4;">
                             <div>Jl. Pangeran Natakusuma, Kota Pontianak, Kalimantan Barat 78116</div>
                             <div>e-mail : ekasulistyanotaris@gmail.com</div>
@@ -116,10 +134,12 @@
 </div>
 
 <style>
-    /* Styling for Notary Paper */
+    /* ========================================================
+       STYLING SIMULASI KERTAS AKTA NOTARIS SISI KANAN
+       ======================================================== */
     .notary-paper-container {
-        width: 210mm; /* A4 width */
-        min-height: 297mm; /* A4 height */
+        width: 210mm; /* Lebar Kertas A4 */
+        min-height: 297mm; /* Tinggi Kertas A4 */
         background-color: #ffffff;
         position: relative;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -127,24 +147,25 @@
         box-sizing: border-box;
     }
 
-    /* Absolute lines to simulate the double vertical red lines on Notary Paper */
+    /* Efek visual garis merah ganda khas kertas minuta Notaris */
     .notary-paper-container::before {
         content: "";
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 3.5cm; /* left boundary red line */
+        left: 3.5cm; /* Garis batas merah kiri */
         width: 3px;
         border-left: 1px solid #d9534f;
         border-right: 1px solid #d9534f;
         z-index: 10;
     }
 
+    /* Layout margin penulisan standar notaris */
     .notary-paper-body {
-        padding: 3.8cm 2.2cm 3.8cm 4.0cm; /* Standard Notary Margins */
+        padding: 3.8cm 2.2cm 3.8cm 4.0cm; /* Margin baku minuta */
         font-family: 'Times New Roman', Times, serif;
         font-size: 11pt;
-        line-height: 2.8; /* Professional double line spacing */
+        line-height: 2.8; /* Spasi ganda/lebar */
         color: #000000;
         text-align: justify;
         word-break: break-word;
@@ -155,7 +176,9 @@
         text-indent: 0;
     }
 
-    /* Styling for Corporate Letter */
+    /* ========================================================
+       STYLING SIMULASI KERTAS SURAT RESMI
+       ======================================================== */
     .letter-paper-container {
         width: 210mm;
         min-height: 297mm;
@@ -167,38 +190,6 @@
         font-family: 'Times New Roman', Times, serif;
         font-size: 11pt;
         color: #000000;
-    }
-
-    .kop-title {
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: bold;
-        font-size: 18pt;
-        margin: 0;
-        color: #4d0011;
-        letter-spacing: 1px;
-    }
-
-    .kop-subtitle {
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: bold;
-        font-size: 10pt;
-        margin: 2px 0 0;
-        letter-spacing: 0.5px;
-    }
-
-    .kop-address, .kop-phone {
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 8.5pt;
-        color: #555;
-        margin: 2px 0 0;
-    }
-
-    .kop-divider {
-        border: none;
-        border-top: 3px double #000;
-        opacity: 1;
-        margin-top: 15px;
-        margin-bottom: 25px;
     }
 
     .letter-body {
@@ -219,7 +210,10 @@
         padding: 3px 0;
     }
 
-    /* Print Styles to allow distraction-free physical printing */
+    /* ========================================================
+       MEDIA QUERY CETAK (PRINT STYLES)
+       Menyembunyikan sidebar dan navbar saat print fisik/simpan PDF browser
+       ======================================================== */
     @media print {
         body * {
             visibility: hidden;

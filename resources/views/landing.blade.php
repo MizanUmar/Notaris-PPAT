@@ -6,38 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $profil->nama_kantor }} - Pelayanan & Manajemen Data Client</title>
 
-    <!-- Google Fonts: Inter & Outfit -->
+    <!-- Google Fonts: Inter untuk teks biasa, Outfit untuk tajuk/heading modern -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Bootstrap 5 CSS untuk framework CSS responsif -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- FontAwesome icons -->
+    <!-- FontAwesome 6 untuk pustaka icon premium -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
     <style>
+        /* ==========================================
+           1. STYLING GLOBAL & FONT
+           ========================================== */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        .font-heading {
+        h1, h2, h3, h4, .font-heading {
             font-family: 'Outfit', sans-serif;
         }
 
+        /* ==========================================
+           2. NAVIGATION BAR STYLE (Navbar)
+           ========================================== */
         .navbar-premium {
-            background-color: rgb(234, 0, 0);
+            background: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding: 1rem 0;
         }
 
+        .navbar-premium .navbar-brand {
+            color: #800020 !important;
+            font-weight: 700;
+        }
+
+        .navbar-premium .navbar-brand i {
+            color: #800020;
+        }
+
+        .navbar-premium .nav-link {
+            color: #800020 !important;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .navbar-premium .nav-link:hover {
+            color: #a00028 !important;
+        }
+
+        .navbar-premium .nav-link.active {
+            color: #800020 !important;
+            border-bottom: 2px solid #800020;
+        }
+
+        /* Toggler untuk menu seluler */
+        .navbar-toggler {
+            border-color: #800020;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        /* ==========================================
+           3. HERO SECTION STYLE (Tajuk Utama)
+           ========================================== */
         .hero-section {
+            /* Latar belakang merah maroon gradasi khas */
             background: linear-gradient(135deg, #4d0011 0%, #2e0108 100%);
             color: #ffffff;
             padding: 8rem 0 6rem;
@@ -45,6 +85,7 @@
             overflow: hidden;
         }
 
+        /* Hiasan lingkaran radial di latar belakang hero */
         .hero-section::before {
             content: '';
             position: absolute;
@@ -62,6 +103,10 @@
             z-index: 10;
         }
 
+        /* ==========================================
+           4. CARD & BUTTON STYLE (Kartu & Tombol)
+           ========================================== */
+        /* Kartu Layanan */
         .card-service {
             border: 1px solid #e2e8f0;
             border-radius: 16px;
@@ -77,6 +122,7 @@
             border-color: #800020;
         }
 
+        /* Lingkaran pembungkus icon di dalam kartu */
         .icon-circle {
             width: 60px;
             height: 60px;
@@ -90,17 +136,12 @@
             margin-bottom: 1.5rem;
         }
 
-        .info-strip {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1.5rem 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
-        }
-
+        /* Spasi Padding Seksi */
         .section-padding {
             padding: 5rem 0;
         }
 
+        /* Tombol Premium Utama (Maroon Gradasi) */
         .btn-premium {
             background: linear-gradient(135deg, #800020 0%, #5a0015 100%);
             color: #ffffff;
@@ -119,6 +160,7 @@
             box-shadow: 0 12px 20px -3px rgba(128, 0, 32, 0.35);
         }
 
+        /* Tombol Premium Outline (Border Putih Transparan) */
         .btn-premium-outline {
             border: 2px solid rgba(255, 255, 255, 0.2);
             background: transparent;
@@ -135,14 +177,34 @@
             color: #ffffff;
         }
 
-        .footer {
-            background-color: #2e0108;
-            color: #94a3b8;
-            padding: 1rem 0 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        /* Tombol Maroon Solid */
+        .btn-maroon {
+            background: #800020;
+            color: #fff !important;
+            border: 2px solid #800020;
         }
 
-        /* Custom Bootstrap Overrides for Maroon Theme */
+        .btn-maroon:hover {
+            background: #660018;
+            border-color: #660018;
+            color: #fff !important;
+        }
+
+        /* Tombol Outline Maroon */
+        .btn-outline-maroon {
+            background: #fff;
+            color: #800020 !important;
+            border: 2px solid #800020;
+        }
+
+        .btn-outline-maroon:hover {
+            background: #800020;
+            color: #fff !important;
+        }
+
+        /* ==========================================
+           5. OVERRIDE WARNA BOOTSTRAP KE MAROON
+           ========================================== */
         .text-primary {
             color: #800020 !important;
         }
@@ -185,84 +247,10 @@
             color: #800020 !important;
         }
 
-        /* =========================
-   Navbar
-========================= */
-
-        .navbar-premium {
-            background: #ffffff !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
-        }
-
-        .navbar-premium .navbar-brand {
-            color: #800020 !important;
-            font-weight: 700;
-        }
-
-        .navbar-premium .navbar-brand i {
-            color: #800020;
-        }
-
-        .navbar-premium .nav-link {
-            color: #800020 !important;
-            font-weight: 600;
-            transition: .3s;
-        }
-
-        .navbar-premium .nav-link:hover {
-            color: #a00028 !important;
-        }
-
-        .navbar-premium .nav-link.active {
-            color: #800020 !important;
-            border-bottom: 2px solid #800020;
-        }
-
-        /* Tombol Maroon */
-
-        .btn-maroon {
-            background: #800020;
-            color: #fff !important;
-            border: 2px solid #800020;
-        }
-
-        .btn-maroon:hover {
-            background: #660018;
-            border-color: #660018;
-            color: #fff !important;
-        }
-
-        /* Tombol Outline */
-
-        .btn-outline-maroon {
-            background: #fff;
-            color: #800020 !important;
-            border: 2px solid #800020;
-        }
-
-        .btn-outline-maroon:hover {
-            background: #800020;
-            color: #fff !important;
-        }
-
-        /* Mobile */
-
-        .navbar-toggler {
-            border-color: #800020;
-        }
-
-        .navbar-toggler:focus {
-            box-shadow: none;
-        }
-
-        /* =========================================================
-   RESPONSIVE — Tablet & Mobile
-   (Bootstrap grid sudah menangani sebagian besar layout,
-   bagian ini hanya merapikan ukuran teks/spasi/tombol
-   yang di-hardcode di atas supaya nyaman di layar kecil)
-========================================================= */
-
-        /* --- Tablet: 768px - 991px --- */
+        /* ==========================================
+           6. RESPONSIVENESS & MEDIA QUERIES
+           ========================================== */
+        /* Tablet view */
         @media (max-width: 991.98px) {
             .hero-section {
                 padding: 7rem 0 4rem;
@@ -284,10 +272,7 @@
             .card-service {
                 margin-bottom: 0.5rem;
             }
-        }
 
-        /* --- QR code di hero: rapikan saat tampil di tablet/mobile --- */
-        @media (max-width: 991.98px) {
             .hero-qr {
                 margin-top: 2rem;
             }
@@ -298,7 +283,7 @@
             }
         }
 
-        /* --- Mobile: sampai 767px --- */
+        /* Mobile View */
         @media (max-width: 767.98px) {
             .navbar-premium {
                 padding: 0.6rem 0;
@@ -378,7 +363,6 @@
             }
         }
 
-        /* --- Extra kecil: HP di bawah 400px --- */
         @media (max-width: 399.98px) {
             .hero-section h1.display-4 {
                 font-size: 1.6rem;
@@ -388,21 +372,38 @@
                 font-size: 0.7rem;
             }
         }
+
+        /* ==========================================
+           7. FOOTER STYLE (Bawah Halaman)
+           ========================================== */
+        .footer {
+            background-color: #2e0108;
+            color: #94a3b8;
+            padding: 1.5rem 0 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
+    <!-- ========================================================
+         BAGIAN NAVBAR ATAS (HEADER NAVIGATION)
+         ======================================================== -->
     <nav class="navbar navbar-expand-lg navbar-light navbar-premium fixed-top">
         <div class="container">
+            <!-- Brand Logo dan Nama Notaris -->
             <a class="navbar-brand d-flex align-items-center gap-2 fw-bold font-heading fs-4" href="#">
                 <i class="fa-solid fa-scale-balanced"></i>
                 <span>EKA SULISTYA</span>
             </a>
+            
+            <!-- Tombol Hamburger Responsif Layar Kecil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
+            <!-- List Menu Navigasi -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center gap-3">
                     <li class="nav-item">
@@ -414,7 +415,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#lokasi">Kontak & Lokasi</a>
                     </li>
+                    
+                    <!-- Kondisional Autentikasi Pengguna -->
                     @auth
+                    <!-- Jika User Sudah Login, Tampilkan Link ke Dashboard Sesuai Role -->
                     <li class="nav-item">
                         @if(Auth::user()->role === 'client')
                         <a class="btn btn-primary btn-sm px-3 rounded-pill" href="{{ route('client.dashboard') }}">Dashboard Saya</a>
@@ -423,6 +427,7 @@
                         @endif
                     </li>
                     @else
+                    <!-- Jika User Belum Login, Tampilkan Tombol Masuk dan Daftar -->
                     <li class="nav-item">
                         <a class="btn btn-outline-maroon btn-sm px-3 rounded-pill" href="{{ route('login') }}">
                             Masuk
@@ -434,15 +439,18 @@
                         </a>
                     </li>
                     @endauth
+                </ul>
             </div>
-        </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ========================================================
+         HERO SECTION (BANNER UTAMA DENGAN BARCODE KUNJUNGAN)
+         ======================================================== -->
     <header class="hero-section">
         <div class="container">
             <div class="row align-items-center g-5">
+                <!-- Teks Hero Penjelasan Singkat Portal Layanan -->
                 <div class="col-lg-7 hero-content">
                     @if(session('success'))
                     <div class="alert alert-success border-0 shadow-lg alert-dismissible fade show mb-4" role="alert">
@@ -461,6 +469,7 @@
                     <p class="lead text-white-50 mb-5">
                         Selamat datang di portal pelayanan digital Kantor Notaris & PPAT Eka Sulistya, S.H., M.Kn. Ajukan permohonan layanan, pantau progres berkas, dan akses dokumen hukum Anda secara praktis dan aman.
                     </p>
+                    <!-- Tombol Ajukan Layanan / Akses Dashboard -->
                     <div class="d-flex flex-wrap gap-3">
                         @auth
                         @if(Auth::user()->role === 'client')
@@ -479,6 +488,8 @@
                         @endauth
                     </div>
                 </div>
+                
+                <!-- QR Code Buku Tamu untuk Memudahkan Pengisian Presensi Kunjungan Fisik -->
                 <div class="col-lg-5 text-center hero-qr">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data={{ route('buku-tamu.checkin') }}" alt="QR Code Guestbook" class="img-thumbnail p-4 rounded-4 shadow-lg mb-3" style="max-width: 280px; border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-white-50 small"><i class="fa-solid fa-qrcode me-2"></i> Pindai QR Code untuk mengisi Buku Tamu Kunjungan</p>
@@ -487,7 +498,9 @@
         </div>
     </header>
 
-    <!-- Layanan Section -->
+    <!-- ========================================================
+         DAFTAR LAYANAN UTAMA (SERVICES CARDS)
+         ======================================================== -->
     <section class="section-padding" id="layanan">
         <div class="container">
             <div class="text-center max-w-2xl mx-auto mb-5">
@@ -496,10 +509,12 @@
                 <p class="text-muted">Kami melayani pengurusan akta hukum autentik serta urusan legalitas dokumen dengan proses yang terstruktur.</p>
             </div>
 
+            <!-- Menampilkan list layanan yang disediakan kantor secara dinamis -->
             <div class="row g-4">
                 @foreach($layanan as $lay)
                 <div class="col-6 col-md-6 col-lg-3">
                     <div class="card-service p-4">
+                        <!-- Icon Layanan -->
                         <div class="icon-circle">
                             @if($loop->iteration == 1)
                             <i class="fa-solid fa-house-chimney"></i>
@@ -523,7 +538,9 @@
         </div>
     </section>
 
-    <!-- Persyaratan Section -->
+    <!-- ========================================================
+         PERSYARATAN BERKAS (ACCORDION REQUIREMENTS)
+         ======================================================== -->
     <section class="section-padding bg-light" id="persyaratan">
         <div class="container">
             <div class="text-center mb-5">
@@ -532,6 +549,7 @@
                 <p class="text-muted">Siapkan dokumen-dokumen berikut sebelum melakukan pengajuan secara online maupun datang ke kantor.</p>
             </div>
 
+            <!-- Tampilan list akordeon untuk masing-masing berkas persyaratan tiap layanan -->
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="accordion shadow-sm border-0" id="accordionRequirements">
@@ -567,10 +585,13 @@
         </div>
     </section>
 
-    <!-- Kontak & Lokasi -->
+    <!-- ========================================================
+         KONTAK & DETAIL LOKASI GOOGLE MAPS KANTOR
+         ======================================================== -->
     <section class="section-padding bg-white" id="lokasi">
         <div class="container">
             <div class="row g-5 align-items-center">
+                <!-- Data Detail Kontak (Alamat, Jam Kerja, Telepon, Email) -->
                 <div class="col-lg-6">
                     <span class="text-primary fw-bold text-uppercase">Kontak & Lokasi</span>
                     <h2 class="font-heading fw-bold mt-2 mb-4">Kunjungi Kantor Kami</h2>
@@ -579,11 +600,9 @@
                     </p>
 
                     <div class="d-flex flex-column gap-3 mb-4">
-
-                        <!-- Alamat -->
+                        <!-- Alamat Kantor -->
                         <div class="d-flex gap-3">
-                            <div class="icon-circle bg-light text-primary mb-0 mt-1"
-                                style="width:45px;height:45px;flex-shrink:0;">
+                            <div class="icon-circle bg-light text-primary mb-0 mt-1" style="width:45px;height:45px;flex-shrink:0;">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
                             <div>
@@ -594,30 +613,22 @@
                             </div>
                         </div>
 
-                        <!-- Jam Operasional -->
+                        <!-- Jam Operasional Kerja -->
                         <div class="d-flex gap-3">
-                            <div class="icon-circle bg-light text-primary mb-0 mt-1"
-                                style="width:45px;height:45px;flex-shrink:0;">
+                            <div class="icon-circle bg-light text-primary mb-0 mt-1" style="width:45px;height:45px;flex-shrink:0;">
                                 <i class="fa-solid fa-clock"></i>
                             </div>
                             <div>
                                 <h6 class="fw-bold mb-1">Jam Operasional</h6>
-                                <p class="text-muted mb-0 small">
-                                    Senin - Jumat : 08.00 - 17.00 WIB
-                                </p>
-                                <p class="text-muted mb-0 small">
-                                    Sabtu : 08.00 - 12.00 WIB
-                                </p>
-                                <p class="text-muted mb-0 small">
-                                    Minggu & Hari Libur Nasional : Tutup
-                                </p>
+                                <p class="text-muted mb-0 small">Senin - Jumat : 08.00 - 17.00 WIB</p>
+                                <p class="text-muted mb-0 small">Sabtu : 08.00 - 12.00 WIB</p>
+                                <p class="text-muted mb-0 small">Minggu & Hari Libur Nasional : Tutup</p>
                             </div>
                         </div>
 
-                        <!-- Telepon -->
+                        <!-- Nomor Kontak Kantor -->
                         <div class="d-flex gap-3">
-                            <div class="icon-circle bg-light text-primary mb-0 mt-1"
-                                style="width:45px;height:45px;flex-shrink:0;">
+                            <div class="icon-circle bg-light text-primary mb-0 mt-1" style="width:45px;height:45px;flex-shrink:0;">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
                             <div>
@@ -628,10 +639,9 @@
                             </div>
                         </div>
 
-                        <!-- Email -->
+                        <!-- Surel Email Kantor -->
                         <div class="d-flex gap-3">
-                            <div class="icon-circle bg-light text-primary mb-0 mt-1"
-                                style="width:45px;height:45px;flex-shrink:0;">
+                            <div class="icon-circle bg-light text-primary mb-0 mt-1" style="width:45px;height:45px;flex-shrink:0;">
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
                             <div>
@@ -641,26 +651,24 @@
                                 </p>
                             </div>
                         </div>
-
                     </div>
 
-                    <!-- Tombol WhatsApp -->
+                    <!-- Tombol WhatsApp API Direct Chat -->
                     @php
                     $waNumber = preg_replace('/[^0-9]/', '', $profil->no_telepon);
                     if (substr($waNumber, 0, 1) === '0') {
-                    $waNumber = '62' . substr($waNumber, 1);
+                        $waNumber = '62' . substr($waNumber, 1);
                     }
                     @endphp
-                    <a href="https://wa.me/{{ $waNumber }}"
-                        class="btn btn-success rounded-3 px-4 py-2" target="_blank">
+                    <a href="https://wa.me/{{ $waNumber }}" class="btn btn-success rounded-3 px-4 py-2" target="_blank">
                         <i class="fa-brands fa-whatsapp me-2 fs-5"></i>
                         Konsultasi via WhatsApp
                     </a>
                 </div>
 
+                <!-- Google Maps Frame -->
                 <div class="col-lg-6">
-                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm"
-                        style="border:1px solid #e2e8f0;">
+                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm" style="border:1px solid #e2e8f0;">
                         <iframe
                             @if($profil->latitude && $profil->longitude)
                             src="https://www.google.com/maps?q={{ $profil->latitude }},{{ $profil->longitude }}&output=embed"
@@ -678,15 +686,16 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ========================================================
+         BAGIAN FOOTER HALAMAN LANDING PAGE
+         ======================================================== -->
     <footer class="footer">
         <div class="text-center small text-white-50 mt-3">
-            <p class="mb-0">&copy; 2026 {{ $profil->nama_kantor }}. Hak Cipta Dilindungi.</p>
-        </div>
+            <p class="mb-0">&copy; {{ date('Y') }} {{ $profil->nama_kantor }}. Hak Cipta Dilindungi.</p>
         </div>
     </footer>
 
-    <!-- Bootstrap Bundle with Popper -->
+    <!-- Bootstrap Bundle JS (Dropdown, Collapse, Modals) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

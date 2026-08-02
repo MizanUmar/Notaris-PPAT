@@ -3,13 +3,16 @@
 @section('title', 'Masuk')
 
 @section('content')
+<!-- Kartu Putih Utama Login -->
 <div class="auth-card">
     <div class="auth-brand">
+        <!-- Logo Notaris -->
         <i class="fa-solid fa-scale-balanced"></i>
         <h2 class="auth-title">Masuk ke Sistem</h2>
         <p class="text-muted small">Notaris & PPAT Eka Sulistya, S.H., M.Kn.</p>
     </div>
 
+    <!-- Validasi Error Login -->
     @if($errors->any())
     <div class="alert alert-danger py-2 border-0 small mb-3">
         <ul class="mb-0 ps-3">
@@ -20,18 +23,22 @@
     </div>
     @endif
 
+    <!-- Form Submit Login -->
     <form action="{{ route('login.post') }}" method="POST">
         @csrf
+        <!-- Input Username -->
         <div class="mb-3">
             <label for="username" class="form-label small fw-bold">Username</label>
             <input type="text" name="username" id="username" class="form-control form-control-premium" placeholder="Masukkan username Anda" value="{{ old('username') }}" required autofocus>
         </div>
 
+        <!-- Input Password -->
         <div class="mb-3">
             <label for="password" class="form-label small fw-bold">Password</label>
             <input type="password" name="password" id="password" class="form-control form-control-premium" placeholder="Masukkan password Anda" required>
         </div>
 
+        <!-- Pemilihan Role Hak Akses -->
         <div class="mb-4">
             <label for="role" class="form-label small fw-bold">Masuk Sebagai</label>
             <select name="role" id="role" class="form-select form-control-premium" required>
@@ -42,9 +49,11 @@
             </select>
         </div>
 
+        <!-- Tombol Submit Form -->
         <button type="submit" class="btn btn-premium-primary mb-3">Masuk Sekarang</button>
     </form>
 
+    <!-- Footer Form Link Pendaftaran -->
     <div class="auth-footer">
         Belum memiliki akun? <a href="{{ route('register') }}">Daftar Sekarang</a>
         <div class="mt-3">
@@ -53,14 +62,18 @@
     </div>
 </div>
 
-<!-- Modal Hubungi Admin -->
+<!-- ========================================================
+     MODAL POPUP HUBUNGI ADMIN (TERTAMPIL BILA GAGAL LOGIN BERULANG)
+     ======================================================== -->
 <div class="modal fade" id="modalHubungiAdmin" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
+            <!-- Header Modal -->
             <div class="modal-header border-0 bg-dark text-white py-3">
                 <h5 class="modal-title fw-bold"><i class="fa-solid fa-circle-exclamation me-2"></i> Gagal Login Berulang Kali</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- Body Modal -->
             <div class="modal-body p-4 text-center">
                 <p class="mb-3">Anda sudah beberapa kali gagal masuk. Jika lupa username atau password, silakan hubungi Admin/Notaris untuk bantuan.</p>
                 <a href="https://wa.me/6285931148582" target="_blank" class="btn btn-success w-100 fw-bold">
@@ -76,6 +89,7 @@
 @endsection
 
 @section('scripts')
+<!-- Pemicu modal hubungi admin jika terdapat session gagal masuk -->
 @if(session('show_contact_popup'))
 <script>
     document.addEventListener('DOMContentLoaded', function() {
