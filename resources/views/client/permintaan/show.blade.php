@@ -269,7 +269,7 @@
                                 <div class="overflow-hidden">
                                     <span class="d-block fw-bold small text-truncate" style="max-width: 150px;" title="{{ $doc->nama_file }}">{{ $doc->nama_file }}</span>
                                     <small class="text-muted d-block text-xs">{{ $doc->tanggal_upload->translatedFormat('d M Y') }}</small>
-                                    <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="small text-decoration-none"><i class="fa-solid fa-download me-1"></i> Unduh</a>
+                                    <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="small text-decoration-none"><i class="fa-solid fa-eye me-1"></i> Lihat Dokumen</a>
                                 </div>
                             </div>
                             @if($permintaan->status === 'Menunggu')
