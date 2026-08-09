@@ -210,11 +210,12 @@
 
                             <div class="d-flex align-items-center gap-2">
 
-                                @if($checklist && $checklist->status)
-                                <i class="fa-solid fa-circle-check text-success"></i>
-                                @else
-                                <i class="fa-regular fa-circle text-muted"></i>
-                                @endif
+                                <input
+                                    type="checkbox"
+                                    class="form-check-input checklist"
+                                    data-permintaan="{{ $permintaan->id }}"
+                                    data-persyaratan="{{ $req->id }}"
+                                    {{ ($checklist && $checklist->status) ? 'checked' : '' }}>
 
                                 <span class="{{ ($checklist && $checklist->status) ? 'text-decoration-line-through text-muted' : '' }}">
                                     {{ $req->nama_dokumen }}
@@ -290,4 +291,32 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$('.checklist').change(function () {
+    const $label = $(this).next('span');
+    if ($(this).is(':checked')) {
+        $label.addClass('text-decoration-line-through text-muted');
+    } else {
+        $label.removeClass('text-decoration-line-through text-muted');
+    }
+
+    $.ajax({
+        url: "{{ route('admin.checklist.update') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            permintaan_id: $(this).data('permintaan'),
+            persyaratan_id: $(this).data('persyaratan'),
+            status: $(this).is(':checked') ? 1 : 0
+        },
+        success: function () {
+            console.log('Checklist berhasil disimpan');
+        }
+    });
+});
+</script>
 @endsection
