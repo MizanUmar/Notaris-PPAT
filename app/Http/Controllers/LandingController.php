@@ -24,7 +24,6 @@ class LandingController extends Controller
         }
 
         $layanan = Layanan::with('persyaratan')
-            ->where('status_aktif', true)
             ->orderBy('nama_layanan', 'asc')
             ->get();
 

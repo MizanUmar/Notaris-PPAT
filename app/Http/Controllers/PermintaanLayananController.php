@@ -146,7 +146,7 @@ class PermintaanLayananController extends Controller
 
     public function clientCreate()
     {
-        $layanan = Layanan::where('status_aktif', true)->orderBy('nama_layanan', 'asc')->get();
+        $layanan = Layanan::orderBy('nama_layanan', 'asc')->get();
         return view('client.permintaan.create', compact('layanan'));
     }
 
@@ -158,6 +158,11 @@ class PermintaanLayananController extends Controller
             'dokumen' => 'nullable|array',
             'dokumen.*' => 'file|mimes:pdf,jpg,jpeg,png,doc,docx|max:5120', // max 5MB per file
         ]);
+
+        $layanan = Layanan::findOrFail($request->layanan_id);
+        if (!$layanan->status_aktif) {
+            return redirect()->back()->withErrors(['layanan_id' => 'Layanan yang Anda pilih sedang tidak aktif / tidak tersedia saat ini.'])->withInput();
+        }
 
         $client = Auth::user()->client;
 
@@ -319,7 +324,6 @@ class PermintaanLayananController extends Controller
     public function clientPersyaratan()
     {
         $layanan = Layanan::with('persyaratan')
-            ->where('status_aktif', true)
             ->orderBy('nama_layanan', 'asc')
             ->get();
 

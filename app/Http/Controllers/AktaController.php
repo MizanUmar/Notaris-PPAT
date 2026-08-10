@@ -98,7 +98,7 @@ class AktaController extends Controller
             'nama_akta'    => $request->nama_akta,
             'tanggal_akta' => $request->tanggal_akta,
             'isi_akta'     => $request->isi_akta,
-        ]);
+        ])->setPaper('a4', 'portrait')->setOption(['isRemoteEnabled' => true, 'isHtml5ParserEnabled' => true]);
 
         // Menyimpan file PDF hasil render ke direktori penyimpanan public (storage/deeds/)
         Storage::disk('public')->put(
@@ -181,7 +181,7 @@ class AktaController extends Controller
                 'nama_akta'    => $request->nama_akta,
                 'tanggal_akta' => $request->tanggal_akta,
                 'isi_akta'     => $isi,
-            ]);
+            ])->setPaper('a4', 'portrait')->setOption(['isRemoteEnabled' => true, 'isHtml5ParserEnabled' => true]);
 
             Storage::disk('public')->put(
                 'deeds/' . $namaFile,

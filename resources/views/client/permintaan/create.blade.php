@@ -27,12 +27,16 @@
                             <option value="" disabled selected>Pilih Layanan Hukum...</option>
                             <optgroup label="Layanan Akta">
                                 @foreach($layanan->where('kategori', 'akta') as $lay)
-                                <option value="{{ $lay->id }}">{{ $lay->nama_layanan }}</option>
+                                <option value="{{ $lay->id }}" {{ !$lay->status_aktif ? 'disabled class=text-muted' : '' }}>
+                                    {{ $lay->nama_layanan }} {{ !$lay->status_aktif ? '(🔴 Sedang Tidak Tersedia)' : '' }}
+                                </option>
                                 @endforeach
                             </optgroup>
                             <optgroup label="Layanan Surat">
                                 @foreach($layanan->where('kategori', 'surat') as $lay)
-                                <option value="{{ $lay->id }}">{{ $lay->nama_layanan }}</option>
+                                <option value="{{ $lay->id }}" {{ !$lay->status_aktif ? 'disabled class=text-muted' : '' }}>
+                                    {{ $lay->nama_layanan }} {{ !$lay->status_aktif ? '(🔴 Sedang Tidak Tersedia)' : '' }}
+                                </option>
                                 @endforeach
                             </optgroup>
                         </select>

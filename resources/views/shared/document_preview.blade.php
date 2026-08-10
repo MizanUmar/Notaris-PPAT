@@ -215,6 +215,16 @@
        Menyembunyikan sidebar dan navbar saat print fisik/simpan PDF browser
        ======================================================== */
     @media print {
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        body {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
         body * {
             visibility: hidden;
         }
@@ -227,14 +237,20 @@
             visibility: visible;
         }
         .notary-paper-container, .letter-paper-container {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            box-shadow: none;
-            border: none;
-            margin: 0;
-            padding: 0;
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            box-shadow: none !important;
+            border: none !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+        }
+        .notary-paper-body {
+            padding: 3.0cm 2.0cm 3.0cm 3.5cm !important;
+        }
+        .letter-paper-container {
+            padding: 2.0cm 2.0cm 2.5cm 2.5cm !important;
         }
     }
 </style>

@@ -512,24 +512,56 @@
             <!-- Menampilkan list layanan yang disediakan kantor secara dinamis -->
             <div class="row g-4">
                 @foreach($layanan as $lay)
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="card-service p-4">
-                        <!-- Icon Layanan -->
-                        <div class="icon-circle">
-                            @if($loop->iteration == 1)
-                            <i class="fa-solid fa-house-chimney"></i>
-                            @elseif($loop->iteration == 2)
-                            <i class="fa-solid fa-building"></i>
-                            @elseif($loop->iteration == 3)
-                            <i class="fa-solid fa-gift"></i>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="card-service p-4 d-flex flex-column h-100 {{ !$lay->status_aktif ? 'opacity-75 bg-light-subtle' : '' }}">
+                        <!-- Icon & Status Badge Layanan -->
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="icon-circle mb-0">
+                                @if($loop->iteration == 1)
+                                <i class="fa-solid fa-house-chimney"></i>
+                                @elseif($loop->iteration == 2)
+                                <i class="fa-solid fa-building"></i>
+                                @elseif($loop->iteration == 3)
+                                <i class="fa-solid fa-gift"></i>
+                                @else
+                                <i class="fa-solid fa-stamp"></i>
+                                @endif
+                            </div>
+
+                            @if($lay->status_aktif)
+                                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1 small" style="font-size: 0.75rem;">
+                                    🟢 Layanan tersedia
+                                </span>
                             @else
-                            <i class="fa-solid fa-stamp"></i>
+                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-2 py-1 small" style="font-size: 0.75rem;">
+                                    🔴 Layanan sedang tidak tersedia
+                                </span>
                             @endif
                         </div>
-                        <h5 class="fw-bold font-heading mb-3">{{ $lay->nama_layanan }}</h5>
-                        <p class="text-muted small mb-4">{{ Str::limit($lay->deskripsi, 120) }}</p>
-                        <div class="mt-auto border-top pt-3 d-flex align-items-center justify-content-between">
-                            <span class="text-muted small"><i class="fa-regular fa-clock me-1"></i> {{ $lay->estimasi_waktu }}</span>
+
+                        <h5 class="fw-bold font-heading mb-2">{{ $lay->nama_layanan }}</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">{{ Str::limit($lay->deskripsi, 120) }}</p>
+
+                        <div class="mt-auto border-top pt-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <span class="text-muted small"><i class="fa-regular fa-clock me-1"></i> {{ $lay->estimasi_waktu }}</span>
+                            </div>
+
+                            @if($lay->status_aktif)
+                                @auth
+                                    <a href="{{ route('client.permintaan.create') }}" class="btn btn-sm btn-primary w-100 rounded-3 py-2 fw-semibold">
+                                        <i class="fa-solid fa-paper-plane me-1"></i> Ajukan Sekarang
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-sm btn-primary w-100 rounded-3 py-2 fw-semibold">
+                                        <i class="fa-solid fa-paper-plane me-1"></i> Ajukan Sekarang
+                                    </a>
+                                @endauth
+                            @else
+                                <button class="btn btn-sm btn-secondary w-100 rounded-3 py-2 fw-semibold" disabled title="Layanan sedang tidak aktif">
+                                    <i class="fa-solid fa-ban me-1"></i> Layanan Tidak Tersedia
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -556,8 +588,17 @@
                         @foreach($layanan as $lay)
                         <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden shadow-sm">
                             <h2 class="accordion-header" id="heading-{{ $lay->id }}">
-                                <button class="accordion-button collapsed fw-bold font-heading" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $lay->id }}">
-                                    <i class="fa-solid fa-folder-open text-primary me-3"></i> {{ $lay->nama_layanan }}
+                                <button class="accordion-button collapsed fw-bold font-heading d-flex justify-content-between align-items-center w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $lay->id }}">
+                                    <div>
+                                        <i class="fa-solid fa-folder-open text-primary me-2"></i> {{ $lay->nama_layanan }}
+                                    </div>
+                                    <div class="me-3">
+                                        @if($lay->status_aktif)
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1 small fw-normal"><i class="fa-solid fa-circle text-success me-1" style="font-size: 6px;"></i> Tersedia</span>
+                                        @else
+                                            <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-2 py-1 small fw-normal"><i class="fa-solid fa-circle text-danger me-1" style="font-size: 6px;"></i> Tidak Tersedia</span>
+                                        @endif
+                                    </div>
                                 </button>
                             </h2>
                             <div id="collapse-{{ $lay->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionRequirements">

@@ -33,7 +33,14 @@
                             <button class="accordion-button collapsed fw-bold font-heading py-3 px-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $lay->id }}" aria-expanded="false" aria-controls="collapse-{{ $lay->id }}" style="background-color: #ffffff; color: #1e293b; font-size: 1.05rem;">
                                 <i class="fa-solid fa-folder-open text-primary me-3 fs-5"></i> 
                                 <div class="d-flex flex-column flex-sm-row justify-content-between w-100 align-items-start align-items-sm-center pe-3">
-                                    <span>{{ $lay->nama_layanan }}</span>
+                                    <span>
+                                        {{ $lay->nama_layanan }}
+                                        @if($lay->status_aktif)
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill ms-2 small fw-normal" style="font-size: 0.7rem;"><i class="fa-solid fa-circle text-success me-1" style="font-size: 6px;"></i> Tersedia</span>
+                                        @else
+                                            <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill ms-2 small fw-normal" style="font-size: 0.7rem;"><i class="fa-solid fa-circle text-danger me-1" style="font-size: 6px;"></i> Tidak Tersedia</span>
+                                        @endif
+                                    </span>
                                     <span class="badge bg-light text-dark fw-normal rounded-pill mt-1 mt-sm-0 small" style="font-size: 0.75rem;"><i class="fa-regular fa-clock me-1 text-primary"></i> Estimasi: {{ $lay->estimasi_waktu }}</span>
                                 </div>
                             </button>

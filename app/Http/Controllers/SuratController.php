@@ -99,7 +99,7 @@ class SuratController extends Controller
             'jenis_surat'   => $request->jenis_surat,
             'tanggal_surat' => $request->tanggal_surat,
             'isi_surat'     => $request->isi_surat,
-        ]);
+        ])->setPaper('a4', 'portrait')->setOption(['isRemoteEnabled' => true, 'isHtml5ParserEnabled' => true]);
 
         // Menyimpan file PDF hasil render ke disk public server (storage/letters/)
         Storage::disk('public')->put(
@@ -180,7 +180,7 @@ class SuratController extends Controller
                 'jenis_surat'   => $request->jenis_surat,
                 'tanggal_surat' => $request->tanggal_surat,
                 'isi_surat'     => $isi,
-            ]);
+            ])->setPaper('a4', 'portrait')->setOption(['isRemoteEnabled' => true, 'isHtml5ParserEnabled' => true]);
 
             Storage::disk('public')->put(
                 'letters/' . $namaFile,
