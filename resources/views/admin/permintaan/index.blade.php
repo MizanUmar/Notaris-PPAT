@@ -114,10 +114,14 @@
                                 <div class="btn-group gap-1">
                                     <a href="{{ route('admin.permintaan.show', $req->id) }}" class="btn btn-sm btn-premium-primary"><i class="fa-solid fa-gear"></i> Proses</a>
                                     
-                                    <form action="{{ route('admin.permintaan.destroy', $req->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data pengajuan ini beserta seluruh file dokumen pendukung?')">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Hapus</button>
-                                    </form>
+                                    @if(!in_array($req->status, ['Diproses', 'Selesai']))
+                                        <form action="{{ route('admin.permintaan.destroy', $req->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data pengajuan ini beserta seluruh file dokumen pendukung?')">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                        </form>
+                                    @else
+                                        <button class="btn btn-sm btn-outline-secondary" disabled title="Permintaan yang diproses / selesai tidak dapat dihapus"><i class="fa-solid fa-lock"></i> Hapus</button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

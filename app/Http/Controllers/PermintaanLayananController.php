@@ -80,6 +80,10 @@ class PermintaanLayananController extends Controller
     {
         $permintaan = PermintaanLayanan::findOrFail($id);
 
+        if (in_array($permintaan->status, ['Diproses', 'Selesai'])) {
+            return redirect()->route('admin.permintaan.index')->withErrors(['error' => 'Permintaan layanan yang sedang diproses atau telah selesai tidak dapat dihapus.']);
+        }
+
         // Delete all associated files
         foreach ($permintaan->dokumenClient as $doc) {
             Storage::disk('public')->delete($doc->file_path);
