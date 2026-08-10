@@ -27,7 +27,7 @@ class PermintaanLayananController extends Controller
 
         $layananList = Layanan::orderBy('nama_layanan', 'asc')->get();
 
-        $permintaan = PermintaanLayanan::with(['client.user', 'layanan'])
+        $permintaan = PermintaanLayanan::with(['client.user', 'layanan', 'dokumenClient', 'akta', 'surat'])
             ->when($search, function ($query) use ($search) {
                 $query->whereHas('client.user', function ($q) use ($search) {
                     $q->where('nama', 'like', "%{$search}%");

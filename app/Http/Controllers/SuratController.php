@@ -50,7 +50,7 @@ class SuratController extends Controller
     public function permintaanSurat()
     {
         // Mengambil seluruh permohonan layanan berjenis kategori "Surat" yang siap dibuatkan berkas suratnya
-        $permintaan = PermintaanLayanan::with(['client.user', 'layanan'])
+        $permintaan = PermintaanLayanan::with(['client.user', 'layanan', 'dokumenClient'])
             ->where('status', 'Diproses')
             ->whereDoesntHave('surat')
             ->whereHas('layanan', function ($q) {

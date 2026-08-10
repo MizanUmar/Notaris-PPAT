@@ -235,7 +235,8 @@ class AktaController extends Controller
         // Mengambil seluruh permohonan layanan berjenis kategori "Akta" yang siap dibuatkan draf akta
         $permintaan = PermintaanLayanan::with([
             'client.user',
-            'layanan'
+            'layanan',
+            'dokumenClient'
         ])
             ->where('status', 'Diproses')
             ->whereDoesntHave('akta')

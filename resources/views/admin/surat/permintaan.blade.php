@@ -24,6 +24,7 @@
                         <th>Layanan</th>
                         <th>Tanggal Permintaan</th>
                         <th>Status</th>
+                        <th>Lihat Dokumen</th>
                         <th class="pe-4 text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -41,6 +42,35 @@
                             <span class="badge badge-process">
                                 {{ $item->status }}
                             </span>
+                        </td>
+                        <td>
+                            @if($item->dokumenClient->count() > 0)
+                                @if($item->dokumenClient->count() === 1)
+                                    @php $singleDoc = $item->dokumenClient->first(); @endphp
+                                    <a href="{{ asset('storage/' . $singleDoc->file_path) }}" target="_blank" class="btn btn-sm btn-outline-info rounded-3 py-1 px-2 fw-semibold" title="{{ $singleDoc->nama_file }}">
+                                        <i class="fa-solid fa-eye me-1"></i> Lihat Dokumen
+                                    </a>
+                                @else
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-info dropdown-toggle rounded-3 py-1 px-2 fw-semibold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-eye me-1"></i> Lihat ({{ $item->dokumenClient->count() }})
+                                        </button>
+                                        <ul class="dropdown-menu shadow border-0">
+                                            <li class="dropdown-header small text-muted font-heading">Dokumen Upload Client:</li>
+                                            @foreach($item->dokumenClient as $doc)
+                                                <li>
+                                                    <a class="dropdown-item small d-flex align-items-center justify-content-between py-2" href="{{ asset('storage/' . $doc->file_path) }}" target="_blank">
+                                                        <span class="text-truncate" style="max-width: 170px;" title="{{ $doc->nama_file }}"><i class="fa-solid fa-file-pdf text-danger me-2"></i>{{ $doc->nama_file }}</span>
+                                                        <i class="fa-solid fa-arrow-up-right-from-square ms-2 text-muted fs-xs"></i>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            @else
+                                <span class="text-muted small"><i class="fa-regular fa-file me-1"></i> Belum ada file</span>
+                            @endif
                         </td>
                         <td class="pe-4 text-center">
                             <a href="{{ route('admin.surat.create', $item->id) }}" class="btn btn-primary btn-sm px-3 fw-semibold">
