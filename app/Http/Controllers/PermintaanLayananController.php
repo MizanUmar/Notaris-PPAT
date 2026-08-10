@@ -6,9 +6,11 @@ use App\Models\Layanan;
 use App\Models\PermintaanLayanan;
 use App\Models\DokumenClient;
 use App\Models\Client;
+use App\Models\ChecklistPersyaratan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class PermintaanLayananController extends Controller
@@ -175,6 +177,9 @@ class PermintaanLayananController extends Controller
                     'file_path' => $path,
                     'tanggal_upload' => Carbon::now(),
                 ]);
+
+                // Auto-check requirement item upon upload
+                $this->autoChecklistDocument($permintaan, $file);
             }
         }
 
@@ -205,6 +210,7 @@ class PermintaanLayananController extends Controller
 
         $request->validate([
             'dokumen' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:5120',
+            'persyaratan_id' => 'nullable|exists:persyaratan_dokumen,id',
         ]);
 
         if ($request->hasFile('dokumen')) {
@@ -219,10 +225,76 @@ class PermintaanLayananController extends Controller
                 'tanggal_upload' => Carbon::now(),
             ]);
 
-            return back()->with('success', 'Dokumen berhasil diunggah!');
+            // Auto-check requirement item upon upload
+            $this->autoChecklistDocument($permintaan, $file, $request->persyaratan_id);
+
+            return back()->with('success', 'Dokumen berhasil diunggah dan berkas persyaratan telah tercentang!');
         }
 
         return back()->withErrors(['dokumen' => 'Gagal mengunggah dokumen.']);
+    }
+
+    private function autoChecklistDocument($permintaan, $file, $persyaratanId = null)
+    {
+        // 1. If explicit persyaratan_id is provided
+        if ($persyaratanId) {
+            ChecklistPersyaratan::updateOrCreate(
+                [
+                    'permintaan_id' => $permintaan->id,
+                    'persyaratan_id' => $persyaratanId,
+                ],
+                [
+                    'status' => 1
+                ]
+            );
+            return;
+        }
+
+        // 2. Match filename against requirement names
+        $filename = strtolower($file->getClientOriginalName());
+        $persyaratanList = $permintaan->layanan->persyaratan;
+
+        $matched = false;
+        foreach ($persyaratanList as $req) {
+            $reqWords = explode(' ', strtolower($req->nama_dokumen));
+            foreach ($reqWords as $word) {
+                $cleanedWord = trim(preg_replace('/[^a-z0-9]/', '', $word));
+                if (strlen($cleanedWord) >= 3 && Str::contains($filename, $cleanedWord)) {
+                    ChecklistPersyaratan::updateOrCreate(
+                        [
+                            'permintaan_id' => $permintaan->id,
+                            'persyaratan_id' => $req->id,
+                        ],
+                        [
+                            'status' => 1
+                        ]
+                    );
+                    $matched = true;
+                    break 2;
+                }
+            }
+        }
+
+        // 3. Fallback: Check off the first unchecked requirement for this request
+        if (!$matched && $persyaratanList->count() > 0) {
+            $checkedIds = ChecklistPersyaratan::where('permintaan_id', $permintaan->id)
+                ->where('status', 1)
+                ->pluck('persyaratan_id')
+                ->toArray();
+
+            $firstUnchecked = $persyaratanList->whereNotIn('id', $checkedIds)->first();
+            if ($firstUnchecked) {
+                ChecklistPersyaratan::updateOrCreate(
+                    [
+                        'permintaan_id' => $permintaan->id,
+                        'persyaratan_id' => $firstUnchecked->id,
+                    ],
+                    [
+                        'status' => 1
+                    ]
+                );
+            }
+        }
     }
 
     public function clientDeleteDokumen($id)

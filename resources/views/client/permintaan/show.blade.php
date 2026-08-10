@@ -248,13 +248,27 @@
                 <!-- Upload Box -->
                 <form action="{{ route('client.permintaan.upload-dokumen', $permintaan->id) }}" method="POST" enctype="multipart/form-data" class="mb-4 bg-light p-3 rounded border-dashed">
                     @csrf
-                    <div class="row g-2 align-items-center">
-                        <div class="col-sm-9">
-                            <label class="form-label small fw-bold text-muted">Pilih File Susulan untuk Diunggah</label>
-                            <input type="file" name="dokumen" class="form-control" required>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted">Pilih Berkas Persyaratan (Opsional)</label>
+                            <select name="persyaratan_id" class="form-select form-select-sm">
+                                <option value="">-- Deteksi Otomatis / Berkas Umum --</option>
+                                @foreach($permintaan->layanan->persyaratan as $req)
+                                    @php
+                                    $chk = $permintaan->checklistPersyaratan->where('persyaratan_id', $req->id)->first();
+                                    @endphp
+                                    <option value="{{ $req->id }}">
+                                        {{ $req->nama_dokumen }} {{ ($chk && $chk->status) ? '(Tercentang)' : '(Belum Tercentang)' }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="col-sm-3 d-flex align-items-end mt-sm-4 pt-sm-1">
-                            <button type="submit" class="btn btn-primary w-100"><i class="fa-solid fa-upload"></i> Upload</button>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted">Pilih File untuk Diunggah</label>
+                            <input type="file" name="dokumen" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-sm btn-primary px-4"><i class="fa-solid fa-upload me-1"></i> Upload Berkas</button>
                         </div>
                     </div>
                 </form>
