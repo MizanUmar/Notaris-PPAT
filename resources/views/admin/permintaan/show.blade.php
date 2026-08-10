@@ -174,7 +174,7 @@
                                     <div class="overflow-hidden">
                                         <span class="d-block fw-bold small text-truncate" title="{{ $doc->nama_file }}">{{ $doc->nama_file }}</span>
                                         <small class="text-muted d-block text-xs">Diunggah: {{ $doc->tanggal_upload->translatedFormat('d M, H:i') }}</small>
-                                        <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="btn btn-sm btn-link text-decoration-none p-0 mt-1 small"><i class="fa-solid fa-download me-1"></i> Unduh File</a>
+                                        <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="btn btn-sm btn-link text-decoration-none p-0 mt-1 small"><i class="fa-solid fa-eye me-1"></i> Lihat Dokumen</a>
                                     </div>
                                 </div>
                             </div>
