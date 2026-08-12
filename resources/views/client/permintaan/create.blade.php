@@ -14,13 +14,13 @@
         </a>
     </div>
 
-    <div class="row g-4">
-        <!-- Form Area -->
-        <div class="col-lg-7">
-            <div class="card card-premium p-4">
-                <form action="{{ route('client.permintaan.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+    <form action="{{ route('client.permintaan.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
+        <div class="row g-4">
+            <!-- Form Area (Left Side) -->
+            <div class="col-lg-7">
+                <div class="card card-premium p-4">
                     <div class="mb-3">
                         <label for="layanan_id" class="form-label small fw-bold">Pilih Jenis Layanan Hukum</label>
                         <select name="layanan_id" id="layanan_id" class="form-select form-control-premium" required>
@@ -49,31 +49,33 @@
 
                     <div class="mb-4">
                         <label class="form-label small fw-bold">Unggah Berkas Pendukung Awal (Bisa pilih beberapa file sekaligus - PDF/JPG max 5MB/file)</label>
-                        <input type="file" name="dokumen[]" class="form-control" multiple>
-                        <small class="text-muted d-block mt-1">Anda juga dapat mengunggah berkas susulan nanti di halaman detail pengajuan.</small>
+                        <input type="file" name="dokumen[]" id="dokumen_files" class="form-control" multiple>
+                        <small class="text-muted d-block mt-1">Anda dapat memilih beberapa file sekaligus dan mengunggah berkas susulan nanti di halaman detail pengajuan.</small>
                     </div>
 
                     <button type="submit" class="btn btn-premium-primary px-4"><i class="fa-solid fa-paper-plane me-1"></i> Kirim Pengajuan</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Requirements Helper Area -->
-        <div class="col-lg-5">
-            <div class="card card-premium p-4" id="requirementCard" style="display: none;">
-                <h5 class="fw-bold font-heading mb-3 text-dark border-bottom pb-2"><i class="fa-solid fa-folder-open text-primary me-2"></i> Berkas yang Perlu Disiapkan</h5>
-                <p class="text-muted small">Harap persiapkan dan unggah dokumen berikut untuk mempercepat proses pembuatan akta:</p>
-                <ul class="list-group list-group-flush small" id="requirementList">
-                    <!-- Loaded dynamically via JS -->
-                </ul>
+                </div>
             </div>
 
-            <div class="card card-premium p-4 text-center text-muted" id="requirementPlaceholder">
-                <i class="fa-solid fa-folder-open fs-1 text-black-50 mb-3"></i>
-                <p class="mb-0 small">Pilih jenis layanan hukum di samping untuk menampilkan daftar berkas persyaratan wajib.</p>
+            <!-- Requirements Helper Area (Right Side with Checkboxes) -->
+            <div class="col-lg-5">
+                <div class="card card-premium p-4" id="requirementCard" style="display: none;">
+                    <h5 class="fw-bold font-heading mb-2 text-dark border-bottom pb-2">
+                        <i class="fa-solid fa-folder-open text-primary me-2"></i> Berkas yang Perlu Disiapkan
+                    </h5>
+                    <p class="text-muted small mb-3">Harap persiapkan dan centang dokumen berikut untuk mempercepat proses pembuatan akta:</p>
+                    <div class="list-group list-group-flush" id="requirementList">
+                        <!-- Loaded dynamically via JS with checkboxes -->
+                    </div>
+                </div>
+
+                <div class="card card-premium p-4 text-center text-muted" id="requirementPlaceholder">
+                    <i class="fa-solid fa-folder-open fs-1 text-black-50 mb-3"></i>
+                    <p class="mb-0 small">Pilih jenis layanan hukum di samping untuk menampilkan daftar berkas persyaratan wajib.</p>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 @endsection
 
@@ -84,8 +86,9 @@
         @foreach($layanan as $lay)
         "{{ $lay->id }}": [
             @foreach($lay->persyaratan as $req) {
-                nama: "{{ $req->nama_dokumen }}",
-                ket: "{{ $req->keterangan ?? 'Fotokopi / Scan Asli' }}"
+                id: "{{ $req->id }}",
+                nama: "{!! addslashes($req->nama_dokumen) !!}",
+                ket: "{!! addslashes($req->keterangan ?? 'Fotokopi / Scan Asli') !!}"
             },
             @endforeach
         ],
@@ -102,17 +105,19 @@
         reqList.innerHTML = ''; // clear
 
         if (requirements.length > 0) {
-            requirements.forEach(req => {
-                const li = document.createElement('li');
-                li.className = 'list-group-item d-flex justify-content-between align-items-center px-0 py-2 border-0 border-bottom';
-                li.innerHTML = `
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fa-regular fa-square-check text-primary"></i>
-                        <span>${req.nama}</span>
+            requirements.forEach((req, idx) => {
+                const div = document.createElement('div');
+                div.className = 'list-group-item d-flex justify-content-between align-items-center px-2 py-2 border-0 border-bottom bg-white my-1 rounded shadow-xs';
+                div.innerHTML = `
+                    <div class="form-check mb-0 d-flex align-items-center gap-2">
+                        <input type="checkbox" name="persyaratan_ids[]" value="${req.id}" id="req_chk_${req.id}" class="form-check-input me-2 text-primary" checked style="cursor: pointer; width: 1.15em; height: 1.15em;">
+                        <label for="req_chk_${req.id}" class="form-check-label fw-semibold text-dark mb-0 small" style="cursor: pointer;">
+                            ${req.nama}
+                        </label>
                     </div>
-                    <span class="badge bg-light text-dark rounded-pill">${req.ket}</span>
+                    <span class="badge bg-light text-dark rounded-pill small">${req.ket}</span>
                 `;
-                reqList.appendChild(li);
+                reqList.appendChild(div);
             });
             reqCard.style.display = 'block';
             reqPlaceholder.style.display = 'none';

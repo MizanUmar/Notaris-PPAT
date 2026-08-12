@@ -202,6 +202,21 @@ class PermintaanLayananController extends Controller
             }
         }
 
+        // Process requirement checkboxes if checked during form submission
+        if ($request->has('persyaratan_ids') && is_array($request->persyaratan_ids)) {
+            foreach ($request->persyaratan_ids as $reqId) {
+                ChecklistPersyaratan::updateOrCreate(
+                    [
+                        'permintaan_id' => $permintaan->id,
+                        'persyaratan_id' => $reqId,
+                    ],
+                    [
+                        'status' => true,
+                    ]
+                );
+            }
+        }
+
         return redirect()->route('client.permintaan.index')->with('success', 'Permintaan layanan berhasil diajukan! Silakan lengkapi/pantau status dokumen Anda.');
     }
 
