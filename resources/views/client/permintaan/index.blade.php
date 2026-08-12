@@ -36,13 +36,17 @@
                         <td><span class="small">{{ $req->tanggal_permintaan->translatedFormat('d F Y') }}</span></td>
                         <td>
                             @if($req->status === 'Menunggu')
-                            <span class="badge badge-waiting">Menunggu Berkas</span>
+                                @if(!$req->isDokumenLengkap())
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle py-1 px-2 small"><i class="fa-solid fa-triangle-exclamation me-1"></i> Lengkapi Berkas ({{ $req->jumlah_berkas_tercentang }}/{{ $req->jumlah_berkas_wajib }})</span>
+                                @else
+                                    <span class="badge badge-waiting">Menunggu Verifikasi</span>
+                                @endif
                             @elseif($req->status === 'Diproses')
-                            <span class="badge badge-process">Sedang Diproses</span>
+                                <span class="badge badge-process">Sedang Diproses</span>
                             @elseif($req->status === 'Selesai')
-                            <span class="badge badge-success">Selesai</span>
+                                <span class="badge badge-success">Selesai</span>
                             @else
-                            <span class="badge badge-danger">Ditolak / Dibatalkan</span>
+                                <span class="badge badge-danger">Ditolak / Dibatalkan</span>
                             @endif
                         </td>
                         <td>

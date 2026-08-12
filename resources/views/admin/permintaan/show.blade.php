@@ -59,18 +59,35 @@
                 <form action="{{ route('admin.permintaan.update-status', $permintaan->id) }}" method="POST" class="border-top pt-3">
                     @csrf
                     <h6 class="fw-bold font-heading mb-3"><i class="fa-solid fa-pen-fancy me-1 text-primary"></i> Perbarui Status Layanan</h6>
+                    
+                    @if(!$permintaan->isDokumenLengkap())
+                        <div class="alert alert-warning border-warning shadow-xs mb-3 p-3 rounded-3" role="alert">
+                            <div class="d-flex align-items-start gap-2">
+                                <i class="fa-solid fa-triangle-exclamation text-warning fs-5 mt-1"></i>
+                                <div>
+                                    <strong class="d-block text-dark small">Berkas Persyaratan Belum Lengkap!</strong>
+                                    <span class="small text-muted">Tercentang: <strong>{{ $permintaan->jumlah_berkas_tercentang }}</strong> dari <strong>{{ $permintaan->jumlah_berkas_wajib }}</strong> berkas wajib. Admin tidak dapat memproses layanan ini sebelum seluruh berkas persyaratan tercentang.</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="mb-3">
                         <label class="form-label small fw-bold">Pilih Status Baru</label>
                         <select name="status" class="form-select" required>
                             <option value="Menunggu" {{ $permintaan->status === 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
-                            <option value="Diproses" {{ $permintaan->status === 'Diproses' ? 'selected' : '' }}>Diproses</option>
-                            <option value="Selesai" {{ $permintaan->status === 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                            <option value="Diproses" {{ $permintaan->status === 'Diproses' ? 'selected' : '' }} {{ !$permintaan->isDokumenLengkap() && $permintaan->status !== 'Diproses' ? 'disabled class=text-muted' : '' }}>
+                                Diproses {{ !$permintaan->isDokumenLengkap() && $permintaan->status !== 'Diproses' ? '(Terkunci - Berkas Belum Lengkap)' : '' }}
+                            </option>
+                            <option value="Selesai" {{ $permintaan->status === 'Selesai' ? 'selected' : '' }} {{ !$permintaan->isDokumenLengkap() && $permintaan->status !== 'Selesai' ? 'disabled class=text-muted' : '' }}>
+                                Selesai {{ !$permintaan->isDokumenLengkap() && $permintaan->status !== 'Selesai' ? '(Terkunci - Berkas Belum Lengkap)' : '' }}
+                            </option>
                             <option value="Ditolak" {{ $permintaan->status === 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label small fw-bold">Catatan Perkembangan / Alasan</label>
-                        <textarea name="keterangan" class="form-control" rows="3" placeholder="Contoh: Berkas lengkap sedang dibuatkan draf, atau sebutkan berkas yang kurang jika ditolak...">{{ $permintaan->keterangan }}</textarea>
+                        <textarea name="keterangan" class="form-control" rows="3" placeholder="Contoh: Berkas belum lengkap, silakan lengkapi fotokopi KTP dan Sertifikat...">{{ $permintaan->keterangan }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-premium-primary w-100">Perbarui Status</button>
                 </form>

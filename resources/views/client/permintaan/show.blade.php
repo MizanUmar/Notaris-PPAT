@@ -14,6 +14,22 @@
         </a>
     </div>
 
+    @if($permintaan->status === 'Menunggu' && !$permintaan->isDokumenLengkap())
+        <div class="alert alert-warning border-start border-4 border-warning shadow-sm mb-4 p-3 rounded-3" role="alert">
+            <div class="d-flex align-items-start gap-3">
+                <div class="icon-circle bg-warning-subtle text-warning mb-0" style="width: 42px; height: 42px; border-radius: 8px; flex-shrink: 0;">
+                    <i class="fa-solid fa-bell fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold text-dark mb-1"><i class="fa-solid fa-triangle-exclamation text-warning me-1"></i> Notifikasi Kelengkapan Dokumen: Berkas Belum Lengkap</h6>
+                    <p class="mb-0 text-muted small">
+                        Pengajuan permohonan layanan Anda belum dapat diproses oleh Notaris karena berkas persyaratan belum lengkap (Terverifikasi: <strong>{{ $permintaan->jumlah_berkas_tercentang }}</strong> dari <strong>{{ $permintaan->jumlah_berkas_wajib }}</strong> dokumen). Silakan unggah seluruh dokumen persyaratan yang bertanda <span class="text-danger fw-bold">(Belum Tercentang)</span> di bawah ini agar permohonan Anda dapat segera diproses.
+                    </p>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row g-4">
         <!-- Status & Outputs -->
         <div class="col-lg-5">

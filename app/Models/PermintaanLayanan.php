@@ -54,4 +54,34 @@ class PermintaanLayanan extends Model
     {
         return $this->hasMany(ChecklistPersyaratan::class, 'permintaan_id');
     }
+
+    public function isDokumenLengkap()
+    {
+        $totalRequired = $this->layanan ? $this->layanan->persyaratan->count() : 0;
+        if ($totalRequired === 0) {
+            return true;
+        }
+
+        $checkedCount = $this->checklistPersyaratan()
+            ->whereIn('persyaratan_id', $this->layanan->persyaratan->pluck('id'))
+            ->where('status', true)
+            ->count();
+
+        return $checkedCount >= $totalRequired;
+    }
+
+    public function getJumlahBerkasTercentangAttribute()
+    {
+        if (!$this->layanan) return 0;
+        return $this->checklistPersyaratan()
+            ->whereIn('persyaratan_id', $this->layanan->persyaratan->pluck('id'))
+            ->where('status', true)
+            ->count();
+    }
+
+    public function getJumlahBerkasWajibAttribute()
+    {
+        if (!$this->layanan) return 0;
+        return $this->layanan->persyaratan->count();
+    }
 }

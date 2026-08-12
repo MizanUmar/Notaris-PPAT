@@ -61,12 +61,22 @@ class PermintaanLayananController extends Controller
 
     public function adminUpdateStatus(Request $request, $id)
     {
-        $permintaan = PermintaanLayanan::findOrFail($id);
+        $permintaan = PermintaanLayanan::with(['layanan.persyaratan', 'checklistPersyaratan'])->findOrFail($id);
 
         $request->validate([
             'status' => 'required|in:Menunggu,Diproses,Selesai,Ditolak',
             'keterangan' => 'nullable|string',
         ]);
+
+        if (in_array($request->status, ['Diproses', 'Selesai'])) {
+            if (!$permintaan->isDokumenLengkap()) {
+                $tercentang = $permintaan->jumlah_berkas_tercentang;
+                $wajib = $permintaan->jumlah_berkas_wajib;
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['error' => 'Gagal memproses permohonan! Berkas persyaratan belum lengkap (' . $tercentang . '/' . $wajib . ' tercentang). Harap beri tahu client atau lengkapi berkas persyaratan terlebih dahulu.']);
+            }
+        }
 
         $permintaan->update([
             'status' => $request->status,
