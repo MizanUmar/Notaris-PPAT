@@ -50,12 +50,11 @@
 
                                 @if($req->akta)
 
-                                <a href="{{ asset('storage/' . $req->akta->file_akta) }}"
-                                    target="_blank"
-                                    class="small text-success text-decoration-none">
+                                <a href="{{ route('client.akta.preview', $req->akta->id) }}"
+                                    class="small text-success text-decoration-none fw-semibold">
 
-                                    <i class="fa-solid fa-file-contract me-1"></i>
-                                    Unduh Akta
+                                    <i class="fa-solid fa-eye me-1"></i>
+                                    Lihat Akta
 
                                 </a>
 
@@ -63,12 +62,11 @@
 
                                 @foreach($req->surat as $sur)
 
-                                <a href="{{ asset('storage/' . $sur->file_surat) }}"
-                                    target="_blank"
-                                    class="small text-info text-decoration-none">
+                                <a href="{{ route('client.surat.preview', $sur->id) }}"
+                                    class="small text-info text-decoration-none fw-semibold">
 
-                                    <i class="fa-solid fa-envelope-open-text me-1"></i>
-                                    Unduh Surat
+                                    <i class="fa-solid fa-eye me-1"></i>
+                                    Lihat Surat
 
                                 </a>
 

@@ -102,15 +102,9 @@
 
                             <div class="d-flex gap-1">
                                 <a href="{{ route('client.akta.preview', $akt->id) }}"
-                                    class="btn btn-outline-success">
-                                    <i class="fa fa-eye"></i>
-                                    Lihat
-                                </a>
-                                <a href="{{ asset('storage/'.$akt->file_akta) }}"
-                                    target="_blank"
-                                    class="btn btn-success">
-                                    <i class="fa fa-download"></i>
-                                    Unduh
+                                    class="btn btn-success fw-semibold">
+                                    <i class="fa-solid fa-eye me-1"></i>
+                                    Lihat Akta
                                 </a>
                             </div>
 
@@ -146,15 +140,9 @@
 
                             <div class="d-flex gap-1">
                                 <a href="{{ route('client.surat.preview', $sur->id) }}"
-                                    class="btn btn-outline-info">
-                                    <i class="fa fa-eye"></i>
-                                    Lihat
-                                </a>
-                                <a href="{{ asset('storage/'.$sur->file_surat) }}"
-                                    target="_blank"
-                                    class="btn btn-info text-white">
-                                    <i class="fa fa-download"></i>
-                                    Unduh
+                                    class="btn btn-info text-white fw-semibold">
+                                    <i class="fa-solid fa-eye me-1"></i>
+                                    Lihat Surat
                                 </a>
                             </div>
 
