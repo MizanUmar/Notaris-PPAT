@@ -244,9 +244,10 @@
                                 @foreach($permintaan->layanan->persyaratan as $req)
                                     @php
                                     $chk = $permintaan->checklistPersyaratan->where('persyaratan_id', $req->id)->first();
+                                    $isDone = ($chk && $chk->status);
                                     @endphp
-                                    <option value="{{ $req->id }}">
-                                        {{ $req->nama_dokumen }} {{ ($chk && $chk->status) ? '(Tercentang)' : '(Belum Tercentang)' }}
+                                    <option value="{{ $req->id }}" {{ $isDone ? 'disabled class=text-muted' : '' }}>
+                                        {{ $req->nama_dokumen }} {{ $isDone ? '(Tercentang)' : '(Belum Tercentang)' }}
                                     </option>
                                 @endforeach
                             </select>
