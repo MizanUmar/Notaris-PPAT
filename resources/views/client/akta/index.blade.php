@@ -56,7 +56,7 @@
                                 <a href="{{ route('client.akta.preview', $akt->id) }}" class="btn btn-sm btn-outline-info py-1 px-3 rounded">
                                     <i class="fa-solid fa-eye me-1"></i> Lihat Akta
                                 </a>
-                                <a href="{{ asset('storage/' . $akt->file_akta) }}" target="_blank" class="btn btn-sm btn-success py-1 px-3 rounded">
+                                <a href="{{ asset('storage/' . $akt->file_akta) }}" download class="btn btn-sm btn-success py-1 px-3 rounded">
                                     <i class="fa-solid fa-download me-1"></i> Unduh
                                 </a>
                             </div>

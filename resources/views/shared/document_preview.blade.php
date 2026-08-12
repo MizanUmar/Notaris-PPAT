@@ -64,7 +64,7 @@
 
                 <!-- Tombol Aksi Unduh PDF dan Cetak Fisik -->
                 <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="{{ asset('storage/' . $filePath) }}" target="_blank" class="btn btn-premium-primary w-100 py-2 fw-bold shadow-xs">
+                    <a href="{{ asset('storage/' . $filePath) }}" download class="btn btn-premium-primary w-100 py-2 fw-bold shadow-xs">
                         <i class="fa-solid fa-file-pdf me-1"></i> Unduh Salinan PDF
                     </a>
                     <button onclick="window.print()" class="btn btn-outline-dark w-100 py-2 fw-bold">

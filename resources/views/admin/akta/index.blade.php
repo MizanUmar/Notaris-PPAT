@@ -74,8 +74,8 @@
                                     <i class="fa-solid fa-eye me-1"></i> Lihat
                                 </a>
                                 <!-- Tombol Unduh Berkas -->
-                                <a href="{{ asset('storage/' . $akt->file_akta) }}" target="_blank" class="btn btn-sm btn-outline-primary py-1 px-2 rounded">
-                                    <i class="fa-solid fa-file-pdf me-1"></i> Unduh
+                                <a href="{{ asset('storage/' . $akt->file_akta) }}" download class="btn btn-sm btn-outline-primary py-1 px-2 rounded">
+                                    <i class="fa-solid fa-download me-1"></i> Unduh
                                 </a>
                             </div>
                         </td>
