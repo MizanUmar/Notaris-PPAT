@@ -67,126 +67,121 @@
 
             <!-- Output Files (Deeds & Letters) -->
             <div class="card card-premium p-4">
-                <h5 class="fw-bold font-heading mb-3 border-bottom pb-2"><i class="fa-solid fa-file-shield text-success me-2"></i> Dokumen Terbit / Hasil</h5>
+                <h5 class="fw-bold font-heading mb-3 border-bottom pb-2">
+                    <i class="fa-solid fa-file-shield text-success me-2"></i>
+                    Dokumen Terbit / Hasil
+                </h5>
 
-                <div class="card card-premium p-4">
+                <div class="d-flex flex-column gap-3">
 
-                    <h5 class="fw-bold font-heading mb-3 border-bottom pb-2">
-                        <i class="fa-solid fa-file-shield text-success me-2"></i>
-                        Dokumen Terbit / Hasil
-                    </h5>
+                    @php
+                    $hasOutput = false;
+                    @endphp
 
-                    <div class="d-flex flex-column gap-3">
+                    {{-- ================= AKTA ================= --}}
+                    @if($permintaan->akta)
 
-                        @php
-                        $hasOutput = false;
-                        @endphp
+                    @php
+                    $akt = $permintaan->akta;
+                    $hasOutput = true;
+                    @endphp
 
-                        {{-- ================= AKTA ================= --}}
-                        @if($permintaan->akta)
+                    <div class="d-flex align-items-center justify-content-between p-3 rounded bg-success-subtle border-start border-success border-4">
 
-                        @php
-                        $akt = $permintaan->akta;
-                        $hasOutput = true;
-                        @endphp
+                        <div>
 
-                        <div class="d-flex align-items-center justify-content-between p-3 rounded bg-success-subtle border-start border-success border-4">
+                            <span class="d-block fw-bold text-success small">
+                                AKTA TERBIT
+                            </span>
 
-                            <div>
+                            <h6 class="mb-1 fw-bold">
+                                {{ $akt->nama_akta }}
+                            </h6>
 
-                                <span class="d-block fw-bold text-success small">
-                                    AKTA TERBIT
-                                </span>
+                            <small class="text-muted">
+                                Nomor Akta :
+                                {{ $akt->nomor_akta }}
+                            </small>
 
-                                <h6 class="mb-1 fw-bold">
-                                    {{ $akt->nama_akta }}
-                                </h6>
+                            <br>
 
-                                <small class="text-muted">
-                                    Nomor Akta :
-                                    {{ $akt->nomor_akta }}
-                                </small>
-
-                                <br>
-
-                                <small class="text-muted">
-                                    Tanggal :
-                                    {{ \Carbon\Carbon::parse($akt->tanggal_akta)->translatedFormat('d F Y') }}
-                                </small>
-
-                            </div>
-
-                            <div class="d-flex gap-1">
-                                <a href="{{ route('client.akta.preview', $akt->id) }}"
-                                    class="btn btn-success fw-semibold">
-                                    <i class="fa-solid fa-eye me-1"></i>
-                                    Lihat Akta
-                                </a>
-                            </div>
+                            <small class="text-muted">
+                                Tanggal :
+                                {{ \Carbon\Carbon::parse($akt->tanggal_akta)->translatedFormat('d F Y') }}
+                            </small>
 
                         </div>
 
-                        @endif
-
-                        {{-- ================= SURAT ================= --}}
-                        @foreach($permintaan->surat as $sur)
-
-                        @php
-                        $hasOutput = true;
-                        @endphp
-
-                        <div class="d-flex align-items-center justify-content-between p-3 rounded bg-info-subtle border-start border-info border-4">
-
-                            <div>
-
-                                <span class="d-block fw-bold text-info small">
-                                    SURAT TERBIT
-                                </span>
-
-                                <h6 class="mb-1 fw-bold">
-                                    {{ $sur->jenis_surat }}
-                                </h6>
-
-                                <small class="text-muted">
-                                    Nomor Surat :
-                                    {{ $sur->nomor_surat }}
-                                </small>
-
-                            </div>
-
-                            <div class="d-flex gap-1">
-                                <a href="{{ route('client.surat.preview', $sur->id) }}"
-                                    class="btn btn-info text-white fw-semibold">
-                                    <i class="fa-solid fa-eye me-1"></i>
-                                    Lihat Surat
-                                </a>
-                            </div>
-
+                        <div class="d-flex gap-1">
+                            <a href="{{ route('client.akta.preview', $akt->id) }}"
+                                class="btn btn-success fw-semibold">
+                                <i class="fa-solid fa-eye me-1"></i>
+                                Lihat Akta
+                            </a>
                         </div>
-
-                        @endforeach
-
-                        {{-- ================= BELUM ADA DOKUMEN ================= --}}
-                        @if(!$hasOutput)
-
-                        <div class="text-center py-4">
-
-                            <i class="fa-solid fa-hourglass-half fs-1 text-secondary mb-3"></i>
-
-                            <p class="text-muted mb-0">
-
-                                Dokumen hasil akta ataupun surat belum diterbitkan oleh Notaris.
-
-                            </p>
-
-                        </div>
-
-                        @endif
 
                     </div>
 
+                    @endif
+
+                    {{-- ================= SURAT ================= --}}
+                    @foreach($permintaan->surat as $sur)
+
+                    @php
+                    $hasOutput = true;
+                    @endphp
+
+                    <div class="d-flex align-items-center justify-content-between p-3 rounded bg-info-subtle border-start border-info border-4">
+
+                        <div>
+
+                            <span class="d-block fw-bold text-info small">
+                                SURAT TERBIT
+                            </span>
+
+                            <h6 class="mb-1 fw-bold">
+                                {{ $sur->jenis_surat }}
+                            </h6>
+
+                            <small class="text-muted">
+                                Nomor Surat :
+                                {{ $sur->nomor_surat }}
+                            </small>
+
+                        </div>
+
+                        <div class="d-flex gap-1">
+                            <a href="{{ route('client.surat.preview', $sur->id) }}"
+                                class="btn btn-info text-white fw-semibold">
+                                <i class="fa-solid fa-eye me-1"></i>
+                                Lihat Surat
+                            </a>
+                        </div>
+
+                    </div>
+
+                    @endforeach
+
+                    {{-- ================= BELUM ADA DOKUMEN ================= --}}
+                    @if(!$hasOutput)
+
+                    <div class="text-center py-4">
+
+                        <i class="fa-solid fa-hourglass-half fs-1 text-secondary mb-3"></i>
+
+                        <p class="text-muted mb-0">
+
+                            Dokumen hasil akta ataupun surat belum diterbitkan oleh Notaris.
+
+                        </p>
+
+                    </div>
+
+                    @endif
+
                 </div>
             </div>
+
         </div>
 
         <!-- Requirements & Uploads -->
