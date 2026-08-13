@@ -6,6 +6,7 @@ use App\Models\Layanan;
 use App\Models\PermintaanLayanan;
 use App\Models\DokumenClient;
 use App\Models\Client;
+use App\Models\ChecklistPersyaratan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -158,7 +159,16 @@ class PermintaanLayananController extends Controller
             return redirect()->back()->withErrors(['layanan_id' => 'Layanan yang Anda pilih sedang tidak aktif / tidak tersedia saat ini.'])->withInput();
         }
 
-        $client = Auth::user()->client;
+        $user = Auth::user();
+        $client = $user->client;
+        if (!$client) {
+            $client = Client::create([
+                'user_id' => $user->id,
+                'nik' => '-',
+                'nomor_telepon' => '-',
+                'alamat' => '-',
+            ]);
+        }
 
         $permintaan = PermintaanLayanan::create([
             'client_id' => $client->id,
