@@ -140,7 +140,7 @@ class PermintaanLayananController extends Controller
 
     public function clientCreate()
     {
-        $layanan = Layanan::where('status_aktif', true)->orderBy('nama_layanan', 'asc')->get();
+        $layanan = Layanan::orderBy('nama_layanan', 'asc')->get();
         return view('client.permintaan.create', compact('layanan'));
     }
 
@@ -153,6 +153,11 @@ class PermintaanLayananController extends Controller
             'dokumen.*' => 'file|mimes:pdf,jpg,jpeg,png,doc,docx|max:5120', // max 5MB per file
         ]);
 
+        $layanan = Layanan::with('persyaratan')->findOrFail($request->layanan_id);
+        if (!$layanan->status_aktif) {
+            return redirect()->back()->withErrors(['layanan_id' => 'Layanan yang Anda pilih sedang tidak aktif / tidak tersedia saat ini.'])->withInput();
+        }
+
         $client = Auth::user()->client;
 
         $permintaan = PermintaanLayanan::create([
@@ -163,9 +168,12 @@ class PermintaanLayananController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
+        $persyaratanList = $layanan->persyaratan->values();
+
         // Upload documents if any
         if ($request->hasFile('dokumen')) {
-            foreach ($request->file('dokumen') as $file) {
+            $files = $request->file('dokumen');
+            foreach ($files as $index => $file) {
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $path = $file->storeAs('client_documents', $filename, 'public');
 
@@ -175,6 +183,34 @@ class PermintaanLayananController extends Controller
                     'file_path' => $path,
                     'tanggal_upload' => Carbon::now(),
                 ]);
+
+                // Auto-checklist corresponding requirement item (1st file -> 1st requirement, 2nd file -> 2nd requirement)
+                if (isset($persyaratanList[$index])) {
+                    ChecklistPersyaratan::updateOrCreate(
+                        [
+                            'permintaan_id' => $permintaan->id,
+                            'persyaratan_id' => $persyaratanList[$index]->id,
+                        ],
+                        [
+                            'status' => true,
+                        ]
+                    );
+                }
+            }
+        }
+
+        // Process requirement checkboxes if checked during form submission
+        if ($request->has('persyaratan_ids') && is_array($request->persyaratan_ids)) {
+            foreach ($request->persyaratan_ids as $reqId) {
+                ChecklistPersyaratan::updateOrCreate(
+                    [
+                        'permintaan_id' => $permintaan->id,
+                        'persyaratan_id' => $reqId,
+                    ],
+                    [
+                        'status' => true,
+                    ]
+                );
             }
         }
 
@@ -201,10 +237,11 @@ class PermintaanLayananController extends Controller
     public function clientUploadDokumen(Request $request, $id)
     {
         $client = Auth::user()->client;
-        $permintaan = PermintaanLayanan::where('client_id', $client->id)->findOrFail($id);
+        $permintaan = PermintaanLayanan::with(['layanan.persyaratan', 'checklistPersyaratan'])->where('client_id', $client->id)->findOrFail($id);
 
         $request->validate([
             'dokumen' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:5120',
+            'persyaratan_id' => 'nullable|exists:persyaratan_dokumen,id',
         ]);
 
         if ($request->hasFile('dokumen')) {
@@ -218,6 +255,38 @@ class PermintaanLayananController extends Controller
                 'file_path' => $path,
                 'tanggal_upload' => Carbon::now(),
             ]);
+
+            if ($request->filled('persyaratan_id')) {
+                ChecklistPersyaratan::updateOrCreate(
+                    [
+                        'permintaan_id' => $permintaan->id,
+                        'persyaratan_id' => $request->persyaratan_id,
+                    ],
+                    [
+                        'status' => true,
+                    ]
+                );
+            } else {
+                // Auto-detect next unchecked requirement item
+                $persyaratanList = $permintaan->layanan->persyaratan;
+                $checkedReqIds = $permintaan->checklistPersyaratan->where('status', true)->pluck('persyaratan_id')->toArray();
+                
+                $nextUnchecked = $persyaratanList->first(function($req) use ($checkedReqIds) {
+                    return !in_array($req->id, $checkedReqIds);
+                });
+
+                if ($nextUnchecked) {
+                    ChecklistPersyaratan::updateOrCreate(
+                        [
+                            'permintaan_id' => $permintaan->id,
+                            'persyaratan_id' => $nextUnchecked->id,
+                        ],
+                        [
+                            'status' => true,
+                        ]
+                    );
+                }
+            }
 
             return back()->with('success', 'Dokumen berhasil diunggah!');
         }
@@ -243,7 +312,6 @@ class PermintaanLayananController extends Controller
     public function clientPersyaratan()
     {
         $layanan = Layanan::with('persyaratan')
-            ->where('status_aktif', true)
             ->orderBy('nama_layanan', 'asc')
             ->get();
 
